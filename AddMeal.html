@@ -1,0 +1,144 @@
+<!doctype html>
+<html ng-app="addMealApp">
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+   <style>
+      hr{
+	  display: block;
+	  height: 1px;
+      border: 0;
+      border-top: 1px solid #ccc;
+      margin: 1em 0;
+      padding: 0; 
+	  }
+      body {
+	  background-color: #F1F1F1;
+	  }
+	  hr {
+	  }
+      .main_add_meal {
+      background-color: #F1F1F1;
+      width: 100%;
+      left: 0;
+      top: 0;
+      }
+      .add_title {
+      margin-top:0;
+      padding: 10px 0px 5px 0px;
+      background-color: white;
+      border-bottom: 1px solid #E9E9E9;
+      box-shadow: 0 2px 2px 0 #E4E4E4;
+      color: black;
+      }
+      .nav_cancel_meal {
+      padding: 5px 20px;
+      color: grey;
+      float:left;
+      } 
+      .title_text {
+      text-align: center;
+      overflow: hidden;
+      font-size: 150%;
+      }
+      .submit_area {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #41B2AA;
+      color : white;
+      text-align: center;
+      font-size: 150%;
+      position: fixed;
+      bottom: 0;
+	  right: 0;
+      width: 100%;
+	  overflow:hidden;
+      }
+      .note_text_area {
+      padding: 20px;
+      margin-top: 20px;
+      background-color: white;
+      border: 1px solid #E9E9E9;
+      }
+      .note_text_input_label {
+      margin: 10px 0px;
+      }
+      .note_text_input {
+      width:100%;
+      border-style:none;
+      resize: none;
+      }
+	  .margin{
+	  margin-top:10px;
+	  margin-bottom:10px;
+	  }
+	  .meal_text_input {
+      overflow: hidden;
+      border-style:none;
+      }
+	  .meal_text {
+	  float:right;
+	  }
+   </style>
+   <script>
+      angular.module('addMealApp', [])
+          .controller('AddMealController', function() {
+              var addMeal = this;
+              addMeal.meals = [{
+                      text: 'learn AngularJS',
+                  },
+                  {
+                      text: 'build an AngularJS app',
+                  }
+              ];
+      
+              addMeal.addMeals = function() {
+                  addMeal.meals.push({
+                      text: 'add',
+                  });
+              };
+      
+          });
+   </script>
+   <head>
+      <title>Add Meal</title>
+   </head>
+   <body>
+      <div class="main_add_meal" ng-controller="AddMealController as addMeal">
+         <div class = "add_title">
+		    <div class = "nav_cancel_meal" ng-click="">Cancel</div>
+            <div class = "title_text"><b>ADD MEAL</b></div>
+         </div>
+         <div class = "note_text_area">
+            <div>
+               <label class = "note_text_input_label"><b>PROTEIN</b></label>
+            </div>
+            <div class = "margin">
+			   <input class ="meal_text_input" type="text" placeholder="Enter" ng-model="addMeal.protein">
+               <label class = "meal_text"><b>gr</b></label>
+			   <hr>
+            </div>
+            <div>
+               <label class = "note_text_input_label"><b>CARBS</b></label>
+            </div>
+            <div class = "margin">
+			   <input class ="meal_text_input" type="text" placeholder="Enter" ng-model="addMeal.carbs">
+               <label class = "meal_text"><b>gr</b></label>
+			   <hr>
+            </div>
+            <div>
+               <label class = "note_text_input_label"><b>CALORIES</b></label>
+            </div>
+            <div class = "margin">
+			   <input class ="meal_text_input" type="text" placeholder="Enter" ng-model="addMeal.calories">
+               <label class = "meal_text"><b>cal</b></label>
+            </div>
+         </div>
+         <div class = "note_text_area">
+            <label class = "note_text_input_label"><b>Note</b></label>
+            <textarea placeholder="Enter" class ="note_text_input margin" rows="5" ng-model="addMeal.meals[addMeal.meals.length - 1].text"></textarea>
+         </div>
+         <div ng-click="addMeal.addMeals()" class = "submit_area">
+            <span>Submit</span>
+         </div>
+      </div>
+   </body>
+</html>
