@@ -1,0 +1,96 @@
+<!doctype html>
+<html ng-app="addExerciseApp">
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+   <style>
+      .main_add_exercise {
+      background - color: #F1F1F1;
+      width: 100 % ;
+      left: 0;
+      top: 0;
+      }
+      .add_title {
+      margin-top:0;
+      padding: 10px 0px 5px 0px;
+      background-color: white;
+      border-bottom: 1px solid #E9E9E9;
+      box-shadow: 0 2px 2px 0 #E4E4E4;
+      color: black;
+      }
+      .nav_cancel_exercise {
+      padding: 5px 20px;
+      color: grey;
+      float:left;
+      } 
+      .title_text {
+      text-align: center;
+      overflow: hidden;
+      font-size: 150%;
+      }
+      .submit_area {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #41B2AA;
+      color : white;
+      text-align: center;
+      vertical-align: middle;
+      font-size: 150%;
+      position: fixed;
+      bottom: 0%;
+      right: 0;
+      width: 100%;
+      }
+   </style>
+   <script>
+      angular.module('addExerciseApp', [])
+          .controller('AddExerciseController', function() {
+              var addExercise = this;
+              addExercise.exercises = [{
+                      text: 'learn AngularJS',
+                      done: true
+                  },
+                  {
+                      text: 'build an AngularJS app',
+                      done: false
+                  }
+              ];
+      
+              addExercise.addTodo = function() {
+                  addExercise.exercises.push({
+                      text: addExercise.todoText,
+                      done: false
+                  });
+                  addExercise.todoText = '';
+              };
+      
+              addExercise.remaining = function() {
+                  var count = 0;
+                  angular.forEach(addExercise.exercises, function(todo) {
+                      count += todo.done ? 0 : 1;
+                  });
+                  return count;
+              };
+      
+              addExercise.archive = function() {
+                  var oldTodos = addExercise.exercises;
+                  addExercise.exercises = [];
+                  angular.forEach(oldTodos, function(todo) {
+                      if (!todo.done) addExercise.exercises.push(todo);
+                  });
+              };
+          });
+   </script>
+   <head>
+      <title>Add Exercise</title>
+   </head>
+   <body>
+      <div class="main_add_exercise" ng-controller="AddExerciseController as addExercise">
+         <div class = "add_title">
+            <div class = "nav_cancel_exercise" ng-click="">Cancel</div>
+            <div class = "title_text"><b>ADD EXERCISE</b></div>
+         </div>
+         <div ng-click="" class = "submit_area">
+            <span>Submit</span>
+         </div>
+      </div>
+   </body>
+</html>
