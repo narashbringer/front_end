@@ -1,20 +1,414 @@
 <html ng-app='bari'>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-resource.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js" />
-<script src="https://d3js.org/d3.v3.min.js"/>
-<script src="https://d3js.org/d3.v4.min.js"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"/>
-<script scr='https://raw.githubusercontent.com/michaelbromley/angularUtils/master/src/directives/pagination/dirPagination.js'/>
-<script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js'/>
-<script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css'/>
-<script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css'/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"/></script>
+    <script src="https://d3js.org/d3.v4.min.js"/></script>
+    <script scr='https://raw.githubusercontent.com/michaelbromley/angularUtils/master/src/directives/pagination/dirPagination.js'></script>
+    <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js'></script>
+    <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css'></script>
+    <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css'></script>
+<style>
+.topbar {
+  background:
+    linear-gradient(
+    rgba(0, 0, 0, 0.7),
+    rgba(0, 0, 0, 0.7)),
+    url("http://imgur.com/TPucnpT.png");
+  width: 100%;
+  background-size:cover;
+  padding: 25px 70px 40px 22px;
+  position: fixed;
+  top: 60px;
+  z-index: 2;
+}
+.topnavbar{
+z-index:3;
+}
+.dropdown {
+    padding-right: 50px;
+}
+
+.navbar-avatar {
+		color: black;
+}
+.patientlist{
+		margin-top: 350px;
+  	margin-left: 20px;
+}
+.navbar {
+  transition: 250ms opacity ease-in-out;
+  -webkit-transition: 250ms opacity ease-in-out;
+  border: 0;
+  border-bottom: 4px solid gray;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3;
+  background-color: whitesmoke;
+  font
+}
+
+.navbar-fade {
+  opacity: 0.4;
+}
+
+.navbar-inverse .navbar-toggle {
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.nav > li > a {
+  max-height: 50px;
+}
+
+.navbar-brand {
+  height: 50px;
+  padding: 20px;
+}
+
+.navbar-brand img, .navbar-brand span {
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: block;
+  max-height: 100px;
+  max-width: 100px;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.breadcrumb-container {
+  background-color: whitesmoke;
+}
+
+/* for mobile app */
+.navbar-inverse.is-native {
+  background-color: #405060;
+}
+
+nav{
+ margin-bottom: 0px;
+ border-radius: 0px;
+}
+
+.navbar-collapse{
+padding-right: 0px;
+}
+
+.navbar-nav {
+margin: 0px;
+}
+
+.visible-lg-inline {
+color: black;
+}
+.visible-xs-block{
+ margin-right:300px;
+}
+.leftissue{
+  margin-right:20px;
+  color: black;
+}
+.sidenav {
+  position:fixed;
+  top:0;
+  left: 0;
+  display: inline-block;
+  background-color: #333645;
+  width: 50px;
+  height: 100%;
+  color: #E4E4E4 ;
+  /*border: 2px solid red;*/
+  transition: 0.5s;
+  z-index:4;
+}
+
+.menu_row {
+  height: 60px;
+  /*border: 2px solid green;*/
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  animation-delay: 3s;
+}
+
+.top_nav {
+  /*border: 2px solid purple;*/
+  text-align:right;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.menu_image {
+  margin-left: 12px;
+  margin-right: 13px;
+  /*border: 2px solid yellow;*/
+}
+
+.menu_image_top {
+  margin-left: 15px;
+  margin-right: 17px;
+}
+
+.menu_text {
+  padding-top: 18px;
+  display: none;
+  color: #E4E4E4;
+  /*border: 2px solid blue;*/
+  animation-delay: 6s;
+  width: 100%;
+  height:100%;
+  border-top: 1px solid #E4E4E4;
+}
+
+.selected {
+  border-left: 2px solid #41B2AA;
+  background-color: #242834;
+}
+
+.main_content {
+    border: 2px solid grey;
+    width: 100%;
+    transition: .5s;
+    padding: 20px;
+}
+
+
+
+.titlefont {
+  color: white;
+  font-size: 36pt;
+}
+
+.mediumfont {
+  color: white;
+  font-size: 30pt;
+}
+
+p {
+	color: white;
+  font-size: 16pt;
+}
+
+.box {
+margin-left: 50px;
+}
+
+@media screen and (max-width: 768px) {
+  .titlefont {
+    color: white;
+    font-size: 14pt;
+  }
+  .mediumfont {
+    color: white;
+    font-size: 12pt;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .titlefont {
+    color: white;
+    font-size: 16pt;
+  }
+  .mediumfont {
+    color: white;
+    font-size: 14pt;
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .titlefont {
+    color: white;
+    font-size: 24pt;
+  }
+  .mediumfont {
+    color: white;
+    font-size: 22pt;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .titlefont {
+    color: white;
+    font-size: 36pt;
+  }
+  .mediumfont {
+    color: white;
+    font-size: 30pt;
+  }
+}
+</style>
+<script>
+var page =angular.module('bari', []);
+
+page.controller('proviers', function($scope) {
+    var doc = this;
+    doc.provier = {name:'jane smith', title:'consler', patient_count: 20};
+  });
+
+page.controller('menu_area', function($rootScope, $scope) {
+      var men = this;
+
+//   men.content=function(){
+  	   //window.location= c.data.instanceurl+'Dportal/$sp.do?id=content_managment';
+  //	}
+
+   $('#nav_home').click(function() {
+          $(men).addClass('selected').siblings().removeClass('selected');
+      });
+
+      $('#nav_add_patient').click(function() {
+          $(men).addClass('selected').siblings().removeClass('selected');
+          //spUtil.get("provider_add_patient").then(function(response) {
+            //  c.add = response;
+          //    c.data.click1_count = c.data.click1_count + 1;
+        //      if (c.data.click1_count % 2 == 0) {
+      //            c.add = null;
+    //}
+        //  });
+      });
+      $('#nav_add_dates').click(function() {
+          $(men).addClass('selected').siblings().removeClass('selected');
+          //spUtil.get("add_data").then(function(response) {
+            //  c.dat = response;
+            //  c.data.click2_count = c.data.click2_count + 1;
+          //    if (c.data.click2_count % 2 == 0) {
+        //          c.dat = null;
+              //}
+         });
+      //});
+  		$('#nav_content').click(function() {
+          $(men).addClass('selected').siblings().removeClass('selected');
+        //  spUtil.get("add_content").then(function(response) {
+          //    c.con = response;
+            //  c.data.click3_count = c.data.click3_count + 1;
+            //  if (c.data.click3_count % 2 == 0) {
+              //    c.con = null;
+            //}
+          });
+      //});
+      $('#nav_groups').click(function() {
+          $(men).addClass('selected').siblings().removeClass('selected');
+          //spUtil.get("provider_add_group").then(function(response) {
+              //c.addg = response;
+              //c.data.click4_count = c.data.click4_count + 1;
+              //if (c.data.click4_count % 2 == 0) {
+                //  c.addg = null;
+//              };
+      });
+      //});
+});
+</script>
 </head>
+<body style="background-color:#f1f1f1;">
+  <section style="top:0px; hight:50px;">
+  <div>
+    <nav class="navbar-inverse" ng-class="::{'navbar':!isViewNative, 'is-native': isViewNative}"
+         role="navigation">
+      <div ng-show="" class="navbar-header">
+        <a class="navbar-brand" ng-if="::!portal.logo" href="?id={{::portal.homepage_dv}}"><span>{{::portal.title}}</span></a>
+        <a class="navbar-brand navbar-brand-logo" ng-if="::portal.logo" href="?id={{::portal.homepage_dv}}">
+          <img src="http://imgur.com/zWHQTH2.png">
+        </a>
+  			<!--<ul><li><a href="{{::portal.logoutUrl}}">${Logout}</a></li></ul>-->
+       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sp-nav-bar">
+          <span class="sr-only">${Toggle navigation}</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
 
-<body>
+      <div sp-navbar-toggle="" class="collapse navbar-collapse navbar-right" id="sp-nav-bar">
+        <!-- Include The Menu -->
+        <sp-widget widget="data.menu"></sp-widget>
+        <ul ng-if="::(!user.logged_in && page.id != portal.login_page_dv && !data.hasLogin)" class="nav navbar-nav">
+          <li><a href ng-click="openLogin()">${Login}</a></li>
+          </ul>
+        <ul ng-if="::user.logged_in" class="nav navbar-nav">
+          <!-- chat, avatar, and logout -->
+          <!--<li ng-if="::data.connect_support_queue_id"><a href ng-click="openPopUp()">${Live Chat}</a></li>-->
+
+            <li class="dropdown hidden-xs">
+            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+              <span class="navbar-avatar"><sn-avatar class="avatar-small-medium" primary="userID" /></span>
+              <span class="visible-lg-inline">{{::user.name}}</span>
+            </a>
+           <li class="visible-xs-block"><a ng-href="?id=user_profile&sys_id={{::user.sys_id}}"><span class="navbar-avatar"><sn-avatar class="avatar-small-medium" primary="userID" /></span>{{::user.name}}</a></li>
+          <li class="leftissue" style="color:black;"><a ng-href="?id=user_profile&sys_id={{::user.sys_id}}">${Profile}</a></li>
+            <li class="leftissue"><a href="{{::portal.logoutUrl}}">${Logout}</a></li>
 
 
+            <!--<ul class="dropdown-menu">
+              <li><a ng-href="?id=user_profile&sys_id={{::user.sys_id}}">${Profile}</a></li>
+              <li><a href="{{::portal.logoutUrl}}">${Logout}</a></li>
+            </ul>-->
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+  </section>
+
+<aside>
+  <div id="mySidenav" class="sidenav">
+   <div id = "mySidenav_head" class = "menu_row">
+      <!--<div class = "top_nav"><label>&#9776;</label></div>-->
+      <div class = "menu_image_top"> <img id = "menu_lines" src="menu_button.png" alt="menu_home_lines" width="16px" height="16px"/></div>
+   </div>
+   <a ng-href="homehp.html">
+      <div class = "menu_row" id = "nav_home">
+         <div class = "menu_image"><img src="home.pngx" alt="menu_home_image" height = "24px" width = "24px"></div>
+         <div class = "menu_text" id = "menu_Dashboard"><span>Dashboard</span></div>
+      </div>
+   </a>
+   <div class = "menu_row" id = "nav_add_patient"   ng-click="" ng-init="">
+      <div class = "menu_image"><img src="add_data.png" alt="menu_home_new"  height = "24px" width = "24px"></div>
+      <div class = "menu_text" id = "menu_Add_Patient"><span>Add Patient</span></div>
+   </div>
+   <div class = "menu_row" id = "nav_add_dates" ng-click="" ng-init="">
+      <div class = "menu_image"><img src="createdata.png" alt="menu_home_edit"  height = "24px" width = "24px"></div>
+      <div class = "menu_text" id = "menu_Add_Dates"><span>Add Data</span></div>
+   </div>
+   <div class = "menu_row" id = "nav_content" ng-click="" >
+      <div class = "menu_image"><img src="addDate.png" alt="menu_home_note"  height = "24px" width = "24px"></div>
+      <div class = "menu_text" id = "menu_Content_Management"><span>Content Management</span></div>
+   </div>
+    <div class = "menu_row" id = "nav_groups" ng-click="" ng-init="">
+      <div class = "menu_image"><img src="temp.png" alt="menu_home_note"  height = "24px" width = "24px"></div>
+      <div class = "menu_text" id = "menu_Groups"><span>Group Management</span></div>
+   </div>
+</div>
+<!--<div ng-if="c.data.x">
+   <sp-widget widget="c.add"></sp-widget>
+</div>
+<div ng-if="c.data.y">
+   <sp-widget widget="c.dat"></sp-widget>
+</div>
+<div ng-if="c.data.v">
+   <sp-widget widget="c.addg"></sp-widget>
+</div>-->
+</aside>
+<section style='margin-top:50px; margin-left:50px;' class='topbar'>
+  <div class="box" ng-controller="proviers as doc" style='margin-top:50wpx;'>
+  	<div class = "titlefont">
+    Hi {{doc.provier.title}}, {{doc.provier.name}},
+   	</div>
+    <div class = "mediumfont">
+      You have {{doc.provier.patient_count}} patients.
+    </div>
+  </div>
+</section>
 </body>
+
 </html>
