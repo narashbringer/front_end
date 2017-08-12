@@ -14,6 +14,276 @@
     <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css'></script>
     <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css'></script>
 <style>
+
+.search_bar {
+  padding: 10px 0px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.day_label {
+  float:1eft;
+  padding: 5px 0px;
+  width: 100px;
+  cursor:pointer;
+  background-color: #E4E4E4;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: 2px solid #E4E4E4;
+  text-align: center;
+}
+
+.week_label {
+  padding: 5px 0px;
+  width: 100px;
+  cursor:pointer;
+  background-color: #E4E4E4;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 2px solid #E4E4E4;
+  text-align: center;
+}
+
+.label_checked {
+  background-color: #41B2AA !important;
+  border: 2px solid #41B2AA !important;
+  color: white !important;
+}
+
+.radio_button {
+  visibility: hidden;
+}
+
+.display_inline_way {
+  width : 400px;;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+.display_middle {
+  justify-content: center  !important;
+}
+
+.display_end {
+  justify-content: flex-end !important;
+}
+
+.display_inline_way input #message{
+  width : 10px;
+  margin-left :10px;
+  margin-right :10px;
+}
+
+.search_input {
+  background-image: url('searchicon.pngx');
+  background-position: center right;
+  background-repeat: no-repeat;
+  border-radius: 5px;
+  border: 2px solid #E4E4E4;
+  height : 33px;
+}
+
+.checkbox_label {
+  margin-top : 10px;
+  width : 200px;
+}
+
+.filter_button {
+  width : 70px;
+  padding: 5px 0px;
+  color: white;
+  background-color: #41B2AA;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid #41B2AA;
+ //display: inline-block;
+  margin-left: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse:separate;
+  border-spacing: 0px 1px;
+}
+
+table th:first-child{
+  border-radius:5px 0 0 5px;
+}
+
+table th:last-child{
+  border-radius:0 5px 5px 0;
+}
+
+th {
+  padding: 10px 10px;
+  background:#E4E4E4; /* Grey */
+  text-align: center;
+  font-size: 10px;
+}
+
+tbody:before {
+    content: "-";
+    display: block;
+    line-height: 1em;
+    color: transparent;
+}
+
+td {
+    border: solid 1px #E4E4E4;
+    border-style: solid none;
+    padding: 10px;
+    background-color: white;
+    text-align: center;
+}
+td:first-child {
+    border-left-style: solid;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+td:last-child {
+    border-right-style: solid;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.order_image {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+.showleftborder {
+  border-left: 3px solid #41B2AA;
+  color : black !important;
+}
+
+.close_iframe {
+  background-color: white;
+  border-radius: 5px;
+  width : 30px;
+  height : 30px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+  float : right;
+}
+
+.green {
+  color : #41B2AA;
+}
+
+.images_div {
+  display : flex;
+  flex-direction: row;
+}
+
+.message_div {
+  position:relative;
+}
+
+.badge {
+  background-color: #41B2AA;
+  position:absolute;
+  top: -5px;
+  right: -5px
+}
+
+.patient_score_dot_style {
+    margin: 0 auto;
+    display: inline-block;
+    height: 12px;
+    width: 12px;
+    line-height: 12px;
+    -moz-border-radius: 30px; /* or 50% */
+    border-radius: 30px; /* or 50% */
+}
+
+.patient_calendar_iframe {
+  background:  #E4E4E4;
+  height:100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.t2{
+  background-color: #E4E4E4;
+}
+
+.test {
+ margin: 0;
+ padding: 0;
+ display: inline-block;
+ width: 90%; height: 520px;
+ background-color: #E4E4E4;
+}
+
+.table_footer_div {
+  display : flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: 10px 0px;
+}
+
+.table_footer_div div select {
+  background-color: white;
+  width : 50px;
+  height : 30px;
+  border-radius: 5px;
+  border: solid 1px #E4E4E4;
+  margin-right: 10px;
+}
+
+.table_paginator {
+  display : flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginator_icons {
+  width : 20px;
+  height : 20px;
+  border-radius: 5px;
+  font-family: Century Gothic, sans-serif;
+  background-color: white;
+  border: solid 1px #E4E4E4;
+  display : flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.paginator_icons:last-of-type {
+    margin-right: 0px !important;
+}
+.modal2 {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 30%;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+}
+/* Modal Content/Box */
+.modal2-content {
+    top: 10%;
+    background-color: #fefefe;
+    margin: 10px auto; /* 15% from the top and centered */
+    padding: 10px;
+    border: 1px solid #888;
+    width: 60%; /* Could be more or less, depending on screen size */
+}
+
 .topbar {
   background:
     linear-gradient(
@@ -408,6 +678,155 @@ page.controller('menu_area', function($rootScope, $scope) {
       You have {{doc.provier.patient_count}} patients.
     </div>
   </div>
+</section>
+<section style='margin-top:25%; margin-left:5%; margin-right:5%;'>
+  <!-- your widget template -->
+  <div>
+    {{c.data.test}}
+     <div class="search_bar">
+        <!-- <div id = "duration" class="display_inline_way">
+           <label for="day_check" class="day_label">Day
+           <input type="radio" name = "duration" value=1 id="day_check" ng-model="c.data.day" class = "radio_button"/>
+           </label>
+              <label for="week_check" class="week_label">Week
+           <input type="radio" name = "duration" value=2 id="week_check" ng-model="c.data.week" class = "radio_button"/>
+           </label>
+        </div>-->
+       <a href="https://ven01860.service-now.com/$sp.do?id=health_care_provider_message_page" class="btn btn-default hidden-xs" target="_blank">Messages</a>
+         <label class="btn btn-default hidden-xs" ng-click = "c.show_edit_patient()">Manage Conntent</label>
+
+        <div class=" display_inline_way display_middle hidden-xs">
+           <input type="checkbox" id = "message" ng-model = "c.data.show_patient_with_message" ng-click = "c.update_show_patient_with_message()">
+           <div>
+              <label ng-if = "!c.data.show_patient_with_message" class = "checkbox_label">Patients with Message</label>
+              <label ng-if = "c.data.show_patient_with_message" class = "checkbox_label">All Patients</label>
+          </div>
+        </div>
+        <div class=" display_inline_way display_end">
+           <input type="text" name="search" placeholder="&nbsp;&nbsp;Search.." class="search_input" ng-model="c.data.patient_name_input">
+           <button type="button" class="filter_button" ng-click="c.search_patient_name()">Filter</button>
+
+        </div>
+     </div>
+     <div class="row">
+        <div class="col-xs-12">
+           <table>
+              <thead>
+                 <tr class = "hidden-xs">
+                    <th>
+                       <label for="patient_name">PATIENT NAME</label>
+                       <input type="image" id="patient_name" src="arrowDown.png" alt="desc" class = "order_image">
+                    </th>
+                    <th>
+                       <label for="patient_id">PATIENT ID</label>
+                       <input type="image" id="patient_id" src="arrowDown.png" alt="desc" class = "order_image">
+                    </th>
+                    <th>
+                       <label for="weekly_group">WEEKLY GROUP</label>
+                       <input type="image" id="weekly_group" src="arrowDown.png" alt="desc" class = "order_image">
+                    </th>
+                    <th>
+                       <label for="date_started">DATE STARTED</label>
+                       <input type="image" id="date_started" src="arrowDown.png" alt="desc" class = "order_image">
+                    </th>
+                    <th>
+                       <label>ATTENDANCE</label>
+                    </th>
+                    <th>
+                       <label>PARTICIPATION</label>
+                    </th>
+                    <th>
+                       <label>JOURNAL</label>
+                    </th>
+                    <th>
+                       <label>TEST RESULT</label>
+                    </th>
+                    <th>
+                       <label>ACTIONS</label>
+                    </th>
+                 </tr>
+              </thead>
+              <tbody>
+                 <tr ng-repeat-start = "patient in c.data.patients">
+
+                   <td class = "green" ng-class="{'showleftborder': patient.expanded}" ng-click="patient.iframe = 1; patient.expanded = true;">
+                     <b>{{patient.name}}</b></td>
+                   <td class = "hidden-xs" ng-click="patient.iframe = 1; patient.expanded = true;">{{patient.patiantID}}</td>
+                    <td class = "hidden-xs" ng-click="patient.iframe = 1; patient.expanded = true;">{{patient.group}}</td>
+                    <td class = "hidden-xs" ng-click="patient.iframe = 1; patient.expanded = true">{{patient.start}}</td>
+                    <td ng-click="patient.iframe = 1; patient.expanded = true">
+                       <span class = "patient_score_dot_style" ng-style = " {'background-color': patient.attends}"></span>
+                    </td>
+                    <td ng-click="patient.iframe = 1; patient.expanded = true">
+                       <span class = "patient_score_dot_style" ng-style = " {'background-color': patient.participation}"></span>
+                    </td>
+                    <td ng-click="patient.iframe = 1; patient.expanded = true">
+                       <span class = "patient_score_dot_style" ng-style = " {'background-color': patient.emotion}"></span>
+                    </td>
+                    <td ng-click="patient.iframe = 1; patient.expanded = true">
+                       <span class = "patient_score_dot_style" ng-style = " {'background-color': patient.test}"></span>
+                    </td>
+
+                   <td>
+                       <div class = "images_div">
+                          <div class = "message_div">
+                            <img src="message.png" width="32" height="32" ng-click="patient.iframe = 2; patient.expanded = true; patient.newMessages_count = 0;" title='Message'/>
+                            <span class = "badge" ng-if = "patient.newMessages_count && patient.newMessages_count > 0">{{patient.newMessages_count}}</span>
+                          </div>
+                          <div>
+                            <img src="data_education.png" width="32" height="32" ng-click="patient.iframe = 4; patient.expanded = true;" title='Content'/>
+                          </div>
+                          <div>
+                            <img src="calendar_icon.png" width="32" height="32" ng-click="patient.iframe = 3; patient.expanded = true;" title='Calendar'/>
+                          </div>
+                       </div>
+                    </td>
+                 </tr>
+                 <tr ng-if="patient.expanded">
+                    <td colspan="9" class = "showleftborder t2" >
+                       <div class = "close_iframe" ng-click="patient.expanded = false">&#10006;</div>
+                       <div class = "test">
+                          <iframe ng-src="{{c.bind_iframe_monthly(patient.sys)}}" scrolling="no" class= "patient_calendar_iframe" frameborder="0" ng-if = "patient.iframe == 1"></iframe>
+                          <iframe ng-src="{{c.bind_iframe_message(patient.sys)}}" scrolling="no" class= "patient_calendar_iframe" frameborder="0" ng-if = "patient.iframe == 2"></iframe>
+                          <iframe ng-src="{{c.bind_iframe_event(patient.sys)}}" scrolling="no" class= "patient_calendar_iframe" frameborder="0" ng-if = "patient.iframe == 3"></iframe>
+                          <iframe ng-src="{{c.bind_iframe_education(patient.sys)}}" scrolling="no" class= "patient_calendar_iframe" frameborder="0" ng-if = "patient.iframe == 4"></iframe>
+                      </div>
+                    </td>
+                 </tr>
+                 <tr ng-repeat-end=""></tr>
+              </tbody>
+           </table>
+           <div class = "table_footer_div">
+              <div>
+                 <select ng-model="c.data.page_size" ng-change="c.update_pagesize()">
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="1000">All</option>
+                 </select>
+                 <label>Per Page</label>
+              </div>
+              <div class = "table_paginator">
+                <div class = "paginator_icons" ng-click = "c.update_page_basedon_number(2, 1)"><span>&laquo;</span></div>
+                <div class = "paginator_icons" ng-click = "c.update_page_basedon_number(1, 0)"><span>&lt;</span></div>
+                <div>
+                  <select ng-model="c.data.page_number" ng-change="c.update_page_basedon_number(0, 0)">
+                    <option ng-repeat="page_index in c.data.page_navigators" value="{{page_index}}">{{page_index}}</option>
+                  </select>
+                </div>
+                <div class = "paginator_icons" ng-click = "c.update_page_basedon_number(3, 0)"><span>&gt;</span></div>
+                <div class = "paginator_icons" ng-click = "c.update_page_basedon_number(2, c.data.number_of_pages)"><span>&raquo;</span></div>
+             </div>
+           </div>
+        </div>
+     </div>
+  </div>
+   <div id="myDialogWindow2" class="modal2">
+       <div>
+           <sp-widget class = "embeded_widget" widget="c.change_group"></sp-widget>
+
+       </div>
+    </div>
 </section>
 </body>
 
