@@ -3,18 +3,16 @@
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
    <style>
       hr{
-	  display: block;
-	  height: 1px;
+      display: block;
+      height: 1px;
       border: 0;
       border-top: 1px solid #ccc;
       margin: 1em 0;
       padding: 0; 
-	  }
+      }
       body {
-	  background-color: #F1F1F1;
-	  }
-	  hr {
-	  }
+      background-color: #F1F1F1;
+      }
       .main_add_meal {
       background-color: #F1F1F1;
       width: 100%;
@@ -48,9 +46,9 @@
       font-size: 150%;
       position: fixed;
       bottom: 0;
-	  right: 0;
+      right: 0;
       width: 100%;
-	  overflow:hidden;
+      overflow:hidden;
       }
       .note_text_area {
       padding: 20px;
@@ -66,23 +64,24 @@
       border-style:none;
       resize: none;
       }
-	  .margin{
-	  margin-top:10px;
-	  margin-bottom:10px;
-	  }
-	  .meal_text_input {
+      .margin{
+      margin-top:10px;
+      margin-bottom:10px;
+      }
+      .meal_text_input {
       overflow: hidden;
       border-style:none;
       }
-	  .meal_text {
-	  float:right;
-	  }
+      .meal_text {
+      float:right;
+      }
    </style>
    <script>
       angular.module('addMealApp', [])
           .controller('AddMealController', function() {
-              var addMeal = this;
-              addMeal.meals = [{
+              var c = this;
+			  c.data = [];
+              c.data.meals = [{
                       text: 'learn AngularJS',
                   },
                   {
@@ -90,10 +89,13 @@
                   }
               ];
       
-              addMeal.addMeals = function() {
-                  addMeal.meals.push({
-                      text: 'add',
-                  });
+              c.addMeals = function() {
+				  window.location = 'Meal_Exercise.html';
+              };
+
+			  
+			  c.back = function() {
+                  window.location = 'Meal_Exercise.html';
               };
       
           });
@@ -102,9 +104,9 @@
       <title>Add Meal</title>
    </head>
    <body>
-      <div class="main_add_meal" ng-controller="AddMealController as addMeal">
+      <div class="main_add_meal" ng-controller="AddMealController as c">
          <div class = "add_title">
-		    <div class = "nav_cancel_meal" ng-click="">Cancel</div>
+            <div class = "nav_cancel_meal" ng-click="c.back()">Cancel</div>
             <div class = "title_text"><b>ADD MEAL</b></div>
          </div>
          <div class = "note_text_area">
@@ -112,31 +114,31 @@
                <label class = "note_text_input_label"><b>PROTEIN</b></label>
             </div>
             <div class = "margin">
-			   <input class ="meal_text_input" type="text" placeholder="Enter" ng-model="addMeal.protein">
+               <input class ="meal_text_input" type="text" placeholder="Enter" ng-model="c.protein">
                <label class = "meal_text"><b>gr</b></label>
-			   <hr>
+               <hr>
             </div>
             <div>
                <label class = "note_text_input_label"><b>CARBS</b></label>
             </div>
             <div class = "margin">
-			   <input class ="meal_text_input" type="text" placeholder="Enter" ng-model="addMeal.carbs">
+               <input class ="meal_text_input" type="text" placeholder="Enter" ng-model="c.carbs">
                <label class = "meal_text"><b>gr</b></label>
-			   <hr>
+               <hr>
             </div>
             <div>
                <label class = "note_text_input_label"><b>CALORIES</b></label>
             </div>
             <div class = "margin">
-			   <input class ="meal_text_input" type="text" placeholder="Enter" ng-model="addMeal.calories">
+               <input class ="meal_text_input" type="text" placeholder="Enter" ng-model="c.calories">
                <label class = "meal_text"><b>cal</b></label>
             </div>
          </div>
          <div class = "note_text_area">
             <label class = "note_text_input_label"><b>Note</b></label>
-            <textarea placeholder="Enter" class ="note_text_input margin" rows="5" ng-model="addMeal.meals[addMeal.meals.length - 1].text"></textarea>
+            <textarea placeholder="Enter" class ="note_text_input margin" rows="5" ng-model="c.note"></textarea>
          </div>
-         <div ng-click="addMeal.addMeals()" class = "submit_area">
+         <div ng-click="c.addMeals()" class = "submit_area">
             <span>Submit</span>
          </div>
       </div>

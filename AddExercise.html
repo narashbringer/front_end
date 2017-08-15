@@ -3,8 +3,8 @@
    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
    <style>
       body {
-	  background-color: #F1F1F1;
-	  }
+      background-color: #F1F1F1;
+      }
       .main_add_exercise {
       background - color: #F1F1F1;
       width: 100 % ;
@@ -29,6 +29,15 @@
       overflow: hidden;
       font-size: 150%;
       }
+      .sm_title_text{
+      text-align: center;
+      }
+      .note_text_area {
+      padding: 20px;
+      margin-top: 20px;
+      background-color: white;
+      border: 1px solid #E9E9E9;
+      }
       .submit_area {
       margin-top: 20px;
       padding: 10px;
@@ -42,43 +51,48 @@
       right: 0;
       width: 100%;
       }
+      .activities {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      }
+      .activity {
+      width: 25%;
+      text-align: center;
+      }
+      .time_selector{
+	  margin-top: 10px;
+      text-align: center;
+      }
+      select{
+      border: none;
+      }
    </style>
    <script>
       angular.module('addExerciseApp', [])
           .controller('AddExerciseController', function() {
-              var addExercise = this;
-              addExercise.exercises = [{
-                      text: 'learn AngularJS',
-                      done: true
-                  },
-                  {
-                      text: 'build an AngularJS app',
-                      done: false
-                  }
-              ];
+              var c = this;
+			  c.data = [];
+			  if (localStorage.exercises) {
+			  c.data.exercises = JSON.parse(localStorage.getItem('exercises'));
+			  } else {
+			  c.data.exercises = [];
+			  }
       
-              addExercise.addTodo = function() {
-                  addExercise.exercises.push({
-                      text: addExercise.todoText,
-                      done: false
-                  });
-                  addExercise.todoText = '';
+              c.addExercise = function() {
+			      var new_exercise = {};
+				  new_exercise.activity = 'Walking';
+				  new_exercise.duration = c.duration;
+				  new_exercise.date = new Date();
+				  c.data.exercises.push(new_exercise);
+				  // Put the object into storage
+				  localStorage.setItem('exercises', JSON.stringify(c.data.exercises)); // this need to be removed if fulture platform is determined
+                  window.location = 'Meal_Exercise.html';
               };
-      
-              addExercise.remaining = function() {
-                  var count = 0;
-                  angular.forEach(addExercise.exercises, function(todo) {
-                      count += todo.done ? 0 : 1;
-                  });
-                  return count;
-              };
-      
-              addExercise.archive = function() {
-                  var oldTodos = addExercise.exercises;
-                  addExercise.exercises = [];
-                  angular.forEach(oldTodos, function(todo) {
-                      if (!todo.done) addExercise.exercises.push(todo);
-                  });
+			  
+			  c.back = function() {
+                  window.location = 'Meal_Exercise.html';
               };
           });
    </script>
@@ -86,19 +100,44 @@
       <title>Add Exercise</title>
    </head>
    <body>
-      <div class="main_add_exercise" ng-controller="AddExerciseController as addExercise">
+      <div class="main_add_exercise" ng-controller="AddExerciseController as c">
          <div class = "add_title">
-            <div class = "nav_cancel_exercise" ng-click="">Cancel</div>
+            <div class = "nav_cancel_exercise" ng-click="c.back()">Cancel</div>
             <div class = "title_text"><b>ADD EXERCISE</b></div>
          </div>
-		 <div>
-		 <div>
-		 <b>ACTIVITY</b>
-		 </div>
-		 <div>
-		 </div>
-		 </div>
-         <div ng-click="" class = "submit_area">
+         <div class = "note_text_area">
+            <div class = "sm_title_text">
+               <b>ACTIVITY</b>
+            </div>
+            <div class = "activities">
+               <div class = "activity">
+                  <img src="images/walking.png" height="42" width="42"><br><label>Walking</label>
+               </div>
+               <div class = "activity">
+                  <img src="images/biking.png" height="42" width="42"><br><label>Biking</label>
+               </div>
+               <div class = "activity">
+                  <img src="images/swimming.png" height="42" width="42"><br><label>Swimming</label>
+               </div>
+               <div class = "activity">
+                  <img src="images/running.png" height="42" width="42"><br><label>Running</label>
+               </div>
+            </div>
+         </div>
+         <div class = "note_text_area">
+            <div class = "sm_title_text">
+               <b>SELECT A TIME</b>
+            </div>
+            <div class = "time_selector">
+               <select ng-model = "c.duration">
+               <option value="15">15 minutes</option>
+               <option value="30">30 minutes</option>
+               <option value="45">45 minutes</option>
+               <option value="60">1 hour</option>
+               <select>
+            </div>
+         </div>
+         <div ng-click="c.addExercise()" class = "submit_area">
             <span>Submit</span>
          </div>
       </div>
