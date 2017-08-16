@@ -1,0 +1,350 @@
+<html  ng-app='single_patient_frame'>
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"/></script>
+  <!--  <script src="https://d3js.org/d3.v4.min.js"/></script>-->
+    <script scr='https://raw.githubusercontent.com/michaelbromley/angularUtils/master/src/directives/pagination/dirPagination.js'></script>
+    <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js'></script>
+    <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css'></script>
+    <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css'></script>
+
+<style>
+  body{
+  background-color: #E4E4E4;
+padding:0;
+}
+  .patient_calender_main_div {
+     background-color: #E4E4E4;
+     padding-top : 20px;
+     display: flex;
+     align-items:center;
+     justify-content: center;border:
+     border: 0px;
+     margin: 0px;
+     width:100%;
+  }
+
+  .calendar_month_year {
+    font-weight: bold;
+    font-size: 150%;
+  }
+
+  .calendar_navigator {
+    text-align:right;
+    font-size: 150%;
+  }
+
+  table {
+    margin-bottom: 30px;
+  }
+
+  table th {
+    text-align:center;
+    font-weight: normal;
+  }
+
+  table tr {
+    height: 60px;
+  }
+
+  table td {
+    height: 60px;
+    width: 60px;
+    border: solid 1px #A9A9A9;
+    background-color: #F2F2F2;
+    font-size: 150%;
+  }
+
+  .uavailable-date {
+     background-color: #E4E4E4;
+  }
+
+  .current-date {
+      margin: 0 auto;
+      display: block;
+      height: 30px;
+      width: 30px;
+      line-height: 30px;
+
+      -moz-border-radius: 30px; /* or 50% */
+      border-radius: 30px; /* or 50% */
+
+      background-color: #41B2AA;
+      color: white;
+      text-align: center;
+      font-size: 1em;
+  }
+
+  .cell_corner {
+    font-size: 50%;
+  }
+
+  .center_div {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .custom_button {
+    background-color: #41B2AA;
+    color: white;
+  }
+
+  .current_date_info_div {
+    border-left: 3px solid #41B2AA;
+    border-top: 1px solid #A9A9A9;
+    border-right: 1px solid #A9A9A9;
+    border-bottom: 1px solid #A9A9A9;
+    padding:10px;
+    margin-left: 40px;
+    width: 200px;
+  }
+
+  .today_header {
+    border-bottom: 1px solid #A9A9A9;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+
+  .date_text_style {
+    font-weight: bold;
+  }
+
+  .today_color_entry {
+    padding: 5px 10px;
+  }
+
+  .date_dot_style {
+      margin: 0 auto;
+      display: inline-block;
+      height: 12px;
+      width: 12px;
+      line-height: 12px;
+      -moz-border-radius: 30px; /* or 50% */
+      border-radius: 30px; /* or 50% */
+  }
+
+  .date_space {
+    margin-left: 10px;
+  }
+
+  .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+  }
+  .modal2 {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+  }
+  /* Modal Content/Box */
+  .modal-content {
+      top: 10%;
+      background-color: #fefefe;
+      margin: 10px auto; /* 15% from the top and centered */
+      padding: 10px;
+      border: 1px solid #888;
+      width: 60%; /* Could be more or less, depending on screen size */
+  }
+
+  /* The Close Button */
+  .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+  .bottom_div{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+  }
+
+
+
+</style>
+<script>
+  pat2= angular.module('single_patient_frame',[]);
+  pat2.controller('singe_patient',function($rootScope) {
+    /* widget controller */
+    var c = this;
+
+    $('#prev').click(function() {
+        if (c.data.month == 1) {
+            c.data.month = 12;
+            c.data.year = c.data.year - 1;
+        } else {
+            c.data.month = c.data.month - 1;
+        }
+        c.server.update();
+    });
+
+    $('#after').click(function() {
+        if (c.data.month == 12) {
+            c.data.month = 1;
+            c.data.year = c.data.year + 1;
+        } else {
+            c.data.month = c.data.month + 1;
+        }
+        c.server.update();
+    });
+
+  //  spUtil.get("doctor_journal_list ").then(function(response) {
+    //    c.journalListWidget = response;
+  //  });
+	//spUtil.get("change_group").then(function(response) {
+  //      c.change_group = response;
+  //  });
+
+    // Get the modal
+  //  var modal = document.getElementById('myDialogWindow');
+//var modal2 = document.getElementById('myDialogWindow2');
+    // Get the <span> element that closes the modal
+  //  var span = document.getElementsByClassName("close")[0];
+//var span2 = document.getElementsByClassName("close2")[0];
+    // When the user clicks on <span> (x), close the modal
+  //  span.onclick = function() {
+    //    modal.style.display = "none";
+    //};
+
+		//c.show_journals = function() {
+			  $rootScope.$broadcast('b_patientID', c.data.patientID);
+      //  modal.style.display = "block";
+  //  };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+		 c.show_edit_patient=function(){
+         $rootScope.$broadcast('b_patientID2', c.data.patientID);
+        modal2.style.display = "block";
+			/*	spUtil.get("provider_add_group").then(function(response) {
+            c.addg = response;*/
+           /* c.data.click4_count = c.data.click4_count + 1;
+            if (c.data.click4_count % 2 == 0) {
+                c.addg = null;
+           }
+        });*/
+    };
+});
+</script>
+</head>
+
+
+
+
+<body>
+  <div class = "patient_calender_main_div">
+   <div>
+      <div class = "row">
+         <div class = "calendar_month_year col-xs-6">
+           <input type="hidden" name="month_string" ng-value="c.data.month"/>
+           <input type="hidden" name="patient_id_string" ng-value="c.data.patientID"/>
+           <span> {{c.data.month_string}} - {{c.data.year}} </span>
+        </div>
+         <div class = "calendar_navigator col-xs-6">
+            <label id = "prev" class = "navigation"> &lt; &#32;</label>
+            <label id = "after" class = "navigation"> &#32; &gt; </label>
+         </div>
+      </div>
+      <div>
+         <table>
+            <tr>
+               <th>SUN</th>
+               <th>MON</th>
+               <th>TUE</th>
+               <th>WED</th>
+               <th>THU</th>
+               <th>FRI</th>
+               <th>SAT</th>
+            </tr>
+            <tr ng-repeat="weeks in c.data.calendar_source">
+               <td ng-repeat = "date in weeks" align="center" ng-class = "{'uavailable-date': !date.thismonth}">
+                  <div ng-class = "{'current-date': date.thisdate}">
+                     {{date.date_number}}
+                  </div>
+                  <div class = "cell_corner">
+                     <span ng-style = " {color: date.attendance_value} ">A</span>
+                     <span ng-style = " {color: date.participation_value}">P</span>
+                     <span ng-style = " {color: date.emotion_state_value}">J</span>
+                     <span ng-style = " {color: date.test_result_value}">T</span>
+                  </div>
+               </td>
+            </tr>
+         </table>
+       <!-- {{data.test}}-->
+      </div>
+   </div>
+   <div>
+     <div class = "center_div">
+       <button class = "btn custom_button" ng-click = "c.show_journals()">Show Journals</button>
+     </div>
+     <div class = "current_date_info_div">
+      <div class = "today_header"><span class = "date_text_style">{{c.data.today_date}}</span> (Today)</div>
+      <div class = "today_color_entry">
+        <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_attendance_value}"></span>
+        <span class = "date_space">Attendance</span>
+     </div>
+     <div class = "today_color_entry">
+        <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_participation_value}"></span>
+        <span class = "date_space">Participation</span>
+     </div>
+     <div class = "today_color_entry">
+        <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_emotion_state_value}"></span>
+        <span class = "date_space">Journal</span>
+     </div>
+     <div class = "today_color_entry">
+       <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_test_result_value}"></span>
+       <span class = "date_space">Testing</span>
+     </div>
+   </div>
+      <div class = "bottom_div">
+       <button class = "btn custom_button" ng-click = "c.show_edit_patient()">Edit Patient Information</button>
+     </div>
+  </div>
+
+   <div id="myDialogWindow" class="modal">
+     <div class="modal-content">
+       <span class="close">&times;</span>
+       <br/>
+       <br/>
+       <div>
+         <sp-widget class = "embeded_widget" widget="c.journalListWidget"></sp-widget>
+       </div>
+     </div>
+  </div>
+ <div id="myDialogWindow2" class="modal2">
+     <div>
+         <sp-widget class = "embeded_widget" widget="c.change_group"></sp-widget>
+
+     </div>
+  </div>
+</div>
+
+ </body>
+
+
+
+
+
+</html>
