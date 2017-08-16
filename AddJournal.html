@@ -12,9 +12,31 @@
     <!-- Include the jQuery Mobile library -->
     <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
     <script>
+		var happiness = 0;
+		var hunger = 0;
         angular.module('addJournalApp', [])
             .controller('AddJournalController', function() {
                 var c = this;
+				c.data = [];
+				if (localStorage.journals) {
+					c.data.journals = JSON.parse(localStorage.getItem('journals'));
+				} else {
+					c.data.journals = [];
+				}
+				c.addJournal = function() {
+					var journal = {};
+					journal.note = c.note;
+					journal.privatejournal = $("#private_toggle").prop("checked");
+					journal.happiness =  $("#range_hapiness").val();
+					journal.hunger = $("#range_hunger").val();
+					journal.date = new Date();
+					c.data.journals.push(journal);
+					localStorage.setItem('journals', JSON.stringify(c.data.journals));
+					window.location = 'Journals.html';
+				}
+				c.back = function() {
+					window.location = 'Journals.html';
+				};
             });
     </script>
     <style>
@@ -119,18 +141,18 @@
 <body>
     <div ng-controller="AddJournalController as c">
         <div class="title_div">
-            <div class="cancel_text">Cancel
+            <div class="cancel_text" ng-click="c.back()">Cancel
             </div>
             <div class="title_text"><b>CREATE JOURNAL</b>
             </div>
         </div>
         <div class="note_text_area">
             <label class="text_input_label"><b>TODAY I'M FEELING...</b></label>
-            <textarea class="text_input" rows="5" ng-model="c.data.text"></textarea>
+            <textarea class="text_input" rows="5" ng-model="c.note"></textarea>
         </div>
         <div class="note_text_area space_between">
             <div><label>Private</label></div>
-            <div><input type="checkbox" data-role="flipswitch" id="private_toggle"></div>
+            <div><input type="checkbox" data-role="flipswitch" id="private_toggle" ></></div>
         </div>
         <div class="note_text_area">
             <div>
@@ -151,5 +173,4 @@
         </div>
     </div>
 </body>
-
 </html>

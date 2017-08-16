@@ -1,0 +1,98 @@
+<!doctype html>
+<html ng-app="journalsApp">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script>
+        angular.module('journalsApp', [])
+            .controller('JournalsController', function() {
+                var c = this;
+                c.data = [];
+                if (localStorage.journals) {
+                    c.data.journals = JSON.parse(localStorage.getItem('journals'));
+                } else {
+                    c.data.journals = [];
+                }
+            });
+    </script>
+    <style>
+	    body {
+			background-color: #F1F1F1;
+			font-size: 13px;
+		}
+        .journal_add_new {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+        }
+
+        .journal_list_item {
+            background-color: white;
+            margin: 1px 0px;
+            color: grey;
+            display: flex;
+        }
+		
+		.circle_div {
+		    width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			color: white;
+			background-color: #F1F1F1;
+			text-align: center;
+			line-height: 40px;
+			align-self: center;
+			margin-right: 10px;
+		}
+		
+		.bari_red{
+			background-color: red !important;
+		}
+		
+		.bari_yellow{
+			background-color: #F7D300 !important;
+		}
+		
+		.bari_green{
+			background-color: #7CDE00 !important;
+		}
+
+        .journal_content {
+            height: 60px;
+            flex: 1;
+        }
+
+        .journal_item_date {
+            padding-right: 10px;
+            text-align: right;
+        }
+
+        .journal_item_entry {
+            padding: 5px 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-controller="JournalsController as c">
+        <div ng-repeat="journal in c.data.journals">
+            <a>
+                <div class="journal_list_item">
+                    <div class = "circle_div" ng-class=" journal.happiness ? ( journal.happiness > 4 ? ( journal.happiness > 7 ? 'bari_green' : 'bari_yellow') : 'bari_red') : ''">{{journal.happiness || 0}}
+                    </div>
+                    <div class = "circle_div" ng-class=" journal.hunger ? ( journal.hunger > 4 ? ( journal.hunger > 7 ? 'bari_green' : 'bari_yellow') : 'bari_red') : ''">{{journal.hunger || 0}}
+                    </div>
+                    <div class="journal_content">
+                        <div class="journal_item_date">{{journal.date}}</div>
+                        <div class="journal_item_entry">{{journal.note.substring(0,40)}}&nbsp;..</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <a class="journal_add_new" ng-href="AddJournal.html">
+			<img src="images/addnew.png" alt="Frown face" height="48" width="48">
+		</a>
+    </div>
+</body>
+
+</html>
