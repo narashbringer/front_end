@@ -54,16 +54,22 @@
             var today_string = date_string.toISOString().substring(0, 10);
             for (var i = c.data.meals.length - 1; i >= 0; i--) {
                 if (c.data.meals[i].date.substring(0, 10) === today_string) {
-                    donut_protein += parseInt(c.data.meals[i].protein);
-                    donut_carbs += parseInt(c.data.meals[i].carbs);
-                    donut_calories += parseInt(c.data.meals[i].calories);
+                    donut_protein += parseInt(c.data.meals[i].protein) || 0;
+                    donut_carbs += parseInt(c.data.meals[i].carbs) || 0;
+                    donut_calories += parseInt(c.data.meals[i].calories) || 0;
                     if (i == c.data.meals.length - 1) {
-                        c.data.today_protein_p = parseInt(c.data.meals[i].protein);
-                        c.data.today_carbs_p = parseInt(c.data.meals[i].carbs);
-                        c.data.today_calories_p = parseInt(c.data.meals[i].calories);
-						c.data.today_protein = parseInt(c.data.meals[i].protein);
-                        c.data.today_carbs = parseInt(c.data.meals[i].carbs);
-                        c.data.today_calories = parseInt(c.data.meals[i].calories);
+					    if (c.data.meals[i].protein) {
+						c.data.today_protein_p = parseInt(c.data.meals[i].protein) || 0;
+						c.data.today_protein = parseInt(c.data.meals[i].protein) || 0;
+						}
+						if (c.data.meals[i].carbs) {
+					    c.data.today_carbs_p = parseInt(c.data.meals[i].carbs) || 0;
+						c.data.today_carbs = parseInt(c.data.meals[i].carbs) || 0;
+						}
+						if (c.data.meals[i].calories) {
+						c.data.today_calories_p = parseInt(c.data.meals[i].calories) || 0;
+						c.data.today_calories = parseInt(c.data.meals[i].calories) || 0;
+						}
 						c.data.today_note = c.data.meals[i].note;
                     }
                 } else {
@@ -112,11 +118,11 @@
                 enableInteractivity: false,
 				pieSliceText: 'none',
                 chartArea: {
-                    left: 0,
-                    top: 0,
                     width: '100%',
                     height: '100%'
                 },
+				width: '100%',
+				height: $( document ).width() / 3.5,
                 legend: {
                     position: 'none',
                     textStyle: {
@@ -146,11 +152,11 @@
                 enableInteractivity: false,
 				pieSliceText: 'none',
                 chartArea: {
-                    left: 0,
-                    top: 0,
                     width: '100%',
                     height: '100%'
                 },
+				width: '100%',
+				height: $( document ).width() / 3.5,
                 legend: {
                     position: 'none',
                     textStyle: {
@@ -180,11 +186,11 @@
                 enableInteractivity: false,
 				pieSliceText: 'none',
                 chartArea: {
-                    left: 0,
-                    top: 0,
                     width: '100%',
                     height: '100%'
                 },
+				width: '100%',
+				height: $( document ).width() / 3.5,
                 legend: {
                     position: 'none',
                     textStyle: {
