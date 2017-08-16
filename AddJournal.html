@@ -1,0 +1,155 @@
+<!doctype html>
+<html ng-app="addJournalApp">
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <!-- Include jQuery Mobile stylesheets -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <!-- Include the jQuery library -->
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <!-- Include the jQuery Mobile library -->
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script>
+        angular.module('addJournalApp', [])
+            .controller('AddJournalController', function() {
+                var c = this;
+            });
+    </script>
+    <style>
+        body {
+            background-color: #F1F1F1;
+        }
+
+        .title_div {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 10px;
+        }
+
+        .cancel_text {
+            position: absolute;
+            left: 10;
+        }
+
+        .title_text {
+            display: flex;
+            margin: 0 auto;
+            align-self: center;
+        }
+
+        .note_text_area {
+            padding: 20px;
+            margin-top: 20px;
+            background-color: white;
+            border: 1px solid #E9E9E9;
+        }
+
+        .text_input_label {
+            margin: 10px 0px;
+        }
+
+        .text_input {
+            width: 100%;
+            border-style: none !important;
+            resize: none !important;
+        }
+
+        .space_between {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .inline_div {
+            display: inline-block
+        }
+
+        .ui-flipswitch {
+            width: 66px !important;
+            border-radius: 34px !important;
+        }
+
+        .ui-flipswitch-active {
+            width: 50px !important;
+            background-color: #41B2AA !important;
+        }
+
+        .ui-flipswitch-off {
+            display: none !important;
+        }
+
+        .ui-slider-input {
+            display: none !important;
+        }
+
+        .ui-slider-track {
+            margin: 0 15px 0 15px !important;
+        }
+
+        .ui-btn-active {
+            background: #41B2AA !important;
+        }
+
+        .ui-slider-track .ui-btn.ui-slider-handle {
+            border-radius: 34px !important;
+            background: #41B2AA !important;
+            color: white !important;
+        }
+
+        .submit_area {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #41B2AA;
+            color: white;
+            text-align: center;
+            font-size: 150%;
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-controller="AddJournalController as c">
+        <div class="title_div">
+            <div class="cancel_text">Cancel
+            </div>
+            <div class="title_text"><b>CREATE JOURNAL</b>
+            </div>
+        </div>
+        <div class="note_text_area">
+            <label class="text_input_label"><b>TODAY I'M FEELING...</b></label>
+            <textarea class="text_input" rows="5" ng-model="c.data.text"></textarea>
+        </div>
+        <div class="note_text_area space_between">
+            <div><label>Private</label></div>
+            <div><input type="checkbox" data-role="flipswitch" id="private_toggle"></div>
+        </div>
+        <div class="note_text_area">
+            <div>
+                <label>Happiness</label>
+            </div>
+            <div class="">
+                <input id="range_hapiness" type="range" min="0" max="10" step="1" value="5" data-highlight="true" data-show-value="true">
+            </div>
+            <div>
+                <label>Hunger</label>
+            </div>
+            <div class="">
+                <input id="range_hunger" type="range" min="0" max="10" step="1" value="5" data-highlight="true" data-show-value="true">
+            </div>
+        </div>
+        <div ng-click="c.addJournal()" class="submit_area">
+            <span>Submit</span>
+        </div>
+    </div>
+</body>
+
+</html>

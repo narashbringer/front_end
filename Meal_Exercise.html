@@ -7,9 +7,9 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
     <script>
-	    var max_protein = 100;
-		var max_carbs = 100;
-		var max_calories = 100;
+        var max_protein = 100;
+        var max_carbs = 100;
+        var max_calories = 100;
         var donut_protein = 0;
         var donut_carbs = 0;
         var donut_calories = 0;
@@ -17,16 +17,16 @@
             .controller('mealExerciseController', function() {
                 var c = this;
                 c.data = [];
-				if (localStorage.getItem('exercises')) {
-				c.data.exercises = JSON.parse(localStorage.getItem('exercises'));
-				} else {
-				c.data.exercises = [];
-				}
-				if (localStorage.getItem('meals')) {
-				c.data.meals = JSON.parse(localStorage.getItem('meals'));
-				} else {
-				c.data.meals = [];
-				}
+                if (localStorage.getItem('exercises')) {
+                    c.data.exercises = JSON.parse(localStorage.getItem('exercises'));
+                } else {
+                    c.data.exercises = [];
+                }
+                if (localStorage.getItem('meals')) {
+                    c.data.meals = JSON.parse(localStorage.getItem('meals'));
+                } else {
+                    c.data.meals = [];
+                }
                 get_today_hour_duration(c);
                 get_today_meals(c);
 
@@ -58,35 +58,35 @@
                     donut_carbs += parseInt(c.data.meals[i].carbs) || 0;
                     donut_calories += parseInt(c.data.meals[i].calories) || 0;
                     if (i == c.data.meals.length - 1) {
-					    if (c.data.meals[i].protein) {
-						c.data.today_protein_p = parseInt(c.data.meals[i].protein) || 0;
-						c.data.today_protein = parseInt(c.data.meals[i].protein) || 0;
-						}
-						if (c.data.meals[i].carbs) {
-					    c.data.today_carbs_p = parseInt(c.data.meals[i].carbs) || 0;
-						c.data.today_carbs = parseInt(c.data.meals[i].carbs) || 0;
-						}
-						if (c.data.meals[i].calories) {
-						c.data.today_calories_p = parseInt(c.data.meals[i].calories) || 0;
-						c.data.today_calories = parseInt(c.data.meals[i].calories) || 0;
-						}
-						c.data.today_note = c.data.meals[i].note;
+                        if (c.data.meals[i].protein) {
+                            c.data.today_protein_p = parseInt(c.data.meals[i].protein) || 0;
+                            c.data.today_protein = parseInt(c.data.meals[i].protein) || 0;
+                        }
+                        if (c.data.meals[i].carbs) {
+                            c.data.today_carbs_p = parseInt(c.data.meals[i].carbs) || 0;
+                            c.data.today_carbs = parseInt(c.data.meals[i].carbs) || 0;
+                        }
+                        if (c.data.meals[i].calories) {
+                            c.data.today_calories_p = parseInt(c.data.meals[i].calories) || 0;
+                            c.data.today_calories = parseInt(c.data.meals[i].calories) || 0;
+                        }
+                        c.data.today_note = c.data.meals[i].note;
                     }
                 } else {
                     break;
                 }
                 c.data.donut_protein = donut_protein;
-				if (donut_protein > max_protein) {
-				donut_protein = max_protein;
-				}
+                if (donut_protein > max_protein) {
+                    donut_protein = max_protein;
+                }
                 c.data.donut_carbs = donut_carbs;
-				if (donut_carbs > max_carbs) {
-				donut_carbs = max_carbs;
-				}
+                if (donut_carbs > max_carbs) {
+                    donut_carbs = max_carbs;
+                }
                 c.data.donut_calories = donut_calories;
-				if (donut_calories > max_calories) {
-				donut_calories = max_calories;
-				}
+                if (donut_calories > max_calories) {
+                    donut_calories = max_calories;
+                }
             }
 
         }
@@ -116,13 +116,13 @@
                 //backgroundColor.fill: 'red',
                 colors: ['#3BB7AB', '#F1F1F1'],
                 enableInteractivity: false,
-				pieSliceText: 'none',
+                pieSliceText: 'none',
                 chartArea: {
                     width: '100%',
                     height: '100%'
                 },
-				width: '100%',
-				height: $( document ).width() / 3.5,
+                width: '100%',
+                height: $(document).width() / 3.5,
                 legend: {
                     position: 'none',
                     textStyle: {
@@ -150,13 +150,13 @@
                 //backgroundColor.fill: 'red',
                 colors: ['#7CDE00', '#F1F1F1'],
                 enableInteractivity: false,
-				pieSliceText: 'none',
+                pieSliceText: 'none',
                 chartArea: {
                     width: '100%',
                     height: '100%'
                 },
-				width: '100%',
-				height: $( document ).width() / 3.5,
+                width: '100%',
+                height: $(document).width() / 3.5,
                 legend: {
                     position: 'none',
                     textStyle: {
@@ -184,13 +184,13 @@
                 //backgroundColor.fill: 'red',
                 colors: ['#F7D300', '#F1F1F1'],
                 enableInteractivity: false,
-				pieSliceText: 'none',
+                pieSliceText: 'none',
                 chartArea: {
                     width: '100%',
                     height: '100%'
                 },
-				width: '100%',
-				height: $( document ).width() / 3.5,
+                width: '100%',
+                height: $(document).width() / 3.5,
                 legend: {
                     position: 'none',
                     textStyle: {
@@ -301,11 +301,11 @@
         .middle_text {
             align-self: center;
         }
-		
-		.font_150 {
-		font-size: 200%;
-		font-weight: bold;
-		}
+
+        .font_150 {
+            font-size: 200%;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -328,15 +328,18 @@
         <div class="content_div">
             <div class="donut_style">
                 <div id="proteindonutchart"></div>
-                <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_protein}}</span> <b>gr <br/>Protein </b></span></div>
+                <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_protein}}</span> <b>gr <br/>Protein </b></span>
+                </div>
             </div>
             <div class="donut_style">
                 <div id="carbsdonutchart"></div>
-                <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_carbs}}</span>  <b>gr <br/>Carbs</b></span></div>
+                <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_carbs}}</span> <b>gr <br/>Carbs</b></span>
+                </div>
             </div>
             <div class="donut_style">
                 <div id="caloriesdonutchart"></div>
-                <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_calories}}</span> <b><br/>Calories</b></span></div>
+                <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_calories}}</span> <b><br/>Calories</b></span>
+                </div>
             </div>
         </div>
         <div class="sml_title"><b>LAST MEAL</b></div>
@@ -366,7 +369,9 @@
                 </div>
             </div>
         </div>
-        <div class="sml_title"><i>{{c.data.today_note}}</i><!--{{c.data.exercises}}{{c.data.meals}}--></div>
+        <div class="sml_title"><i>{{c.data.today_note}}</i>
+            <!--{{c.data.exercises}}{{c.data.meals}}-->
+        </div>
         <a class="add_new" href="AddMeal.html">
          <img src="images/addnew.png" alt="Frown face" height="48" width="48">
          </a>

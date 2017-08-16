@@ -1,135 +1,146 @@
 <!doctype html>
 <html ng-app="addExerciseApp">
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
-   <style>
-      body {
-      background-color: #F1F1F1;
-      }
-      .main_add_exercise {
-      background - color: #F1F1F1;
-      width: 100 % ;
-      left: 0;
-      top: 0;
-      }
-      .add_title {
-      margin-top:0;
-      padding: 10px 0px 5px 0px;
-      background-color: white;
-      border-bottom: 1px solid #E9E9E9;
-      box-shadow: 0 2px 2px 0 #E4E4E4;
-      color: black;
-      }
-      .nav_cancel_exercise {
-      padding: 5px 20px;
-      color: grey;
-      float:left;
-      } 
-      .title_text {
-      text-align: center;
-      overflow: hidden;
-      font-size: 150%;
-      }
-      .sm_title_text{
-      text-align: center;
-      }
-      .note_text_area {
-      padding: 20px;
-      margin-top: 20px;
-      background-color: white;
-      border: 1px solid #E9E9E9;
-      }
-      .submit_area {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #41B2AA;
-      color : white;
-      text-align: center;
-      vertical-align: middle;
-      font-size: 150%;
-      position: fixed;
-      bottom: 0%;
-      right: 0;
-      width: 100%;
-      }
-      .activities {
-      margin-top: 15px;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      }
-      .activity {
-      width: 25%;
-      text-align: center;
-      }
-      .time_selector{
-	  margin-top: 10px;
-      text-align: center;
-      }
-      select{
-      border: none;
-      }
-   </style>
-   <script>
-      angular.module('addExerciseApp', [])
-          .controller('AddExerciseController', function() {
-              var c = this;
-			  c.data = [];
-			  if (localStorage.exercises) {
-			  c.data.exercises = JSON.parse(localStorage.getItem('exercises'));
-			  } else {
-			  c.data.exercises = [];
-			  }
-      
-              c.addExercise = function() {
-			      var new_exercise = {};
-				  new_exercise.activity = c.activity;
-				  new_exercise.duration = c.duration;
-				  new_exercise.date = new Date();
-				  c.data.exercises.push(new_exercise);
-				  // Put the object into storage
-				  localStorage.setItem('exercises', JSON.stringify(c.data.exercises)); // this need to be removed if fulture platform is determined
-                  window.location = 'Meal_Exercise.html';
-              };
-			  
-			  c.back = function() {
-                  window.location = 'Meal_Exercise.html';
-              };
-          });
-   </script>
-   <head>
-      <title>Add Exercise</title>
-   </head>
-   <body>
-      <div class="main_add_exercise" ng-controller="AddExerciseController as c">
-         <div class = "add_title">
-            <div class = "nav_cancel_exercise" ng-click="c.back()">Cancel</div>
-            <div class = "title_text"><b>ADD EXERCISE</b></div>
-         </div>
-         <div class = "note_text_area">
-            <div class = "sm_title_text">
-               <b>ACTIVITY</b>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+<style>
+    body {
+        background-color: #F1F1F1;
+    }
+
+    .main_add_exercise {
+        background - color: #F1F1F1;
+        width: 100 %;
+        left: 0;
+        top: 0;
+    }
+
+    .title_div {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background-color: white;
+        padding: 10px;
+    }
+
+    .cancel_text {
+        position: absolute;
+        left: 10;
+    }
+
+    .title_text {
+        display: flex;
+        margin: 0 auto;
+        align-self: center;
+    }
+
+    .sm_title_text {
+        text-align: center;
+    }
+
+    .note_text_area {
+        padding: 20px;
+        margin-top: 20px;
+        background-color: white;
+        border: 1px solid #E9E9E9;
+    }
+
+    .submit_area {
+        margin-top: 20px;
+        padding: 10px;
+        background-color: #41B2AA;
+        color: white;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 150%;
+        position: fixed;
+        bottom: 0%;
+        right: 0;
+        width: 100%;
+    }
+
+    .activities {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+    }
+
+    .activity {
+        width: 25%;
+        text-align: center;
+    }
+
+    .time_selector {
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    select {
+        border: none;
+    }
+</style>
+<script>
+    angular.module('addExerciseApp', [])
+        .controller('AddExerciseController', function() {
+            var c = this;
+            c.data = [];
+            if (localStorage.exercises) {
+                c.data.exercises = JSON.parse(localStorage.getItem('exercises'));
+            } else {
+                c.data.exercises = [];
+            }
+
+            c.addExercise = function() {
+                var new_exercise = {};
+                new_exercise.activity = c.activity;
+                new_exercise.duration = c.duration;
+                new_exercise.date = new Date();
+                c.data.exercises.push(new_exercise);
+                // Put the object into storage
+                localStorage.setItem('exercises', JSON.stringify(c.data.exercises)); // this need to be removed if fulture platform is determined
+                window.location = 'Meal_Exercise.html';
+            };
+
+            c.back = function() {
+                window.location = 'Meal_Exercise.html';
+            };
+        });
+</script>
+
+<head>
+    <title>Add Exercise</title>
+</head>
+
+<body>
+    <div class="main_add_exercise" ng-controller="AddExerciseController as c">
+        <div class="title_div">
+            <div class="cancel_text" ng-click="c.back()">Cancel</div>
+            <div class="title_text"><b>ADD EXERCISE</b></div>
+        </div>
+        <div class="note_text_area">
+            <div class="sm_title_text">
+                <b>ACTIVITY</b>
             </div>
-            <div class = "activities">
-               <div class = "activity" ng-click = "c.activity = 'Walking';">
-                  <img src="images/walking.png" height="42" width="42"><br><label>Walking</label>
-               </div>
-               <div class = "activity" ng-click = "c.activity = 'Biking';">
-                  <img src="images/biking.png" height="42" width="42"><br><label>Biking</label>
-               </div>
-               <div class = "activity" ng-click = "c.activity = 'Swimming';">
-                  <img src="images/swimming.png" height="42" width="42"><br><label>Swimming</label>
-               </div>
-               <div class = "activity" ng-click = "c.activity = 'Running';">
-                  <img src="images/running.png" height="42" width="42"><br><label>Running</label>
-               </div>
+            <div class="activities">
+                <div class="activity" ng-click="c.activity = 'Walking';">
+                    <img src="images/walking.png" height="42" width="42"><br><label>Walking</label>
+                </div>
+                <div class="activity" ng-click="c.activity = 'Biking';">
+                    <img src="images/biking.png" height="42" width="42"><br><label>Biking</label>
+                </div>
+                <div class="activity" ng-click="c.activity = 'Swimming';">
+                    <img src="images/swimming.png" height="42" width="42"><br><label>Swimming</label>
+                </div>
+                <div class="activity" ng-click="c.activity = 'Running';">
+                    <img src="images/running.png" height="42" width="42"><br><label>Running</label>
+                </div>
             </div>
-         </div>
-         <div class = "note_text_area">
-            <div class = "sm_title_text">
-               <b>SELECT A TIME</b>
+        </div>
+        <div class="note_text_area">
+            <div class="sm_title_text">
+                <b>SELECT A TIME</b>
             </div>
-            <div class = "time_selector">
-               <select ng-model = "c.duration">
+            <div class="time_selector">
+                <select ng-model="c.duration">
                <option value="15">15 minutes</option>
                <option value="30">30 minutes</option>
                <option value="45">45 minutes</option>
