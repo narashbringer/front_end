@@ -82,7 +82,7 @@
       
               c.addExercise = function() {
 			      var new_exercise = {};
-				  new_exercise.activity = 'Walking';
+				  new_exercise.activity = c.activity;
 				  new_exercise.duration = c.duration;
 				  new_exercise.date = new Date();
 				  c.data.exercises.push(new_exercise);
@@ -110,16 +110,16 @@
                <b>ACTIVITY</b>
             </div>
             <div class = "activities">
-               <div class = "activity">
+               <div class = "activity" ng-click = "c.activity = 'Walking';">
                   <img src="images/walking.png" height="42" width="42"><br><label>Walking</label>
                </div>
-               <div class = "activity">
+               <div class = "activity" ng-click = "c.activity = 'Biking';">
                   <img src="images/biking.png" height="42" width="42"><br><label>Biking</label>
                </div>
-               <div class = "activity">
+               <div class = "activity" ng-click = "c.activity = 'Swimming';">
                   <img src="images/swimming.png" height="42" width="42"><br><label>Swimming</label>
                </div>
-               <div class = "activity">
+               <div class = "activity" ng-click = "c.activity = 'Running';">
                   <img src="images/running.png" height="42" width="42"><br><label>Running</label>
                </div>
             </div>

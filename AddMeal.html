@@ -71,6 +71,7 @@
       .meal_text_input {
       overflow: hidden;
       border-style:none;
+	  height: 30px;
       }
       .meal_text {
       float:right;
@@ -80,16 +81,22 @@
       angular.module('addMealApp', [])
           .controller('AddMealController', function() {
               var c = this;
-			  c.data = [];
-              c.data.meals = [{
-                      text: 'learn AngularJS',
-                  },
-                  {
-                      text: 'build an AngularJS app',
-                  }
-              ];
+			  c.data = []
+			  if (localStorage.meals) {
+			  c.data.meals = JSON.parse(localStorage.getItem('meals'));
+			  } else {
+			  c.data.meals = [];
+			  }
       
               c.addMeals = function() {
+			  var meal = {};
+			  meal.protein = c.protein;
+			  meal.carbs = c.carbs;
+			  meal.calories = c.calories;
+			  meal.date = new Date();
+			  meal.note = c.note;
+			  c.data.meals.push(meal);
+			  localStorage.setItem('meals', JSON.stringify(c.data.meals)); // this need to be removed if fulture platform is determined
 				  window.location = 'Meal_Exercise.html';
               };
 

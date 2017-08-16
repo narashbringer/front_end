@@ -14,8 +14,16 @@
             .controller('mealExerciseController', function() {
                 var c = this;
                 c.data = [];
-                c.data.exercises = JSON.parse(localStorage.getItem('exercises'));
-                c.data.meals = JSON.parse(localStorage.getItem('meals'));
+				if (localStorage.getItem('exercises')) {
+				c.data.exercises = JSON.parse(localStorage.getItem('exercises'));
+				} else {
+				c.data.exercises = [];
+				}
+				if (localStorage.getItem('meals')) {
+				c.data.meals = JSON.parse(localStorage.getItem('meals'));
+				} else {
+				c.data.meals = [];
+				}
                 get_today_hour_duration(c);
                 get_today_meals(c);
 
