@@ -7,6 +7,9 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
     <script>
+	    var max_protein = 100;
+		var max_carbs = 100;
+		var max_calories = 100;
         var donut_protein = 0;
         var donut_carbs = 0;
         var donut_calories = 0;
@@ -67,8 +70,17 @@
                     break;
                 }
                 c.data.donut_protein = donut_protein;
+				if (donut_protein > max_protein) {
+				donut_protein = max_protein;
+				}
                 c.data.donut_carbs = donut_carbs;
+				if (donut_carbs > max_carbs) {
+				donut_carbs = max_carbs;
+				}
                 c.data.donut_calories = donut_calories;
+				if (donut_calories > max_calories) {
+				donut_calories = max_calories;
+				}
             }
 
         }
@@ -88,7 +100,7 @@
             var data = google.visualization.arrayToDataTable([
                 ['Protein', 'gr'],
                 ['taken', donut_protein],
-                ['nottaken', 100 - donut_protein]
+                ['nottaken', max_protein - donut_protein]
             ]);
 
             var options = {
@@ -122,7 +134,7 @@
             var data = google.visualization.arrayToDataTable([
                 ['Protein', 'gr'],
                 ['taken', donut_carbs],
-                ['nottaken', 100 - donut_carbs]
+                ['nottaken', max_carbs - donut_carbs]
             ]);
 
             var options = {
@@ -156,7 +168,7 @@
             var data = google.visualization.arrayToDataTable([
                 ['Protein', 'gr'],
                 ['taken', donut_calories],
-                ['nottaken', 100 - donut_calories]
+                ['nottaken', max_calories - donut_calories]
             ]);
 
             var options = {
@@ -348,7 +360,7 @@
                 </div>
             </div>
         </div>
-        <div class="sml_title"><i>{{c.data.today_note}}</i>{{c.data.exercises}}{{c.data.meals}}</div>
+        <div class="sml_title"><i>{{c.data.today_note}}</i><!--{{c.data.exercises}}{{c.data.meals}}--></div>
         <a class="add_new" href="AddMeal.html">
          <img src="images/addnew.png" alt="Frown face" height="48" width="48">
          </a>
