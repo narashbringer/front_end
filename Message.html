@@ -1,0 +1,169 @@
+<!doctype html>
+<html ng-app="messageApp">
+
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script>
+        var accessToken = "03ad46c2f59d466aa2b02311ce3d6303";
+        var baseUrl = "https://api.api.ai/v1/";
+
+        function send(c) {
+			var api_response = '';
+            var text = c.message;//$("#pmessage").val();
+			c.message = '';
+			var m_obj = {};
+			m_obj.user = 'me';
+			m_obj.text = text;
+			m_obj.date = new Date();
+			c.data.messages.push(m_obj);
+            $.ajax({
+                type: "POST",
+                url: baseUrl + "query?v=20150910",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+				async: false,
+                headers: {
+                    "Authorization": "Bearer " + accessToken
+                },
+                data: JSON.stringify({
+                    query: text,
+                    lang: "en",
+                    sessionId: "<any random string>"
+                }),
+                success: function(data) {
+					//(data.result.fulfillment.speech.toString());
+				    api_response = data.result.fulfillment.speech.toString();
+                },
+                error: function() {
+                    alert("Internal Server Error");
+                }
+            });
+			return api_response;
+            //alert("Loading...");
+        }
+        angular.module('messageApp', [])
+            .controller('MessageController', function() {
+                var c = this;
+                c.data = [];
+				c.data.messages = [];
+				c.send = function() {
+					var response_string = send(c);
+					var d_obj = {};
+					d_obj.user = 'doctor';
+					d_obj.text = response_string; 
+					d_obj.date = new Date();
+					c.data.messages.push(d_obj);
+				}
+            });
+    </script>
+    <style>
+        body {
+            background-color: #F1F1F1;
+            font-size: 14px;
+        }
+
+        .message_card {
+            display: flex;
+            align-items: center;
+        }
+
+        .right_direction {
+            flex-direction: row;
+        }
+
+        .reverse_direction {
+            flex-direction: row-reverse;
+        }
+
+        .image_header {
+            padding: 5px;
+        }
+
+        .circle_div {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            background-color: #41B2AA;
+            text-align: center;
+            line-height: 40px;
+            align-self: center;
+        }
+
+        .message_div {}
+
+        .text_dialog {
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px;
+        }
+		
+		.darker {
+			background-color: #E4E4E4 !important;
+		}
+
+        .smaller_text {
+            font-size: 10px;
+            margin: 5px;
+        }
+
+        .submit_area {
+            display: flex;
+            flex-direction: row-reverse;
+            background-color: white;
+            position: fixed;
+            bottom: 0%;
+            right: 0;
+            width: 100%;
+            padding: 5px;
+        }
+
+        input {
+            width: 100%;
+            border-style: none;
+        }
+
+        .btn {
+            background-color: #41B2AA !important;
+            color: white !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div ng-controller="MessageController as c">
+        <div ng-repeat="message in c.data.messages">
+            <div ng-if="message.user == 'doctor'" class="message_card right_direction">
+                <div class="image_header">
+                    <div class="circle_div">D</div>
+                </div>
+                <div class="message_div">
+                    <div class="smaller_text">{{message.user}}</div>
+                    <div class="text_dialog">{{message.text}}</div>
+                    <div class="smaller_text">{{message.date}}</div>
+                </div>
+            </div>
+            <div ng-if="message.user == 'me'" class="message_card reverse_direction">
+                <div class="image_header">
+                    <div class="circle_div">P</div>
+                </div>
+                <div class="message_div">
+                    <div class="smaller_text">{{message.user}}</div>
+                    <div class="text_dialog darker">{{message.text}}</div>
+                    <div class="smaller_text">{{message.date}}</div>
+                </div>
+            </div>
+        </div><br/><br/><br/>
+        <div class="submit_area">
+            <label ng-click="c.send()" class="btn">send</label>
+            <input type="text" placeholder="messaging..." ng-model="c.message" id = "pmessage">
+        </div>
+    </div>
+</body>
+
+</html>
