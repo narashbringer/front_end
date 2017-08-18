@@ -11,15 +11,7 @@
         var accessToken = "03ad46c2f59d466aa2b02311ce3d6303";
         var baseUrl = "https://api.api.ai/v1/";
 
-        function send(c) {
-			var api_response = '';
-            var text = c.message;//$("#pmessage").val();
-			c.message = '';
-			var m_obj = {};
-			m_obj.user = 'me';
-			m_obj.text = text;
-			m_obj.date = new Date();
-			c.data.messages.push(m_obj);
+        function send(text, c) {
             $.ajax({
                 type: "POST",
                 url: baseUrl + "query?v=20150910",
@@ -36,13 +28,17 @@
                 }),
                 success: function(data) {
 					//(data.result.fulfillment.speech.toString());
-				    api_response = data.result.fulfillment.speech.toString();
+				    var api_response = data.result.fulfillment.speech.toString();
+					var d_obj = {};
+					d_obj.user = 'doctor';
+					d_obj.text = api_response; 
+					d_obj.date = new Date();
+					c.data.messages.push(d_obj);
                 },
                 error: function() {
                     alert("Internal Server Error");
                 }
             });
-			return api_response;
             //alert("Loading...");
         }
         angular.module('messageApp', [])
@@ -51,12 +47,15 @@
                 c.data = [];
 				c.data.messages = [];
 				c.send = function() {
-					var response_string = send(c);
-					var d_obj = {};
-					d_obj.user = 'doctor';
-					d_obj.text = response_string; 
-					d_obj.date = new Date();
-					c.data.messages.push(d_obj);
+				    var text_string = c.message;
+					var m_obj = {};
+					m_obj.user = 'me';
+					m_obj.text = text_string;
+					m_obj.date = new Date();
+					c.data.messages.push(m_obj);
+					c.message = '';
+					var response_string = ''
+					setTimeout(send(text_string, c), 5000);
 				}
             });
     </script>

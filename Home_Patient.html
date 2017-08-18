@@ -20,6 +20,11 @@
             } else {
                 c.data.meals = [];
             }
+			if (localStorage.appointments) {
+                c.data.appointments = JSON.parse(localStorage.getItem('appointments'));
+				var app_obj = c.data.appointments[c.data.appointments.length - 1];
+				c.data.appointment_text = app_obj.title + ' with ' + app_obj.healthcare_provider_assigned + ' on ' + app_obj.start;
+            }
             get_today_meals(c);
 			
             c.clear = function() {
@@ -27,6 +32,8 @@
             }
 
             function get_today_meals(c) {
+			    c.data.protein = 0;
+				c.data.calories = 0;
                 var date_string = new Date();
                 var today_string = date_string.toISOString().substring(0, 10);
                 for (var i = c.data.meals.length - 1; i >= 0; i--) {
@@ -62,6 +69,7 @@
 
         .number {
             text-align: center;
+			align-self: center;
         }
 
         .large_number {
@@ -144,8 +152,8 @@
 
 <body ng-controller="PatientHomeChartsController as c">
     <div class="top_panel">
-        <div>HI, <b>Lynda Wells</b>, Hereis your overview today.
-            <div ng-click="c.clear()">clear</div> <br> August 16, 2017 8:23:53 AM PDT </div>
+        <div>HI, <b>Lynda Wells</b>, Hereis your overview today. <br> August 16, 2017 8:23:53 AM PDT </div>
+		<div ng-click="c.clear()">clear</div>
         <div class="number_panel">
             <div class="number"><span class="large_number">{{c.data.protein}}</span><span>gr</span><br/><span>Protein</span></div>
             <div class="number"><span class="large_number">{{c.data.calories}}</span><br/><span>Calories <br/> Remaining</span></div>
@@ -156,7 +164,7 @@
         <!--Next Appointment-->
         <span class="green_text">TODAY'S REMINDER</span>
         <br/>
-        <span>Appointment with Dr. Suilivan on Monday</span>
+        <span>{{c.data.appointment_text}}</span>
     </div>
     <div class="footer">
         <!--navigators-->
@@ -171,12 +179,12 @@
                            <br/>MY JOURNAL</a>
                             </td>
                             <td style="border-right:thin #E3E3E3 solid;">
-                                <a href="">
+                                <a href="Appointments.html">
                            <img src="images/Calendar.png" width="60" height="60" />
                            <br/>MY CALENDAR</a>
                             </td>
                             <td style="border-right:thin #E3E3E3 solid;">
-                                <a href="">
+                                <a href="Message.html">
                                     <div class="message_div">
                                         <img src="images/connectd.png" width="60" height="60" />
                                         <span class="badge" ng-if=""></span>
@@ -198,7 +206,7 @@
                            <br/>LOG</a>
                             </td>
                             <td>
-                                <a href="">
+                                <a href="Education.html">
                            <img src="images/Education.png" width="60" height="60" />
                            <br/>EDUCATION</a>
                             </td>

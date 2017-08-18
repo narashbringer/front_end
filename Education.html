@@ -1,18 +1,185 @@
 <!doctype html>
 <html ng-app="educationContentApp">
-  <head>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/angular-social.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+	<script src="assets/js/angular-social/angular-social.js"></script>
+    <script src="assets/js/angular-social/angular-social.src.js"></script>
+    <script src="assets/js/angular-social/directive.js"></script>
+    <script src="assets/js/angular-social/facebook.js"></script>
+    <script src="assets/js/angular-social/google-plus.js"></script>
+    <script src="assets/js/angular-social/twitter.js"></script>
     <script>
-	angular.module('educationContentApp', [])
-  .controller('EducationContentController', function() {
-    var c = this;
-  });
-	</script>
-	<style>
-	</style>
-  </head>
-  <body>
-    <div ng-controller="EducationContentController as c">
+        angular.module('educationContentApp', ['ngSocial'])
+            .controller('EducationContentController', function($sce, $rootScope, $scope) {
+                var c = this;
+                c.data = [];
+                c.data.favorite = false;
+                c.data.AlleducationContents = [{
+                    'favorite': 0,
+                    'health_provider': 'Doctor Alice',
+                    'youtube_video': 'pInkXHaoI2M',
+                    'update_time': new Date(),
+                    'name': 'Bariatric Surgery',
+                    'description': 'Healthcare Heroes Episode 1012.2: Bariatric patient Angela Duran knew her family history meant she might have future health problems if she didnt take action soon.  Because other family members had developed major health problems, Angela decided to take the preventative measure of having bariatric surgery to help with her weight loss...',
+                    'image': '',
+                    'link': 'https://youtu.be/pInkXHaoI2M'
+                }, {
+                    'favorite': 0,
+                    'health_provider': 'Doctor Alice',
+                    'youtube_video': '',
+                    'update_time': new Date(),
+                    'name': 'Bariatric and its treatment',
+                    'description': ' therapy can offer some relief. By understanding the brain better, our ability to treat should also get a boost.',
+                    'image': 'https://www.w3schools.com/css/paris.jpg',
+                    'link': 'https://www.w3schools.com/css/paris.jpg'
+                }];
+                c.data.educationContents = c.data.AlleducationContents;
+				$("#all_c").addClass("source_selected");
+                c.bind_iframe_youtube = function(videoID) {
+                    var url_youtube_video = 'https://www.youtube.com/embed/' + videoID + '?controls=0';
+                    return $sce.trustAsResourceUrl(url_youtube_video); //'https://www.youtube.com/embed/' + videoID + '?controls=0';
+                }
+                c.bind_image_youtube = function(videoID) {
+                    var url_youtube_image = 'https://img.youtube.com/vi/' + videoID + '/0.jpg';
+                    return $sce.trustAsResourceUrl(url_youtube_video); //'https://www.youtube.com/embed/' + videoID + '?controls=0';
+                }
+                c.all = function() {
+                    c.data.favorite = false;
+                    c.data.educationContents = c.data.AlleducationContents;
+					$("#all_c").addClass("source_selected");
+					$("#favorite_c").removeClass("source_selected");
+                }
+                c.favorite = function() {
+                    c.data.favorite = true;
+                    c.data.educationContents = c.data.AlleducationContents.filter(function(x) {
+                        var match = (x.favorite == 1);
+                        return match;
+                    });
+					$("#favorite_c").addClass("source_selected");
+					$("#all_c").removeClass("source_selected");
+                }
+            });
+    </script>
+    <style>
+        body {
+            background-color: #F1F1F1;
+        }
+
+        .m_header {
+            display: flex;
+            background-color: white;
+            margin-bottom: 10px;
+        }
+
+        .source_selected {
+            font-weight: bold;
+            border-bottom: 2px solid #41B2AA;
+        }
+
+        .m_tag {
+            width: 50%;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .EducationContentCard {
+            background-color: white;
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .health_provider_span {
+            color: #41B2AA;
+        }
+
+        .ec_title_span {
+            color: black;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .ec_card_footer {
+            display: flex;
+            flex-direction: column;
+            background-color: #e5e5e5;
+            padding: 5px;
+            margin-bottom: 10px;
+            left: 0;
+            right: 0;
+        }
+
+        .footer_lines {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        img {
+            margin: 2px;
+        }
+
+        .ng-social-counter {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body ng-controller="EducationContentController as c">
+    <div>
+        <div class="m_header">
+            <div class="m_tag" ng-click="c.all()" id = "all_c">
+                <lable>Feeds</lable>
+            </div>
+            <div class="m_tag" ng-click="c.favorite()" id = "favorite_c">
+                <lable>Favorite</lable>
+            </div>
+        </div>
     </div>
-  </body>
+    <div ng-repeat="educationContent in c.data.educationContents">
+        <div class="EducationContentCard">
+            <div>
+                <span class="health_provider_span">{{educationContent.health_provider}}</span> - {{educationContent.update_time}}
+            </div>
+            <div>
+                <span class="ec_title_span">{{educationContent.name}}</span>
+            </div>
+            <div>
+                {{educationContent.description}}
+            </div>
+            <div ng-if="educationContent.youtube_video">
+                <iframe width="100%" height="300px" ng-src="{{c.bind_iframe_youtube(educationContent.youtube_video)}}"></iframe>
+            </div>
+            <div ng-if="!educationContent.youtube_video">
+                <img ng-src="{{educationContent.image}}" width="100%" />
+            </div>
+        </div>
+        <div class="ec_card_footer">
+            <div class="footer_lines">
+                <div>
+                    <a ng-href="{{educationContent.link}}" target="_blank"><span ng-if = "educationContent.link.length > 0">Source : </span>link</a>
+                </div>
+                <div>
+                    <img src="images/share.png" width="32" height="32" ng-click="educationContent.share = !educationContent.share" />
+                    <img src="images/favorite.png" width="32" height="32" ng-if="educationContent.favorite == 0" ng-click="educationContent.favorite = 1;" />
+                    <img src="images/favorite_active.png" width="32" height="32" ng-if="educationContent.favorite == 1" ng-click="educationContent.favorite = 0;" />
+                </div>
+            </div>
+            <div ng-if="educationContent.share" class="footer_lines">
+                <ul ng-social-buttons data-url="c.bind_iframe_youtube(educationContent.youtube_video)" data-title="educationContent.name" data-description="educationContent.description" data-image="c.bind_iframe_youtube(educationContent.youtube_video)" showcounts="true">
+                    <li class="ng-social-facebook">Facebook</li>
+                    <li class="ng-social-twitter">Twitter</li>
+                    <li class="ng-social-google-plus">Google+</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+
 </html>
