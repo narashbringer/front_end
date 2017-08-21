@@ -31,7 +31,7 @@
 				    var api_response = data.result.fulfillment.speech.toString();
 					var d_obj = {};
 					d_obj.user = 'doctor';
-					d_obj.text = api_response; 
+					d_obj.text = api_response;
 					d_obj.date = new Date();
 					c.data.messages.push(d_obj);
                 },
@@ -63,6 +63,9 @@
         body {
             background-color: #F1F1F1;
             font-size: 14px;
+            width: 400px;
+            height: 700px;
+            margin: auto;
         }
 
         .message_card {
@@ -101,7 +104,7 @@
             border-radius: 5px;
             margin: 5px;
         }
-		
+
 		.darker {
 			background-color: #E4E4E4 !important;
 		}
