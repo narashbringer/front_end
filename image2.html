@@ -1,0 +1,89 @@
+<!doctype html>
+<html ng-app="imageApp">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script>
+        angular.module('imageApp', [])
+            .controller('ImageController', function() {
+                var c = this;
+                c.data = [];
+                c.data.images = ['images/biking.png', 'images/swimming.png', 'images/walking.png', 'images/calendar.png', 'images/connectd.png',  'images/pencil.png'];
+                var curDown = false,
+                    curYPos = 0,
+                    curXPos = 0;
+                $(window).mousemove(function(m) {
+                    if (curDown === true) {
+                        //$(window).scrollTop($(window).scrollTop() + (curYPos - m.pageY)); 
+                        $(window).scrollLeft($(window).scrollLeft() + (curXPos - m.pageX));
+                        resizeimage();
+                    }
+                });
+                $(window).mousedown(function(m) {
+                    curDown = true;
+                    curYPos = m.pageY;
+                    curXPos = m.pageX;
+                });
+
+                $(window).mouseup(function() {
+                    curDown = false;
+                });
+
+                function resizeimage() {
+                    var window_width = $(window).width();
+                    $('img').each(function() {
+                        var x = $(this).position().left;
+                        test.push('x', x);
+                        if (x > $(window).scrollLeft() + (window_width * 0.15) && x < $(window).scrollLeft() + (window_width * 0.6)) {
+                            $(this).addClass('large_img').removeClass('small_img');
+                            $(this).siblings().removeClass('large_img').addClass('small_img');
+                        } else {
+                            $(this).removeClass('large_img').addClass('small_img');
+                        }
+                    });
+                }
+                $(document).ready(function() {
+                    resizeimage();
+                });
+
+            });
+    </script>
+    <style>
+        body {
+            background-color: grey;
+        }
+
+        .main_carousel {
+        }
+		
+        .img_carousel {
+            display: inline;
+            white-space: nowrap;
+        }
+
+        .large_img {
+            width: 46% !important;
+        }
+
+        .small_img {
+            width: 21% !important;
+        }
+		
+		img{
+			white-space: normal;
+			margin-left: 2%;
+			margin-right: 2%;
+		}
+    </style>
+</head>
+
+<body>
+    <div ng-controller="ImageController as c" class="main_carousel">
+        <div class="img_carousel" id="imageDiv">
+            <img ng-repeat="image in c.data.images" ng-src="{{image}}" />
+        </div>
+    </div>
+</body>
+
+</html>
