@@ -26,7 +26,7 @@
 				c.data.appointment_text = app_obj.title + ' with ' + app_obj.healthcare_provider_assigned + ' on ' + app_obj.start;
             }
             get_today_meals(c);
-			
+
             c.clear = function() {
                 localStorage.clear();
             }
@@ -50,6 +50,8 @@
     <style>
         body {
             background-color: #F1F1F1;
+            width: 500px;
+            margin: auto;
         }
 
         .top_panel {
@@ -149,73 +151,71 @@
         }
     </style>
 </head>
-
-<body ng-controller="PatientHomeChartsController as c">
-    <div class="top_panel">
-        <div>HI, <b>Lynda Wells</b>, Hereis your overview today. <br> August 16, 2017 8:23:53 AM PDT </div>
-		<div ng-click="c.clear()">clear</div>
-        <div class="number_panel">
-            <div class="number"><span class="large_number">{{c.data.protein}}</span><span>gr</span><br/><span>Protein</span></div>
-            <div class="number"><span class="large_number">{{c.data.calories}}</span><br/><span>Calories <br/> Remaining</span></div>
-            <div class="number"><span class="large_number">28</span><span>CG</span><br/><span>Water</span></div>
-        </div>
-    </div>
-    <div class="appointment">
-        <!--Next Appointment-->
-        <span class="green_text">TODAY'S REMINDER</span>
-        <br/>
-        <span>{{c.data.appointment_text}}</span>
-    </div>
-    <div class="footer">
-        <!--navigators-->
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <div class="navbara">
-                    <table>
-                        <tr class="toprows">
-                            <td style="border-right:thin #E3E3E3 solid;">
-                                <a href="Journals.html">
-                           <img src="images/pencil.png" width="60" height="60" />
-                           <br/>MY JOURNAL</a>
-                            </td>
-                            <td style="border-right:thin #E3E3E3 solid;">
-                                <a href="Appointments.html">
-                           <img src="images/Calendar.png" width="60" height="60" />
-                           <br/>MY CALENDAR</a>
-                            </td>
-                            <td style="border-right:thin #E3E3E3 solid;">
-                                <a href="Message.html">
-                                    <div class="message_div">
-                                        <img src="images/connectd.png" width="60" height="60" />
-                                        <span class="badge" ng-if=""></span>
-                                    </div>
-                                    <br/>CONNECT
-                                </a>
-                            </td>
-                        </tr>
-                        <tr class="toprows" style="border-top:thin #E3E3E3 solid;">
-                            <td class="buttomrows" style="	border-right:thin #E3E3E3 solid; ">
-                                <a href="">
-                           <img src="images/Progress.png" width="60" height="60" />
-                           <br/>PROGRESS
-                           </a>
-                            </td>
-                            <td style="border-right:thin #E3E3E3 solid;">
-                                <a href="Meal_Exercise.html">
-                           <img src="images/ConnectC.png" width="60" height="60" />
-                           <br/>LOG</a>
-                            </td>
-                            <td>
-                                <a href="Education.html">
-                           <img src="images/Education.png" width="60" height="60" />
-                           <br/>EDUCATION</a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-
+    <body ng-controller="PatientHomeChartsController as c">
+      <div class="top_panel">
+          <div>HI, <b>Lynda Wells</b>, Here is your overview today. <br> August 16, 2017 8:23:53 AM PDT </div>
+  		<div ng-click="c.clear()">clear</div>
+          <div class="number_panel">
+              <div class="number"><span class="large_number">{{c.data.protein}}</span><span>gr</span><br/><span>Protein</span></div>
+              <div class="number"><span class="large_number">{{c.data.calories}}</span><br/><span>Calories <br/> Remaining</span></div>
+              <div class="number"><span class="large_number">28</span><span>CG</span><br/><span>Water</span></div>
+          </div>
+      </div>
+      <div class="appointment">
+          <!--Next Appointment-->
+          <span class="green_text">TODAY'S REMINDER</span>
+          <br/>
+          <span>{{c.data.appointment_text}}</span>
+      </div>
+      <div class="footer">
+          <!--navigators-->
+          <div class="row">
+              <div class="col-sm-12 text-center">
+                  <div class="navbara">
+                      <table>
+                          <tr class="toprows">
+                              <td style="border-right:thin #E3E3E3 solid;">
+                                  <a href="Journals.html">
+                             <img src="images/pencil.png" width="60" height="60" />
+                             <br/>MY JOURNAL</a>
+                              </td>
+                              <td style="border-right:thin #E3E3E3 solid;">
+                                  <a href="Appointments.html">
+                             <img src="images/Calendar.png" width="60" height="60" />
+                             <br/>MY CALENDAR</a>
+                              </td>
+                              <td style="border-right:thin #E3E3E3 solid;">
+                                  <a href="Message.html">
+                                      <div class="message_div">
+                                          <img src="images/connectd.png" width="60" height="60" />
+                                          <span class="badge" ng-if=""></span>
+                                      </div>
+                                      <br/>CONNECT
+                                  </a>
+                              </td>
+                          </tr>
+                          <tr class="toprows" style="border-top:thin #E3E3E3 solid;">
+                              <td class="buttomrows" style="	border-right:thin #E3E3E3 solid; ">
+                                  <a href="">
+                             <img src="images/Progress.png" width="60" height="60" />
+                             <br/>PROGRESS
+                             </a>
+                              </td>
+                              <td style="border-right:thin #E3E3E3 solid;">
+                                  <a href="Meal_Exercise.html">
+                             <img src="images/ConnectC.png" width="60" height="60" />
+                             <br/>LOG</a>
+                              </td>
+                              <td>
+                                  <a href="Education.html">
+                             <img src="images/Education.png" width="60" height="60" />
+                             <br/>EDUCATION</a>
+                              </td>
+                          </tr>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </body>
 </html>
