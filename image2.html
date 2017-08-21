@@ -34,7 +34,6 @@
                     var window_width = $(window).width();
                     $('img').each(function() {
                         var x = $(this).position().left;
-                        test.push('x', x);
                         if (x > $(window).scrollLeft() + (window_width * 0.15) && x < $(window).scrollLeft() + (window_width * 0.6)) {
                             $(this).addClass('large_img').removeClass('small_img');
                             $(this).siblings().removeClass('large_img').addClass('small_img');
