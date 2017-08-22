@@ -10,7 +10,9 @@
     <!-- Include the jQuery library -->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <!-- Include the jQuery Mobile library -->
-    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js">
+    </script>
+
     <script>
 		var happiness = 0;
 		var hunger = 0;
@@ -39,11 +41,10 @@
 				};
             });
     </script>
+
     <style>
         body {
             background-color: #F1F1F1;
-            width: 400px;
-            margin: auto;
         }
 
         .title_div {
@@ -52,6 +53,8 @@
             align-items: center;
             background-color: white;
             padding: 10px;
+            width: 400px;
+            margin: auto;
         }
 
         .cancel_text {
@@ -66,11 +69,14 @@
         }
 
         .note_text_area {
-            padding: 20px;
+            padding: 10px;
             margin-top: 20px;
             background-color: white;
             border: 1px solid #E9E9E9;
+            width: 400px;
+            margin: auto;
         }
+
 
         .text_input_label {
             margin: 10px 0px;
@@ -86,6 +92,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            right: 50;
+            width: 400px;
         }
 
         .inline_div {
@@ -133,47 +141,49 @@
             font-size: 150%;
             position: fixed;
             bottom: 0;
-            right: 50;
             width: 400px;
             overflow: hidden;
+            left: 50%;
+            transform: translateX(-50%);
         }
-      
+
+
+
     </style>
 </head>
-
-<body>
-    <div ng-controller="AddJournalController as c">
-        <div class="title_div">
-            <div class="cancel_text" ng-click="c.back()">Cancel
-            </div>
-            <div class="title_text"><b>CREATE JOURNAL</b>
-            </div>
-        </div>
-        <div class="note_text_area">
-            <label class="text_input_label"><b>TODAY I'M FEELING...</b></label>
-            <textarea class="text_input" rows="5" ng-model="c.note"></textarea>
-        </div>
-        <div class="note_text_area space_between">
-            <div><label>Private</label></div>
-            <div><input type="checkbox" data-role="flipswitch" id="private_toggle" ></></div>
-        </div>
-        <div class="note_text_area">
-            <div>
-                <label>Happiness</label>
-            </div>
-            <div class="">
-                <input id="range_hapiness" type="range" min="0" max="10" step="1" value="5" data-highlight="true" data-show-value="true">
-            </div>
-            <div>
-                <label>Hunger</label>
-            </div>
-            <div class="">
-                <input id="range_hunger" type="range" min="0" max="10" step="1" value="5" data-highlight="true" data-show-value="true">
-            </div>
-        </div>
-        <div ng-click="c.addJournal()" class="submit_area">
-            <span>Submit</span>
-        </div>
-    </div>
-</body>
+  <body>
+      <div ng-controller="AddJournalController as c">
+          <div class="title_div">
+              <div class="cancel_text" ng-click="c.back()">Cancel
+              </div>
+              <div class="title_text"><b>CREATE JOURNAL</b>
+              </div>
+          </div>
+          <div class="note_text_area">
+              <label class="text_input_label"><b>TODAY I'M FEELING...</b></label>
+              <textarea class="text_input" rows="5" ng-model="c.note"></textarea>
+          </div>
+          <div class="note_text_area space_between">
+              <div><label>Private</label></div>
+              <div><input type="checkbox" data-role="flipswitch" id="private_toggle" ></></div>
+          </div>
+          <div class="note_text_area">
+              <div>
+                  <label>Happiness</label>
+              </div>
+              <div class="">
+                  <input id="range_hapiness" type="range" min="0" max="10" step="1" value="5" data-highlight="true" data-show-value="true">
+              </div>
+              <div>
+                  <label>Hunger</label>
+              </div>
+              <div class="">
+                  <input id="range_hunger" type="range" min="0" max="10" step="1" value="5" data-highlight="true" data-show-value="true">
+              </div>
+          </div>
+          <div ng-click="c.addJournal()" class="submit_area">
+              <span>Submit</span>
+          </div>
+      </div>
+  </body>
 </html>
