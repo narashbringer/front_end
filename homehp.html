@@ -535,13 +535,13 @@ var page = angular.module('bari', []);
 
 page.controller('providers', function($scope) {
     var doc = this;
-    doc.provider = {name:'Jane Smith', title:'Counselor', patient_count: 20};
+    doc.provider = {name:'Smith', title:'Dr.', patient_count: 20};
   });
 
 page.controller('menu_area', function($scope,$http) {
         $scope.patients =[{
           name:'Emily Williams', patientId:"p00001" ,iframe:0, group:'Monday', start: '10/20/2017',attends:'green',participation:'green',expanded:false, emotion:'red' ,test:'green'},
-      {name:'Jack Rogers', patientId:"p00002" ,iframe:0, group:'monday', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'}]
+      {name:'Jack Rodman', patientId:"p00002" ,iframe:0, group:'monday', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'}]
 });
 
   /* $('#nav_home').click(function() {
@@ -590,6 +590,7 @@ page.controller('menu_area', function($scope,$http) {
       //});
 //});*/
 </script>
+
 </head>
 <body style="background-color:#f1f1f1;">
   <section style="top:0px; hight:70px; position:fixed; z-index:10;">
