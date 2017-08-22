@@ -31,7 +31,7 @@
   width: 100%;
 }
 .day_label {
-  float:1eft;
+  float:left;
   padding: 5px 0px;
   width: 100px;
   cursor:pointer;
@@ -527,19 +527,21 @@ margin-left: 20px;
 }
 
 </style>
+
+
 <script>
 
 var page = angular.module('bari', []);
 
-page.controller('proviers', function($scope) {
+page.controller('providers', function($scope) {
     var doc = this;
-    doc.provier = {name:'jane smith', title:'consler', patient_count: 20};
+    doc.provider = {name:'Jane Smith', title:'Counselor', patient_count: 20};
   });
 
 page.controller('menu_area', function($scope,$http) {
         $scope.patients =[{
-          name:'jane smith', patiantID:"p00001" ,iframe:0, group:'monday', start: '10/20/2017',attends:'green',participation:'green',expanded:false, emotion:'red' ,test:'green'},
-      {name:'janes smith', patiantID:"p00002" ,iframe:0, group:'monday', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'}]
+          name:'Emily Williams', patientId:"p00001" ,iframe:0, group:'Monday', start: '10/20/2017',attends:'green',participation:'green',expanded:false, emotion:'red' ,test:'green'},
+      {name:'Jack Rogers', patientId:"p00002" ,iframe:0, group:'monday', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'}]
 });
 
   /* $('#nav_home').click(function() {
@@ -642,12 +644,12 @@ page.controller('menu_area', function($scope,$http) {
    // add new group
   </div>-->
 <section style='margin-top:10px; margin-left:50px;' class='topbar Donuts row'>
-  <div class="box col-md-12" ng-controller="proviers as doc" style='margin-top:50px;'>
+  <div class="box col-md-12" ng-controller="providers as doc" style='margin-top:50px;'>
   	<div class = "titlefont">
-    Hi {{doc.provier.title}}, {{doc.provier.name}},
+    Hi {{doc.provider.title}}, {{doc.provider.name}},
    	</div>
     <div class = "mediumfont">
-      You have {{doc.provier.patient_count}} patients.
+      You have {{doc.provider.patient_count}} patients.
     </div>
   </div>
 </section>
@@ -664,7 +666,7 @@ page.controller('menu_area', function($scope,$http) {
            </label>
         </div>-->
        <a href="https://ven01860.service-now.com/$sp.do?id=health_care_provider_message_page" class="btn btn-default hidden-xs" target="_blank">Messages</a>
-         <label class="btn btn-default hidden-xs" ng-click = "c.show_edit_patient()">Manage Conntent</label>
+         <label class="btn btn-default hidden-xs" ng-click = "c.show_edit_patient()">Manage Content</label>
 
         <div class=" display_inline_way display_middle hidden-xs">
            <input type="checkbox" id = "message"  ng-model = "c.data.show_patient_with_message" ng-click = "c.update_show_patient_with_message()">
@@ -722,7 +724,7 @@ page.controller('menu_area', function($scope,$http) {
 
                    <td class = "green" ng-class="{'showleftborder': patient.expanded}"><!-- ng-click="patient.iframe = 1; patient.expanded = true;">-->
                      <b>{{patient.name}}</b></td>
-                   <td class = "hidden-xs" ng-click="patient.iframe = 1; patient.expanded = true;">{{patient.patiantID}}</td>
+                   <td class = "hidden-xs" ng-click="patient.iframe = 1; patient.expanded = true;">{{patient.patientId}}</td>
                     <td class = "hidden-xs" ng-click="patient.iframe = 1; patient.expanded = true;">{{patient.group}}</td>
                     <td class = "hidden-xs" ng-click="patient.iframe = 1; patient.expanded = true">{{patient.start}}</td>
                   <td ng-click="patient.iframe = 1; patient.expanded = true">
