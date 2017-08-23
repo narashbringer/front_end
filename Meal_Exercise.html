@@ -218,6 +218,7 @@
 
         .btn_add_exercise {
             background-color: #6E6E6E !important;
+            margin: 8px;
         }
 
         .white_color {
@@ -281,11 +282,6 @@
             height: 10px;
         }
 
-        .add_new {
-            position: fixed;
-            right: 30px;
-            bottom: 30px;
-        }
 
         .content_div {
             background-color: white;
@@ -340,7 +336,8 @@
             <div class="center_exercise">
                 <label class="white_color font_size">{{c.data.exercises_hours}}</label>
                 <br/>
-                <a class="btn btn_add_exercise white_color" href="AddExercise.html">+ Add Exercise</a>
+                <a class="btn btn_add_exercise white_color" href="AddExercise.html">+ Exercise</a>
+                <a class="btn btn_add_exercise white_color" href="AddMeal.html">+ Meal</a>
             </div>
         </div>
         <div class="sml_title"><b>DAILY TOTALS</b></div>
@@ -391,9 +388,6 @@
         <div class="sml_title"><i>{{c.data.today_note}}</i>
             <!--{{c.data.exercises}}{{c.data.meals}}-->
         </div>
-        <a class="add_new" href="AddMeal.html">
-         <img src="images/addnew.png" alt="Frown face" height="48" width="48">
-         </a>
     </div>
 </body>
 
