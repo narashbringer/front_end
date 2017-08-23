@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="dist/main.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
@@ -323,72 +324,79 @@
         }
     </style>
 </head>
-
-<body>
-    <div ng-controller="mealExerciseController as c">
-        <div class="exercise_div grey_background_color">
-            <div>
-                <img class="img_style" src="images/walking.png" height="42" width="42"><br/>
-                <img class="img_style" src="images/biking.png" height="42" width="42"><br/>
-                <img class="img_style" src="images/swimming.png" height="42" width="42"><br/>
-                <img class="img_style margin_bottom_10" src="images/running.png" height="42" width="42"><br/>
+<div class="device-wrapper">
+  <div class="device" data-device="iPhone5" data-orientation="portrait" data-color="black">
+      <div class="screen">
+        <body>
+            <div ng-controller="mealExerciseController as c">
+                <div class="exercise_div grey_background_color">
+                    <div>
+                        <img class="img_style" src="images/walking.png" height="42" width="42"><br/>
+                        <img class="img_style" src="images/biking.png" height="42" width="42"><br/>
+                        <img class="img_style" src="images/swimming.png" height="42" width="42"><br/>
+                        <img class="img_style margin_bottom_10" src="images/running.png" height="42" width="42"><br/>
+                    </div>
+                    <div class="center_exercise">
+                        <label class="white_color font_size">{{c.data.exercises_hours}}</label>
+                        <br/>
+                        <a class="btn btn_add_exercise white_color" href="AddExercise.html">+ Exercise</a>
+                        <a class="btn btn_add_exercise white_color" href="AddMeal.html">+ Meal</a>
+                    </div>
+                </div>
+                <div class="sml_title"><b>DAILY TOTALS</b></div>
+                <div class="content_div">
+                    <div class="donut_style">
+                        <div id="proteindonutchart"></div>
+                        <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_protein}}</span> <b>gr <br/>Protein </b></span>
+                        </div>
+                    </div>
+                    <div class="donut_style">
+                        <div id="carbsdonutchart"></div>
+                        <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_carbs}}</span> <b>gr <br/>Carbs</b></span>
+                        </div>
+                    </div>
+                    <div class="donut_style">
+                        <div id="caloriesdonutchart"></div>
+                        <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_calories}}</span> <b><br/>Calories</b></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sml_title"><b>LAST MEAL</b></div>
+                <div class="content1_div">
+                    <div>
+                        <label>Protein</label>
+                        <label class="label_right">{{c.data.today_protein}}gr</label>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar backgroundcolor_blue" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': c.data.today_protein_p + '%'}">
+                        </div>
+                    </div>
+                    <div>
+                        <label>Carbs</label>
+                        <label class="label_right">{{c.data.today_carbs}}gr</label>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar backgroundcolor_green" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': c.data.today_carbs_p + '%'}">
+                        </div>
+                    </div>
+                    <div>
+                        <label>Calories</label>
+                        <label class="label_right">{{c.data.today_calories}}</label>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar backgroundcolor_yellow" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': c.data.today_calories_p + '%'}">
+                        </div>
+                    </div>
+                </div>
+                <div class="sml_title"><i>{{c.data.today_note}}</i>
+                    <!--{{c.data.exercises}}{{c.data.meals}}-->
+                </div>
             </div>
-            <div class="center_exercise">
-                <label class="white_color font_size">{{c.data.exercises_hours}}</label>
-                <br/>
-                <a class="btn btn_add_exercise white_color" href="AddExercise.html">+ Exercise</a>
-                <a class="btn btn_add_exercise white_color" href="AddMeal.html">+ Meal</a>
-            </div>
+        </body>
+      </div>
+        <div class="button">
+          <!-- You can hook the "home button" to some JavaScript events or just remove it -->
         </div>
-        <div class="sml_title"><b>DAILY TOTALS</b></div>
-        <div class="content_div">
-            <div class="donut_style">
-                <div id="proteindonutchart"></div>
-                <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_protein}}</span> <b>gr <br/>Protein </b></span>
-                </div>
-            </div>
-            <div class="donut_style">
-                <div id="carbsdonutchart"></div>
-                <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_carbs}}</span> <b>gr <br/>Carbs</b></span>
-                </div>
-            </div>
-            <div class="donut_style">
-                <div id="caloriesdonutchart"></div>
-                <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_calories}}</span> <b><br/>Calories</b></span>
-                </div>
-            </div>
-        </div>
-        <div class="sml_title"><b>LAST MEAL</b></div>
-        <div class="content1_div">
-            <div>
-                <label>Protein</label>
-                <label class="label_right">{{c.data.today_protein}}gr</label>
-            </div>
-            <div class="progress">
-                <div class="progress-bar backgroundcolor_blue" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': c.data.today_protein_p + '%'}">
-                </div>
-            </div>
-            <div>
-                <label>Carbs</label>
-                <label class="label_right">{{c.data.today_carbs}}gr</label>
-            </div>
-            <div class="progress">
-                <div class="progress-bar backgroundcolor_green" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': c.data.today_carbs_p + '%'}">
-                </div>
-            </div>
-            <div>
-                <label>Calories</label>
-                <label class="label_right">{{c.data.today_calories}}</label>
-            </div>
-            <div class="progress">
-                <div class="progress-bar backgroundcolor_yellow" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" ng-style="{'width': c.data.today_calories_p + '%'}">
-                </div>
-            </div>
-        </div>
-        <div class="sml_title"><i>{{c.data.today_note}}</i>
-            <!--{{c.data.exercises}}{{c.data.meals}}-->
-        </div>
+      </div>
     </div>
-</body>
-
 </html>
