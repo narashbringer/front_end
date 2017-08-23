@@ -2,8 +2,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="A beautiful HTML & CSS built iPhone 6 mock for your website." />
-<title>MocKit - Beautiful HTML & CSS built iPhone 6 mock</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 <link rel="shortcut icon" href="../favicon.png">
 </head>
@@ -37,15 +35,15 @@
 </script>
 
 <style>
-    html, body {width:100%;height:100%;}
-    body {padding:0;margin:0;background-color:#9a21a5;font-family:'open sans',helvetica neue,helvetica,arial,sans-serif;}
+    html, body {width:120%;height:120%;}
+    body {padding:0;margin:0;background-color:gray;font-family:'open sans',helvetica neue,helvetica,arial,sans-serif;}
 
 
     /*Not neccessary in your layout -- only here for the demo page layout styles*/
 
     .half {width:50%;height:100%;display:inline-block;float:left;position:relative;}
     .half.dark {background-color:#ffa633;}
-    .iphone-container {width:100%;}
+    .iphone-container {width:190%;}
 
 
     /*Styles for Dark version*/
@@ -72,6 +70,16 @@
     .button-two {height: 40px;width: 3px;left: -7px;top: 110px;border-radius: 4px 0 0 4px;}
     .button-three {height: 40px;width: 3px;left: -7px;top: 165px;border-radius: 4px 0 0 4px;}
     .button-four {height: 40px;width: 3px;right: -7px;top: 110px;border-radius: 0 4px 4px 0;}
+
+    iframe {
+    width: 1366px; height: 768px; border: 1px solid black;
+    -moz-transform: scale(0.25);
+    -moz-transform-origin: 0 0;
+    -o-transform: scale(0.25);
+    -o-transform-origin: 0 0;
+    -webkit-transform: scale(0.25);
+    -webkit-transform-origin: 0 0;
+}
 </style>
 
 
@@ -90,7 +98,7 @@
                     <span class="speaker"></span>
                 </div>
                 <div class="phone-screen">
-                    <iframe allowtransparency="true" style="background: #FFFFFF;" src="https://narashbringer.github.io/front_end/Home_Patient.html" height="100%" width="100%" />-->
+                    <iframe allowtransparency="true" style="background: #FFFFFF;" src="https://narashbringer.github.io/front_end/Home_Patient.html" height="100%" width="100%"/>-->
                 </div>
                 <div class="circle-button"></div>
             </div>
@@ -110,7 +118,7 @@
                     <span class="speaker"></span>
                 </div>
                 <div class="phone-screen">
-                    <!-- Put your screenshot here <img src="yourscreen.png" height="100%" width="100%" />-->
+                    <iframe allowtransparency="true" style="background: #FFFFFF;" src="https://narashbringer.github.io/front_end/Home_Patient.html" height="10" width="100%" />
                 </div>
                 <div class="circle-button"></div>
             </div>
