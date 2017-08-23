@@ -254,10 +254,20 @@
         }
 
         .content_div {
+            background-color: white;
+            max-height: 234px;
+            display: flex;
+            justify-content:space-between;
+            align-items: center;
+            padding: 12px;
+        }
+
+        .content1_div {
             padding: 20px;
             background-color: white;
             max-height: 225px;
         }
+
 
         .label_right {
             float: right;
@@ -286,10 +296,11 @@
         }
 
         .donut_style {
-            position: relative;
-            width: 32%;
-            text-align: center;
-            display: inline-block;
+          position: relative;
+          width: 32%;
+          max-height: 99%;
+          margin: auto;
+          text-align: center;
         }
 
         .overlay_text {
@@ -350,7 +361,7 @@
             </div>
         </div>
         <div class="sml_title"><b>LAST MEAL</b></div>
-        <div class="content_div">
+        <div class="content1_div">
             <div>
                 <label>Protein</label>
                 <label class="label_right">{{c.data.today_protein}}gr</label>
