@@ -7,21 +7,19 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js" ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-resource.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
-       <script src="https://d3js.org/d3.v3.min.js"/></script>
-       <!--<script src="https://d3js.org/d3.v4.min.js"/></script>-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script scr='https://raw.githubusercontent.com/michaelbromley/angularUtils/master/src/directives/pagination/dirPagination.js'></script>
     <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js'></script>
     <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css'></script>
     <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css'></script>
 <style>
-.search_bar {
+  .search_bar {
   padding: 10px 0px;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
-}
-.donuts {
-  margin-top:10px;
+  }
+  .donuts {
 	display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
@@ -29,8 +27,8 @@
   align-content: space-around;
   justify-content: flex-start;
   width: 100%;
-}
-.day_label {
+  }
+  .day_label {
   float:left;
   padding: 5px 0px;
   width: 100px;
@@ -40,9 +38,9 @@
   border-bottom-left-radius: 5px;
   border: 2px solid #E4E4E4;
   text-align: center;
-}
+  }
 
-.week_label {
+  .week_label {
   padding: 5px 0px;
   width: 100px;
   cursor:pointer;
@@ -51,128 +49,128 @@
   border-bottom-right-radius: 5px;
   border: 2px solid #E4E4E4;
   text-align: center;
-}
+  }
 
-.label_checked {
+  .label_checked {
   background-color: #41B2AA !important;
   border: 2px solid #41B2AA !important;
   color: white !important;
-}
+  }
 
-.radio_button {
-  visibility: hidden;
-}
+  .radio_button {
+    visibility: hidden;
+  }
 
-.display_inline_way {
-  width : 400px;;
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  text-align: center;
-}
+  .display_inline_way {
+    width : 400px;;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+  }
 
-.display_middle {
-  justify-content: center  !important;
-}
+  .display_middle {
+    justify-content: center  !important;
+  }
 
-.display_end {
-  justify-content: flex-end !important;
-}
+  .display_end {
+    justify-content: flex-end !important;
+  }
 
-.display_inline_way input #message{
-  width : 10px;
-  margin-left :10px;
-  margin-right :10px;
-}
+  .display_inline_way input #message{
+    width : 10px;
+    margin-left :10px;
+    margin-right :10px;
+  }
 
-.search_input {
-  background-image: url('images/searchicon.png');
-  background-position: center right;
-  background-repeat: no-repeat;
-  border-radius: 5px;
-  border: 2px solid #E4E4E4;
-  height : 33px;
-}
+  .search_input {
+    background-image: url('images/searchicon.png');
+    background-position: center right;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    border: 2px solid #E4E4E4;
+    height : 33px;
+  }
 
-.checkbox_label {
-  margin-top : 10px;
-  width : 200px;
-}
+  .checkbox_label {
+    margin-top : 10px;
+    width : 200px;
+  }
 
-.filter_button {
-  width : 70px;
-  padding: 5px 0px;
-  color: white;
-  background-color: #41B2AA;
-  text-align: center;
-  cursor: pointer;
-  border-radius: 5px;
-  border: 2px solid #41B2AA;
- //display: inline-block;
-  margin-left: 10px;
-}
+  .filter_button {
+    width : 70px;
+    padding: 5px 0px;
+    color: white;
+    background-color: #41B2AA;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 2px solid #41B2AA;
+    //display: inline-block;
+    margin-left: 10px;
+  }
 
-table {
-  width: 100%;
-  border-collapse:separate;
-  border-spacing: 0px 1px;
-}
+  table {
+    width: 100%;
+    border-collapse:separate;
+    border-spacing: 0px 1px;
+  }
 
-table th:first-child{
-  border-radius:5px 0 0 5px;
-}
+  table th:first-child{
+    border-radius:5px 0 0 5px;
+  }
 
-table th:last-child{
-  border-radius:0 5px 5px 0;
-}
+  table th:last-child{
+    border-radius:0 5px 5px 0;
+  }
 
-th {
-  padding: 10px 10px;
-  background:#E4E4E4; /* Grey */
-  text-align: center;
-  font-size: 10px;
-}
+  th {
+    padding: 10px 10px;
+    background:#E4E4E4; /* Grey */
+    text-align: center;
+    font-size: 10px;
+  }
 
-tbody:before {
-    content: "-";
+  tbody:before {
+      content: "-";
     display: block;
     line-height: 1em;
     color: transparent;
-}
+  }
 
-td {
+  td {
     border: solid 1px #E4E4E4;
     border-style: solid none;
     padding: 10px;
     background-color: white;
     text-align: center;
-}
-td:first-child {
+  }
+  td:first-child {
     border-left-style: solid;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
-}
-td:last-child {
+  }
+  td:last-child {
     border-right-style: solid;
     border-bottom-right-radius: 5px;
     border-top-right-radius: 5px;
-}
+  }
 
-.order_image {
+  .order_image {
   width: 15px;
   height: 15px;
   vertical-align: middle;
   display: inline-block;
-}
+  }
 
-.showleftborder {
+  .showleftborder {
   border-left: 3px solid #41B2AA;
   color : black !important;
-}
+  }
 
-.close_iframe {
+  .close_iframe {
   background-color: white;
   border-radius: 5px;
   width : 30px;
@@ -181,29 +179,29 @@ td:last-child {
   vertical-align: middle;
   line-height: 30px;
   float : right;
-}
+  }
 
-.green {
+  .green {
   color : #41B2AA;
-}
+  }
 
-.images_div {
+  .images_div {
   display : flex;
   flex-direction: row;
-}
+  }
 
-.message_div {
+  .message_div {
   position:relative;
-}
+  }
 
-.badge {
+  .badge {
   background-color: #41B2AA;
   position:absolute;
   top: -5px;
   right: -5px
-}
+  }
 
-.patient_score_dot_style {
+  .patient_score_dot_style {
     margin: 0 auto;
     display: inline-block;
     height: 12px;
@@ -211,52 +209,52 @@ td:last-child {
     line-height: 12px;
     -moz-border-radius: 30px; /* or 50% */
     border-radius: 30px; /* or 50% */
-}
+  }
 
-.patient_calendar_iframe {
+  .patient_calendar_iframe {
   background:  #E4E4E4;
   height:100%;
   width: 100%;
   margin: 0;
   padding: 0;
-}
+  }
 
-.t2{
-  background-color: #E4E4E4;
-}
+  .t2{
+    background-color: #E4E4E4;
+  }
 
-.test {
- margin: 0;
- padding: 0;
- display: inline-block;
- width: 90%; height: 520px;
- background-color: #E4E4E4;
-}
+  .test {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 90%; height: 520px;
+    background-color: #E4E4E4;
+  }
 
-.table_footer_div {
+  .table_footer_div {
   display : flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   margin: 10px 0px;
-}
+  }
 
-.table_footer_div div select {
-  background-color: white;
+  .table_footer_div div select {
+    background-color: white;
   width : 50px;
   height : 30px;
   border-radius: 5px;
   border: solid 1px #E4E4E4;
   margin-right: 10px;
-}
+  }
 
-.table_paginator {
+  .table_paginator {
   display : flex;
   flex-wrap: nowrap;
   align-items: center;
   justify-content: center;
-}
+  }
 
-.paginator_icons {
+  .paginator_icons {
   width : 20px;
   height : 20px;
   border-radius: 5px;
@@ -267,12 +265,12 @@ td:last-child {
   align-items: center;
   justify-content: center;
   margin-right: 10px;
-}
+  }
 
-.paginator_icons:last-of-type {
+  .paginator_icons:last-of-type {
     margin-right: 0px !important;
-}
-.modal2 {
+  }
+  .modal2 {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -281,18 +279,18 @@ td:last-child {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-}
-/* Modal Content/Box */
-.modal2-content {
+  }
+  /* Modal Content/Box */
+  .modal2-content {
     top: 10%;
     background-color: #fefefe;
     margin: 10px auto; /* 15% from the top and centered */
     padding: 10px;
     border: 1px solid #888;
     width: 60%; /* Could be more or less, depending on screen size */
-}
+  }
 
-.topbar {
+  .topbar {
   background:
     linear-gradient(
     rgba(0, 0, 0, 0.7),
@@ -300,26 +298,26 @@ td:last-child {
     url("http://imgur.com/TPucnpT.png");
   width: 100%;
   background-size:cover;
-  padding: 25px 70px 40px 22px;
+  padding: 20px 70px 20px 22px;
   position: fixed;
   top: 50px;
   z-index: 2;
-}
-.topnavbar{
-z-index:3;
-}
-.dropdown {
+  }
+  .topnavbar{
+    z-index:3;
+  }
+  .dropdown {
     padding-right: 50px;
-}
+  }
 
-.navbar-avatar {
+  .navbar-avatar {
 		color: black;
-}
-.patientlist{
+  }
+  .patientlist{
 		margin-top: 350px;
   	margin-left: 20px;
-}
-.navbar {
+  }
+  .navbar {
   transition: 250ms opacity ease-in-out;
   -webkit-transition: 250ms opacity ease-in-out;
   border: 0;
@@ -331,26 +329,26 @@ z-index:3;
   z-index: 3;
   background-color: whitesmoke;
   font
-}
+  }
 
-.navbar-fade {
+  .navbar-fade {
   opacity: 0.4;
-}
+  }
 
-.navbar-inverse .navbar-toggle {
+  .navbar-inverse .navbar-toggle {
   border-color: rgba(255, 255, 255, 0.25);
-}
+  }
 
-.nav > li > a {
+  .nav > li > a {
   max-height: 50px;
-}
+  }
 
-.navbar-brand {
+  .navbar-brand {
   height: 50px;
   padding: 20px;
-}
+  }
 
-.navbar-brand img, .navbar-brand span {
+  .navbar-brand img, .navbar-brand span {
   margin-left: 50px;
   margin-right: 50px;
   margin-top: 5px;
@@ -363,82 +361,89 @@ z-index:3;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
-}
-.breadcrumb-container {
+  }
+  .breadcrumb-container {
   background-color: whitesmoke;
-}
+  }
 
-/* for mobile app */
-.navbar-inverse.is-native {
-  background-color: #405060;
-}
+  /* for mobile app */
+  .navbar-inverse.is-native {
+  //background-color: #405060;
+  }
 
-nav{
- margin-bottom: 0px;
- border-radius: 0px;
-}
+  nav{
+    margin-bottom: 0px;
+    border-radius: 0px;
+  }
+  .top_wraper{
+    //margin-left: 300px;
+    background-color: inherit;
+    display: grid;
+    display: -ms-grid;
+    grid-template-columns: 20% 25% 25% 25%;
+    grid-gap: 10px;
 
-.navbar-collapse{
-padding-right: 0px;
-}
+  }
+  .navbar-collapse{
+    padding-right: 0px;
+  }
 
-.navbar-nav {
-margin: 0px;
-}
+  .navbar-nav {
+    margin: 0px;
+  }
 
-.visible-lg-inline {
-color: black;
-}
-.visible-xs-block{
- margin-right:300px;
-}
-.leftissue{
-  margin-right:20px;
-  color: black;
-}
-.sidenav {
-  position:fixed;
-  top:0;
-  left: 0;
-  display: inline-block;
-  background-color: #333645;
-  width: 50px;
-  height: 100%;
-  color: #E4E4E4 ;
-  /*border: 2px solid red;*/
-  transition: 0.5s;
-  z-index:4;
-}
+  .visible-lg-inline {
+    color: black;
+  }
+  .visible-xs-block{
+    margin-right:300px;
+  }
+  .leftissue{
+    margin-right:20px;
+  }
+  .sidenav {
+    position:fixed;
+    top:0;
+    left: 0;
+    display: inline-block;
+    background-color: #333645;
+    width: 50px;
+    height: 100%;
+    color: #E4E4E4 ;
+    /*border: 2px solid red;*/
+    transition: 0.5s;
+    z-index:4;
+  }
 
-.menu_row {
-  height: 60px;
-  /*border: 2px solid green;*/
-  left: 0;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  animation-delay: 3s;
-}
+  .menu_row {
+    height: 60px;
+    /*border: 2px solid green;*/
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    animation-delay: 3s;
+  }
 
-.top_nav {
-  /*border: 2px solid purple;*/
-  text-align:right;
-  padding-left: 10px;
-  padding-right: 10px;
-}
+  .top_nav {
+    /*border: 2px solid purple;*/
+    text-align:right;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
-.menu_image {
+  .menu_image {
   margin-left: 12px;
   margin-right: 13px;
   /*border: 2px solid yellow;*/
-}
+  }
 
-.menu_image_top {
+  .menu_image_top {
   margin-left: 15px;
   margin-right: 17px;
-}
+  }
 
-.menu_text {
+  .menu_text {
   padding-top: 18px;
   display: none;
   color: #E4E4E4;
@@ -478,9 +483,6 @@ p {
   font-size: 16pt;
 }
 
-.box {
-margin-left: 20px;
-}
 
 @media screen and (max-width: 768px) {
   .titlefont {
@@ -543,6 +545,143 @@ page.controller('menu_area', function($scope,$http) {
           name:'Emily Williams', patientId:"p00001" ,iframe:0, group:'Monday', start: '10/20/2017',attends:'green',participation:'green',expanded:false, emotion:'red' ,test:'green'},
       {name:'Jack Rodman', patientId:"p00002" ,iframe:0, group:'monday', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'}]
 });
+
+var max_protein = 100;
+var max_carbs = 100;
+
+var ontrack_good = 50;
+var ontrack_ok = 25;
+var ontrack_bad = 25;
+
+var hunger_good = 50;
+var hunger_ok = 20;
+var hunger_bad = 30;
+google.charts.load("current", {
+    packages: ["corechart"]
+});
+
+  google.charts.setOnLoadCallback(drawChartstate);
+google.charts.setOnLoadCallback(drawproteindonutchart);
+google.charts.setOnLoadCallback(drawcarbsdonutchart);
+$(window).resize(function() {
+  google.charts.setOnLoadCallback(drawChartstate);
+    google.charts.setOnLoadCallback(drawproteindonutchart);
+    google.charts.setOnLoadCallback(drawcarbsdonutchart);
+});
+
+function drawChartstate() {
+      var data = google.visualization.arrayToDataTable([
+        ["Info Sesion", "Density", { role: "style" } ],
+        ["Info Sesion", 95, "#b87333"],
+        ["consultation", 85, "silver"],
+        ["pyscoligist", 65, "gold"],
+        ["nutrtion", 50, "color: #e5e4e2"],
+          ["education", 40, "color: #e5e4e2"],
+            ["something", 30, "color: #e5e4e2"],
+              ["surgery", 20, "color: #e5e4e2"]
+      ]);
+
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
+
+      var options = {
+        title: "patient retention",
+        backgroundColor: 'none', // background of the div
+        SliceBorderColor: 'none',
+        chartArea: {
+            width: '90%',
+            height: '90%'
+        },
+          hAxis:{
+            baselineColor: 'white',
+
+          },
+        width: '100%',
+        height: '100%',
+        color:['whitesmoke','whitesmoke','whitesmoke','whitesmoke','whitesmoke','whitesmoke','whitesmoke'],
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+
+function drawproteindonutchart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Protein', 'gr'],
+        ['good', ontrack_good],
+        ['ok', ontrack_ok],
+        ['not good', ontrack_bad]
+    ]);
+
+    var options = {
+        //title: 'My Daily Activities', // the text next to the chart
+        pieHole: 0.75,
+        backgroundColor: 'none', // background of the div
+        pieSliceBorderColor: 'none',
+        //backgroundColor.fill: 'red',
+        //colors: ['#3BB7AB', '#F1F1F1'],
+        enableInteractivity: false,
+        pieSliceText: 'none',
+        chartArea: {
+            width: '100%',
+            height: '100%'
+        },
+       width: '100%',
+        height: '100%',
+        legend: {
+            position: 'none',
+            textStyle: {
+                color: 'red',
+                fontSize: 16
+            }
+        } // the chart details for each part
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('proteindonutchart'));
+    chart.draw(data, options);
+}
+
+function drawcarbsdonutchart() {
+    var data = google.visualization.arrayToDataTable([
+        ['Protein', 'gr'],
+        ['good', hunger_good],
+        ['ok', hunger_ok],
+        ['not good', hunger_bad]
+    ]);
+
+    var options = {
+        //title: 'My Daily Activities', // the text next to the chart
+        pieHole: 0.75,
+        backgroundColor: 'none', // background of the div
+        pieSliceBorderColor: 'none',
+          //backgroundColor.fill: 'red',
+        //colors: ['#7CDE00', '#F1F1F1'],
+        enableInteractivity: false,
+        pieSliceText: 'none',
+        chartArea: {
+            width: '100%',
+            height: '100%'
+        },
+        width: '100%',
+        height: '100%',
+        legend: {
+            position: 'none',
+            textStyle: {
+                color: 'red',
+                fontSize: 16
+            }
+        } // the chart details for each part
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('carbsdonutchart'));
+    chart.draw(data, options);
+}
 
   /* $('#nav_home').click(function() {
           $(men).addClass('selected').siblings().removeClass('selected');
@@ -645,14 +784,32 @@ page.controller('menu_area', function($scope,$http) {
    // add new group
   </div>-->
 <section style='margin-top:10px; margin-left:50px;' class='topbar Donuts row'>
-  <div class="box col-md-12" ng-controller="providers as doc" style='margin-top:50px;'>
-  	<div class = "titlefont">
-    Hi {{doc.provider.title}}, {{doc.provider.name}},
-   	</div>
-    <div class = "mediumfont">
-      You have {{doc.provider.patient_count}} patients.
-    </div>
+  <div class="top_wraper box col-md-12" ng-controller="providers as doc">
+    <div>
+      <div class = "titlefont">
+        Hi {{doc.provider.title}}, {{doc.provider.name}},
+   	  </div>
+      <div class = "mediumfont">
+        You have {{doc.provider.patient_count}} patients.
+      </div>
+
   </div>
+<!--  <div class="content_div">-->
+      <div class="donut_style">
+          <div id="proteindonutchart"></div>
+          <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_protein}}</span> <b>gr <br/>Protein </b></span>
+          </div>
+      </div>
+      <div class="donut_style">
+          <div id="columnchart_values"></div>
+      </div>
+      <div class="donut_style">
+          <div id="carbsdonutchart"></div>
+          <div class="overlay_text"><span class="middle_text"><span class = "font_150">{{c.data.donut_carbs}}</span> <b>gr <br/>Carbs</b></span>
+          </div>
+      </div>
+
+    </div>
 </section>
 <section style='margin-top:25%; margin-left:5%; margin-right:5%;'>
   <!-- your widget template -->
