@@ -16,6 +16,10 @@
         app.controller('AppointmentController', function($scope, uiCalendarConfig) {
             var c = this;
             c.data = [];
+			c.back = function() {
+					window.location = 'Home_Patient.html';
+				}
+				
             if (localStorage.appointments) {
                 c.data.appointments = JSON.parse(localStorage.getItem('appointments'));
             } else {
@@ -84,6 +88,33 @@
             width: 400px;
             margin: auto;
         }
+		
+		.calendar {
+			width:100% !important;
+			margin-top: 10px;
+		}
+		
+		.title_div {
+            position: relative;
+            display: flex;
+			flex-direction: row-reverse;
+            align-items: center;
+            background-color: white;
+            padding: 10px;
+            width: 100% !important;
+            margin: auto;
+        }
+
+        .cancel_text {
+            position: absolute;
+            right: 10px;
+        }
+
+        .title_text {
+            display: flex;
+            margin: 0 auto;
+            align-self: center;
+        }
 
         .modal {
             display: none;
@@ -128,11 +159,22 @@
             margin-top: 10px;
             margin-bottom: 10px;
         }
+		
+		.no_margin {
+			 margin: 0px !important;
+		}
     </style>
 </head>
 
 <body>
     <div ng-controller="AppointmentController as c">
+		<div class="title_div">
+            <div class="title_text"><b>Calendar</b>
+            </div>
+			<div class="cancel_text" ng-click="c.back()">Home
+            </div>
+        </div>
+		<hr class = "no_margin"/>
         <div class="calendar" ng-model="c.data.eventSources" calendar="myCalendar1" ui-calendar="c.data.uiConfig.calendar"></div>
         <div id="myDialogWindow" class="modal">
             <div class="modal-content">

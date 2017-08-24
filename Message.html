@@ -45,7 +45,14 @@
             .controller('MessageController', function() {
                 var c = this;
                 c.data = [];
+				
+				c.back = function() {
+					window.location = 'Home_Patient.html';
+				}
+				
 				c.data.messages = [];
+				send('hello,', c);
+				send('who are you?', c);
 				c.send = function() {
 				    var text_string = c.message;
 					var m_obj = {};
@@ -54,7 +61,6 @@
 					m_obj.date = new Date();
 					c.data.messages.push(m_obj);
 					c.message = '';
-					var response_string = ''
 					setTimeout(send(text_string, c), 5000);
 				}
             });
@@ -64,7 +70,29 @@
             background-color: #F1F1F1;
             font-size: 14px;
             width: 400px;
+			height:100vh;
             margin: auto;
+        }
+		
+		.title_div {
+            display: flex;
+			flex-direction: row;
+            align-items: center;
+            background-color: white;
+            padding: 10px;
+            width: 100% !important;
+            margin: auto;
+			bottom: 0px;
+        }
+
+        .cancel_text {
+            right: 10px;
+        }
+
+        .title_text {
+            display: flex;
+            margin: 0 auto;
+            align-self: center;
         }
 
         .message_card {
@@ -117,14 +145,13 @@
         }
 
         .submit_area {
+			position:absolute;
             display: flex;
             flex-direction: row-reverse;
             background-color: white;
-            bottom: 0%;
-            right: 0;
+            bottom: 0px;
             padding: 5px;
             width: 400px;
-            margin: auto;
         }
 
         input {
@@ -140,7 +167,13 @@
 </head>
 
 <body>
-    <div ng-controller="MessageController as c">
+    <div ng-controller="MessageController as c" style = "height:100vh;">
+		<div class="title_div">
+            <div class="title_text"><b>Messages</b>
+            </div>
+			<div class="cancel_text" ng-click="c.back()">Home
+            </div>
+        </div>
         <div ng-repeat="message in c.data.messages">
             <div ng-if="message.user == 'doctor'" class="message_card right_direction">
                 <div class="image_header">
