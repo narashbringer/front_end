@@ -1,0 +1,61 @@
+<!doctype html>
+<html ng-app="progressApp">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="assets/js/slick/slick.css" />
+	<link rel="stylesheet" type="text/css" href="assets/js/slick/slick-theme.css" />
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script src="assets/js/slick/slick.min.js"></script>
+    <script>
+        angular.module('progressApp', [])
+            .controller('ProgressController', function() {
+                var c = this;
+				c.data = [];
+				c.data.images = ['data/1.jpg','data/2.jpg','data/3.jpg','data/4.jpg','data/5.jpg','data/6.jpg','data/7.jpg'];
+            });
+    </script>
+    <style>
+	.image_div {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.slick-center img{
+		height: 150px;
+		width: 150px;
+	}
+	
+	.slick-track {
+		display: flex !important;
+		align-items: center;
+		justify-content: center;
+	}
+
+    </style>
+</head>
+
+<body>
+    <div ng-controller="ProgressController as c">
+        <div id = "slider">
+            <div ng-repeat="img in c.data.images">
+				<div class = "image_div">
+					<img ng-src="{{img}}" width = "100px" height = "100px"/>
+				</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function(){
+      $('#slider').slick({
+	  arrows: true,
+	  slidesToShow: 3,
+	  slidesToScroll: 1,
+	  centerMode: true
+      });
+    });
+  </script>
+</html>
