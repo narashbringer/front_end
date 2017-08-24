@@ -9,6 +9,18 @@
             .controller('ImageController', function() {
                 var c = this;
                 c.data = [];
+				c.resizeimage = function() {
+                    var window_width = $(window).width();
+                    $('img').each(function() {
+                        var x = $(this).position().left;
+                        if (x > $(window).scrollLeft() + (window_width * 0.15) && x < $(window).scrollLeft() + (window_width * 0.6)) {
+                            $(this).addClass('large_img').removeClass('small_img');
+                            $(this).siblings().removeClass('large_img').addClass('small_img');
+                        } else {
+                            $(this).removeClass('large_img').addClass('small_img');
+                        }
+                    });
+                }
                 c.data.images = ['images/biking.png', 'images/swimming.png', 'images/walking.png', 'images/calendar.png', 'images/connectd.png',  'images/pencil.png'];
                 var curDown = false,
                     curYPos = 0,
@@ -17,7 +29,7 @@
                     if (curDown === true) {
                         //$(window).scrollTop($(window).scrollTop() + (curYPos - m.pageY)); 
                         $(window).scrollLeft($(window).scrollLeft() + (curXPos - m.pageX));
-                        resizeimage();
+                        c.resizeimage();
                     }
                 });
                 $(window).mousedown(function(m) {
@@ -30,20 +42,8 @@
                     curDown = false;
                 });
 
-                function resizeimage() {
-                    var window_width = $(window).width();
-                    $('img').each(function() {
-                        var x = $(this).position().left;
-                        if (x > $(window).scrollLeft() + (window_width * 0.15) && x < $(window).scrollLeft() + (window_width * 0.6)) {
-                            $(this).addClass('large_img').removeClass('small_img');
-                            $(this).siblings().removeClass('large_img').addClass('small_img');
-                        } else {
-                            $(this).removeClass('large_img').addClass('small_img');
-                        }
-                    });
-                }
                 $(document).ready(function() {
-                    resizeimage();
+                    c.resizeimage();
                 });
 
             });
@@ -51,6 +51,8 @@
     <style>
         body {
             background-color: grey;
+			width: 400px;
+            margin: auto;
         }
 
         .main_carousel {
@@ -79,7 +81,7 @@
 
 <body>
     <div ng-controller="ImageController as c" class="main_carousel">
-        <div class="img_carousel" id="imageDiv">
+        <div class="img_carousel" id="imageDiv" onscroll="c.resizeimage()">
             <img ng-repeat="image in c.data.images" ng-src="{{image}}" />
         </div>
     </div>
