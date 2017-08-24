@@ -380,7 +380,7 @@
     background-color: inherit;
     display: grid;
     display: -ms-grid;
-    grid-template-columns: 20% 25% 25% 25%;
+    grid-template-columns: 25% 25% 25% 25%;
     grid-gap: 10px;
 
   }
@@ -537,7 +537,7 @@ var page = angular.module('bari', []);
 
 page.controller('providers', function($scope) {
     var doc = this;
-    doc.provider ={title:'Dr. Smith',patient_count: 20};
+    doc.provider ={title:'Dr.' ,name:'Smith', patient_count: 20};
   });
 
 page.controller('menu_area', function($scope,$http) {
@@ -787,7 +787,7 @@ function drawcarbsdonutchart() {
   <div class="top_wraper box col-md-12" ng-controller="providers as doc">
     <div>
       <div class = "titlefont">
-        Hi {{doc.provider.title}}, {{doc.provider.name}},
+        Hi {{doc.provider.title}} {{doc.provider.name}},
    	  </div>
       <div class = "mediumfont">
         You have {{doc.provider.patient_count}} patients.
