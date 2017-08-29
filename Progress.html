@@ -89,14 +89,14 @@
 </head>
 
 <body>
-    <div ng-controller="ProgressController as c" class = "container">
+    <div ng-controller="ProgressController as c">
 		<div class="title_div">
 			<div class="title_text"><b>PROGRESS</b>
 			</div>
 			<div class="cancel_text" ng-click="c.back()"><img src = "images/home_mobile.png"/>
 			</div>
 		</div>
-        <div id="slider">
+        <div id="slider" class = "container">
             <div ng-repeat="img in c.data.images">
                 <div class="image_div">
                     <img ng-src="{{img}}" width="120px" height="120px"/>
