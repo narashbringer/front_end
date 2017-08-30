@@ -1,138 +1,156 @@
-<html  ng-app='single_patient_frame'>
+<html  ng-app='single_patient_frameApp'>
 <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js" ></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js" ></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-resource.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
-    <script src="https://d3js.org/d3.v3.min.js"/></script>
-  <!--  <script src="https://d3js.org/d3.v4.min.js"/></script>-->
-    <script scr='https://raw.githubusercontent.com/michaelbromley/angularUtils/master/src/directives/pagination/dirPagination.js'></script>
-    <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.js'></script>
-    <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.min.css'></script>
-    <script scr='https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.4.0/fullcalendar.print.css'></script>
 
 <style>
   body{
   background-color: #E4E4E4;
 padding:0;
 }
-  .patient_calender_main_div {
-     background-color: #E4E4E4;
-     padding-top : 20px;
-     display: flex;
-     align-items:center;
-     justify-content: center;border:
-     border: 0px;
-     margin: 0px;
-     width:100%;
-  }
+/*.patient_calender_main_div {
+ background-color: #E4E4E4;
+ display: flex;
+ flex-direction: column;
+ align-items:center;
+ justify-content: center;border:
+ border: 0px;
+ margin: 0px;
+ width:100%;
+ height: 100%;
+}*/
 
-  .calendar_month_year {
-    font-weight: bold;
-    font-size: 150%;
-  }
+.buttons{
+ padding-top: 70px;
+ width:100%;
+}
 
-  .calendar_navigator {
-    text-align:right;
-    font-size: 150%;
-  }
+.custom_btn {
+color: white;
+background-color: #41B2AA;
+font-size: 15px;
+padding: 5px 2px;
+}
 
-  table {
-    margin-bottom: 30px;
-  }
+.button_selected {
+ color: #41B2AA !important;
+ background-color: white !important;
+}
 
-  table th {
-    text-align:center;
-    font-weight: normal;
-  }
+.contain_div {
+ width:100%;
+ height : 500px;
+ //border: solid 1px #41B2AA; // for testing purpose
+}
 
-  table tr {
-    height: 60px;
-  }
+.flex_display {
+display: flex;
+align-items:center;
+}
 
-  table td {
-    height: 60px;
-    width: 60px;
-    border: solid 1px #A9A9A9;
-    background-color: #F2F2F2;
-    font-size: 150%;
-  }
+.calendar_month_year {
+font-weight: bold;
+font-size: 150%;
+padding-left: 20px;
+}
 
-  .uavailable-date {
-     background-color: #E4E4E4;
-  }
+.calendar_navigator {
+text-align:right;
+}
 
-  .current-date {
-      margin: 0 auto;
-      display: block;
-      height: 30px;
-      width: 30px;
-      line-height: 30px;
+.navigation {
+//margin-left: 20px;
+margin-top: 0px;
+margin-bottom: 0px;
+padding: 0px;
+font-size:40px;
+}
 
-      -moz-border-radius: 30px; /* or 50% */
-      border-radius: 30px; /* or 50% */
+table {
+margin-bottom: 30px;
+}
 
-      background-color: #41B2AA;
-      color: white;
-      text-align: center;
-      font-size: 1em;
-  }
+table th {
+text-align:center;
+font-weight: normal;
+}
 
-  .cell_corner {
-    font-size: 50%;
-  }
+table tr {
+height: 60px;
+}
 
-  .center_div {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
+table td {
+height: 60px;
+width: 60px;
+border: solid 1px #A9A9A9;
+background-color: #F2F2F2;
+font-size: 150%;
+}
 
-  .custom_button {
-    background-color: #41B2AA;
-    color: white;
-  }
+.uavailable-date {
+ background-color: #E4E4E4;
+}
 
-  .current_date_info_div {
-    border-left: 3px solid #41B2AA;
-    border-top: 1px solid #A9A9A9;
-    border-right: 1px solid #A9A9A9;
-    border-bottom: 1px solid #A9A9A9;
-    padding:10px;
-    margin-left: 40px;
-    width: 200px;
-  }
+.current-date {
+  margin: 0 auto;
+  display: block;
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
 
-  .today_header {
-    border-bottom: 1px solid #A9A9A9;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-  }
+  -moz-border-radius: 30px; /* or 50% */
+  border-radius: 30px; /* or 50% */
 
-  .date_text_style {
-    font-weight: bold;
-  }
+  background-color: #41B2AA;
+  color: white;
+  text-align: center;
+  font-size: 1em;
+}
 
-  .today_color_entry {
-    padding: 5px 10px;
-  }
+.cell_corner {
+font-size: 50%;
+}
 
-  .date_dot_style {
-      margin: 0 auto;
-      display: inline-block;
-      height: 12px;
-      width: 12px;
-      line-height: 12px;
-      -moz-border-radius: 30px; /* or 50% */
-      border-radius: 30px; /* or 50% */
-  }
+.current_date_info_div {
+border-left: 3px solid #41B2AA;
+border-top: 1px solid #A9A9A9;
+border-right: 1px solid #A9A9A9;
+border-bottom: 1px solid #A9A9A9;
+padding:10px;
+margin-left: 40px;
+width: 200px;
+}
 
-  .date_space {
-    margin-left: 10px;
-  }
+.today_header {
+border-bottom: 1px solid #A9A9A9;
+padding-bottom: 10px;
+margin-bottom: 10px;
+}
+
+.date_text_style {
+font-weight: bold;
+}
+
+.today_color_entry {
+padding: 5px 10px;
+}
+
+.date_dot_style {
+  margin: 0 auto;
+  display: inline-block;
+  height: 12px;
+  width: 12px;
+  line-height: 12px;
+  -moz-border-radius: 30px; /* or 50% */
+  border-radius: 30px; /* or 50% */
+}
+
+.date_space {
+margin-left: 10px;
+}
+
 
   .modal {
       display: none; /* Hidden by default */
@@ -176,35 +194,185 @@ padding:0;
     justify-content: center;
     margin-top: 100px;
   }
+.outer{
+  display: grid;
+  grid-template-rows: 50% 50%;
+  grid-template-columns: auto;
+   grid-gap: 10px;
 
+}
+.mess{
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+}
 
 
 </style>
 <script>
-  pat2= angular.module('single_patient_frame',[]);
-  pat2.controller('singe_patient',function($rootScope) {
-    /* widget controller */
-    var c = this;
+  var page = angular.module('single_patient_frameApp', []);
+  page.controller('single_patient_frameController',function($scope) {
+      var c = this;
+      c.data =[];
 
-    $('#prev').click(function() {
-        if (c.data.month == 1) {
-            c.data.month = 12;
-            c.data.year = c.data.year - 1;
-        } else {
-            c.data.month = c.data.month - 1;
-        }
-        c.server.update();
-    });
+         var custom_black = "black";
+         var custom_yellow = "#FFC710";
+         var custom_green = "#92CB00";
+         var custom_red = "#EF3024";
 
-    $('#after').click(function() {
-        if (c.data.month == 12) {
-            c.data.month = 1;
-            c.data.year = c.data.year + 1;
-        } else {
-            c.data.month = c.data.month + 1;
+
+       c.return_weekday= function (given_day){
+         var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday" ,"Friday", "Saturday"];
+         return weekday[given_day];
+       }
+
+       c.return_month= function (given_day){
+         var monthNames  = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+         return monthNames[given_day];
+       }
+       c.data.calendar_source = [];
+        var ini_dates = new Date();
+         current_months = ini_dates.getMonth() + 1;
+       c.up =function(ini_month){
+         var current_year, current_month;
+
+                // on page init load
+                var ini_date = new Date();
+                current_year = ini_date.getFullYear();
+                current_month = ini_month;
+                c.data.year = current_year;
+                c.data.month = current_month;
+        			  c.data.month_string = c.return_month(current_month - 1);
+
+            //Calendar data
+             // calendar contains 5 weeks
+
+            // Test Data to Show
+        	  //data.test.push("month,year:");
+            //data.test.push(current_year);
+            //data.test.push(current_month);
+
+
+        	  //data.test.push("patientID:");
+            //data.test.push(data.patientID);
+
+            //Start and End date on the calendar
+            var current_month_start = new Date();
+            var current_month_end = new Date();
+        	  var current_date = new Date();
+
+        	  c.data.today_date = c.return_weekday(current_month_start.getDate()) + ", " + c.return_month(current_month_start.getMonth()) + " " + current_month_start.getDate();
+
+            //Function to generate Calendar Data framework
+            function feed_calendar_source(year, month) {
+                month -= 1;
+                var first_day_of_month = new Date(year, month, 1);
+                var diff = first_day_of_month.getDay();
+                var startdiff = -diff + 1;
+                current_month_start = new Date(year, month, startdiff);
+                //current_month_start.setHours(0,0,0,0);
+                //data.test.push(current_month_start);
+        			  var end_of_this_month = new Date(year, month + 1, 0);
+                for (var i = 0; i < 6; i++) {
+                    var week = [];
+                    for (var j = 0; j < 7; j++) {
+                        var p = {};
+                        current_month_end = new Date(year, month, startdiff);
+                        p.date_number = current_month_end.getDate();
+                        p.attendance_value = 0;
+                        p.participation_value = 0;
+                        p.emotion_state_value = 0;
+                        p.test_result_value = 0;
+                        week.push(p);
+                        startdiff += 1;
+        							  if (current_month_end.setHours(0,0,0,0) == current_date.setHours(0,0,0,0)) {
+        									p.thisdate =  true;
+        								} else {
+        									p.thisdate =  false;
+        								}
+        							  if (current_month_end >= first_day_of_month && current_month_end <= end_of_this_month) {
+        									p.thismonth =  true;
+        								} else {
+        									p.thismonth =  false;
+        								}
+                    }
+                    c.data.calendar_source.push(week);
+                }
+            }
+
+            feed_calendar_source(current_year, current_month);
+
+            // convert javascript date to glidedate format
+            //data.test.push(current_month_start);
+            //data.test.push(current_month_end);
+            var query_start_date = current_month_start.toISOString().substring(0, 10)+" 00:00:00";
+            var query_end_date = current_month_end.toISOString().substring(0, 10)+" 00:00:00";
+            //data.test.push(query_start_date);
+            //data.test.push(query_end_date);
+
+            // Define variables that will be used
+            var y, m, d, t_date, date_diff, row, col, old_value;
+            return c.data.calendar_source;
+            //data.test.push(data.source);
+       }
+
+        c.up(current_months);
+         /* widget controller */
+       	c.prev = function(){
+       		if (c.data.month == 1) {
+       			c.data.month = 12;
+       			c.data.year = c.data.year - 1;
+            c.data.month_string =c.return_month(c.data.month);
+            c.up(c.data.month);
+
+       		} else {
+       			c.data.month = c.data.month - 1;
+              c.data.month_string =c.return_month(c.data.month);
+                c.up(c.data.month);
+       		}
+       	}
+
+       	c.after = function(){
+       		if (c.data.month == 12) {
+       			c.data.month = 1;
+       			c.data.year = c.data.year + 1;
+              c.data.month_string =c.return_month(c.data.month);
+              c.up(c.data.month)
+       		} else {
+       			c.data.month = c.data.month + 1;
+              c.data.month_string =c.return_month(c.data.month);
+                c.up(c.data.month);
+       		}
+       	}
+        c.debug = function(){
+          console.log(c.data.calendar);
         }
-        c.server.update();
-    });
+        c.pageChanged = function() {
+        		var startrow = (c.data.currentPage - 1) * 8;
+            var endrow = c.data.currentPage * 8;
+        	  c.data.results = c.data.allresults.slice(startrow, endrow);
+        	}
+       	function swipeleftHandler(event){
+           if (c.data.month == 12) {
+       			c.data.month = 1;
+       			c.data.year = c.data.year + 1;
+       		} else {
+       			c.data.month = c.data.month + 1;
+       		}
+         }
+
+       	function swiperightHandler(event){
+           if (c.data.month == 1) {
+       			c.data.month = 12;
+       			c.data.year = c.data.year - 1;
+       		} else {
+       			c.data.month = c.data.month - 1;
+       		}
+         }
+
+       	$(document).on( "swipeleft", swipeleftHandler );
+       	$(document).on( "swiperight", swiperightHandler );
+});
 
   //  spUtil.get("doctor_journal_list ").then(function(response) {
     //    c.journalListWidget = response;
@@ -224,38 +392,30 @@ padding:0;
     //    modal.style.display = "none";
     //};
 
-		//c.show_journals = function() {
-			  $rootScope.$broadcast('b_patientID', c.data.patientID);
+		c.show_journals = function() {
+			//  $rootScope.$broadcast('b_patientID', c.data.patientID);
       //  modal.style.display = "block";
-  //  };
-
+    };
+    c.show_edit_patient =function() {
+      ///todo
+    }
     // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
+  /*  window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";
         }
     };
-		 c.show_edit_patient=function(){
-         $rootScope.$broadcast('b_patientID2', c.data.patientID);
-        modal2.style.display = "block";
-			/*	spUtil.get("provider_add_group").then(function(response) {
-            c.addg = response;*/
-           /* c.data.click4_count = c.data.click4_count + 1;
-            if (c.data.click4_count % 2 == 0) {
-                c.addg = null;
-           }
-        });*/
-    };
-});
+*/
+
 </script>
 </head>
 
 
 
 
-<body>
-  <div class = "patient_calender_main_div">
-   <div>
+<body ng-controller = "single_patient_frameController as c">
+<div class= 'outer'>  <div class = "patient_calender_main_div">
+   <div class='mess'>
       <div class = "row">
          <div class = "calendar_month_year col-xs-6">
            <input type="hidden" name="month_string" ng-value="c.data.month"/>
@@ -263,8 +423,8 @@ padding:0;
            <span> {{c.data.month_string}} - {{c.data.year}} </span>
         </div>
          <div class = "calendar_navigator col-xs-6">
-            <label id = "prev" class = "navigation"> &lt; &#32;</label>
-            <label id = "after" class = "navigation"> &#32; &gt; </label>
+            <label id = "prev" class = "navigation" ng-click='c.prev()'> &lt; &#32;</label>
+            <label id = "after" class = "navigation" ng-click='c.after()'> &#32; &gt; </label>
          </div>
       </div>
       <div>
@@ -295,11 +455,11 @@ padding:0;
        <!-- {{data.test}}-->
       </div>
    </div>
-   <div>
+  <div class='mess'>
      <div class = "center_div">
        <button class = "btn custom_button" ng-click = "c.show_journals()">Show Journals</button>
      </div>
-     <div class = "current_date_info_div">
+  <!--    <div class = "current_date_info_div">
       <div class = "today_header"><span class = "date_text_style">{{c.data.today_date}}</span> (Today)</div>
       <div class = "today_color_entry">
         <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_attendance_value}"></span>
@@ -317,9 +477,9 @@ padding:0;
        <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_test_result_value}"></span>
        <span class = "date_space">Testing</span>
      </div>
-   </div>
+   </div-->
       <div class = "bottom_div">
-       <button class = "btn custom_button" ng-click = "c.show_edit_patient()">Edit Patient Information</button>
+       <button class = "btn custom_button" ng-click = "c.show_edit_patient()">Edit Information</button>
      </div>
   </div>
 
@@ -339,8 +499,7 @@ padding:0;
 
      </div>
   </div>
-</div>
-
+</div></div>
  </body>
 
 
