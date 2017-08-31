@@ -19,6 +19,7 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   }
+
   .donuts {
 	display: flex;
   flex-wrap: nowrap;
@@ -28,6 +29,7 @@
   justify-content: flex-start;
   width: 100%;
   }
+
   .day_label {
   float:left;
   padding: 5px 0px;
@@ -80,7 +82,7 @@
   }
 
   .display_inline_way input #message{
-    width : 10px;
+    width: 10px;
     margin-left :10px;
     margin-right :10px;
   }
@@ -112,9 +114,9 @@
     margin-left: 10px;
   }
 
-  table {
+ table {
     width: 100%;
-    border-collapse:separate;
+    border-collapse: separate;
     border-spacing: 0px 1px;
   }
 
@@ -290,6 +292,7 @@
     width: 60%; /* Could be more or less, depending on screen size */
   }
 
+
   .topbar {
   background:
     linear-gradient(
@@ -412,7 +415,7 @@
     color: #E4E4E4 ;
     /*border: 2px solid red;*/
     transition: 0.5s;
-    z-index:20;
+    z-index:12;
   }
 
   .menu_row {
@@ -427,7 +430,7 @@
 
   .top_nav {
     /*border: 2px solid purple;*/
-    text-align:right;
+    text-align: right;
     padding-left: 10px;
     padding-right: 10px;
   }
@@ -476,17 +479,6 @@
 .mediumfont {
   color: white;
   font-size: 30pt;
-}
-.patient_add_iframe{
-
-  width:100%;
-  height:10%;
-  z-index: 50;
-  display: block;
-  background-color: none;
-  margin: 0;
-  padding: 0;
-  border: none;
 }
 p {
 	color: white;
@@ -540,13 +532,16 @@ p {
 .card{
  background-color:#ffffff;
   position: fixed;
-  margin-left: 28%;
+  margin-left: 32%;
   margin-right: 32%;
-  width:50%;
+  margin-top: 10%;
+  width:40%;
+  height: 15%;
   z-index: 10;
   border-radius: 25px;
-  //padding: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
   border: 3px  solid #f1f1f1;
+  box-shadow: 10px 10px 10px #888888;
 }
 
 .spacing{
@@ -569,104 +564,12 @@ p {
 }
 
 
-.form-style-5 fieldset{
-    border: none;
-}
-.form-style-5 legend {
-    font-size: 1.4em;
-    margin-bottom: 10px;
-}
-.form-style-5 label {
-    display: block;
-    margin-bottom: 8px;
-}
-.form-style-5 input[type="text"],
-.form-style-5 input[type="date"],
-.form-style-5 input[type="datetime"],
-.form-style-5 input[type="email"],
-.form-style-5 input[type="number"],
-.form-style-5 input[type="search"],
-.form-style-5 input[type="time"],
-.form-style-5 input[type="url"],
-.form-style-5 input[type="password"],
-.form-style-5 textarea,
-.form-style-5 select {
-    font-family: Georgia, "Times New Roman", Times, serif;
-    background: rgba(255,255,255,.1);
-    border: none;
-    border-radius: 4px;
-    font-size: 16px;
-    margin: 0;
-    outline: 0;
-    padding: 7px;
-    width: 100%;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    background-color: #f1f1f1;
-    color:#8a97a0;
-    -webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-    margin-bottom: 30px;
-
-}
-.form-style-5 input[type="text"]:focus,
-.form-style-5 input[type="date"]:focus,
-.form-style-5 input[type="datetime"]:focus,
-.form-style-5 input[type="email"]:focus,
-.form-style-5 input[type="number"]:focus,
-.form-style-5 input[type="search"]:focus,
-.form-style-5 input[type="time"]:focus,
-.form-style-5 input[type="url"]:focus,
-.form-style-5 input[type="password"]:focus,
-.form-style-5 textarea:focus,
-.form-style-5 select:focus{
-    background: #d2d9dd;
-}
-.form-style-5 select{
-    -webkit-appearance: menulist-button;
-    height:35px;
-}
-.form-style-5 .number {
-    background: #1abc9c;
-    color: #fff;
-    height: 30px;
-    width: 30px;
-    display: inline-block;
-    font-size: 0.8em;
-    margin-right: 4px;
-    line-height: 30px;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
-    border-radius: 15px 15px 15px 0px;
-}
 .close{
-float:right;
+  padding-top: 5px;
+  float:right;
  padding-bottom:20px;
 }
 
-.form-style-5 input[type="submit"],
-.form-style-5 input[type="button"]
-{
-    position: relative;
-    display: block;
-    padding: 19px 39px 18px 39px;
-    color: #FFF;
-    margin: 0 auto;
-    background: #41B2AA;
-    font-size: 18px;
-    text-align: center;
-    font-style: normal;
-    width: 100%;
-    border: 1px solid #16a085;
-    border-width: 1px 1px 3px;
-    margin-bottom: 10px;
-}
-.form-style-5 input[type="submit"]:hover,
-.form-style-5 input[type="button"]:hover
-{
-    background: #41B2AA;
-}
 labal{
    font-weight: bold;
   font-size:15pt;
@@ -680,7 +583,12 @@ vertical-align:top;
   width: 0px;
 display: none;
 }
-
+.submit_add_patient{
+  margin-top:5px;
+  width:30%;
+  background-color: #41B2AA;
+  color:#ffffff;
+}
 </style>
 
 
@@ -695,11 +603,15 @@ page.controller('providers', function($scope) {
 page.controller('menu_area', function($scope,$http) {
         $scope.patients =[{
           name:'Emily Williams', patientId:"p00001" ,iframe:0, group:'Monday', start: '10/20/2017',attends:'green',participation:'green',expanded:false, emotion:'red' ,test:'green'},
-      {name:'Jack Rodman', patientId:"p00002" ,iframe:0, group:'monday', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'}]
+      {name:'Jack Rodman', patientId:"p00002" ,iframe:0, group:'Monday', start: '10/10/2017',attends:'yellow',participation:'green',expanded:false, emotion:'yellow' ,test:'green'}]
 });
 page.controller('add_patient', function($scope) {
         var c = this;
         c.data=[];
+        c.add = function(){
+          c.data.iframe=7;
+          c.data.mystyle ='{ -webkit-filter: blur(100);  -moz-filter: blur(100);-o-filter: blur(100);  -ms-filter: blur(100);filter: blur(100)}';
+            };
 });
 var max_protein = 100;
 var max_carbs = 100;
@@ -1067,7 +979,7 @@ function drawcarbsdonutchart() {
                           <iframe ng-src="singlePatient.html" scrolling="no" class= "patient_calendar_iframe" frameborder="0" ng-if = "patient.iframe == 1"></iframe>
                           <iframe ng-src="Provider_message.html" scrolling="no" class= "patient_calendar_iframe" frameborder="0" ng-if = "patient.iframe == 2"></iframe>
                           <iframe ng-src="AppointmentsSinglePatient.html" scrolling="no" class= "patient_calendar_iframe" frameborder="0" ng-if = "patient.iframe == 3"></iframe>
-                          <iframe ng-src="AppointmentsSinglePatient.html" scrolling="no" class= "patient_calendar_iframe" frameborder="0" ng-if = "patient.iframe == 4"></iframe>
+                          <iframe ng-src="singlePatientEducation.html" scrolling="no" class= "patient_calendar_iframe" frameborder="0" ng-if = "patient.iframe == 4"></iframe>
                  </div>
                     </td>
                  </tr>
@@ -1103,7 +1015,7 @@ function drawcarbsdonutchart() {
     </div>
 </section>
 <aside style='z-index:12;'  ng-controller='add_patient as c'>
-  <div id="mySidenav" class="sidenav">
+  <div id="mySidenav" class="sidenav" ng-style='c.data.mystyle'>
    <div id = "mySidenav_head" class = "menu_row">
       <!--<div class = "top_nav"><label>&#9776;</label></div>-->
       <div ng-init='c.data.iframe=0' class = "menu_image_top"> <img id = "menu_lines" src="images/menu_button.png" alt="menu_home_lines" width="16px" height="16px"/></div>
@@ -1114,7 +1026,7 @@ function drawcarbsdonutchart() {
          <div class = "menu_text" id = "menu_Dashboard"><span>Dashboard</span></div>
       </div>
    </a>
-   <div class = "menu_row" id = "nav_add_patient"   ng-click="c.data.iframe=7" ng-init="">
+   <div class = "menu_row" id = "nav_add_patient"   ng-click="c.add()" ng-init="">
       <div class = "menu_image"><img src="images/add_data.png" alt="menu_home_new"  height = "24px" width = "24px"></div>
       <div class = "menu_text" id = "menu_Add_Patient"><span>Add Patient</span></div>
    </div>
@@ -1132,22 +1044,16 @@ function drawcarbsdonutchart() {
    </div>
  </div>
  <div ng-if ='c.data.iframe==7' ng-init="c.data.close = true">
-    <div class='card scrollable' ng-if="c.data.close===true">
-       <div  class="close" ng-click="c.data.close=!c.data.close &&c.data.iframe==0">
-          Close
+    <div class='card scrollable' ng-if="c.data.iframe===7">
+       <div  class="close" ng-click="c.data.iframe=0">
+          X
        </div>
-       <div class='spacing form-style-5 row'>
-          <form class='spacing' name="addpatientform">
-             <table class='spacing' style="width:100%">
-                <tr>
-                   <td>
-                      <labal> Email </labal>
-                   </td>
-                   <td> <input type='email' ng-model="c.data.email" required></td>
-                </tr>
-             <div class='col-xs-4'></div>
-             <div class='col-xs-5'>
-                <input type='submit' ng-click="c.data.start.length == 10 && addpatientform.$valid && c.add_patient()">
+       <form class=" spacing form-horizontal" style="margin-top:5%;">
+         <div class="input-group">
+           <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+           <input id="email" type="text" class="form-control" name="email" ng-model='c.data.user' placeholder="Email">
+         </div>
+                <input  class='submit_add_patient form-control' type='submit' ng-click="c.data.start.length == 10 && addpatientform.$valid && c.add_patient()">
             </div>
           </form>
        </div>
