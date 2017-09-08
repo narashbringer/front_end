@@ -597,7 +597,7 @@ display: none;
 var page = angular.module('bari', []);
 page.controller('providers', function($scope) {
     var doc = this;
-    doc.provider ={title:'Dr.' ,name:'Smith', patient_count: 20};
+    doc.provider ={title:'Dr.' ,name:'Smith', patient_count: 27};
   });
 
 page.controller('menu_area', function($scope,$http) {
@@ -630,6 +630,7 @@ name:'Emily Williams', patientId:"p00001" ,iframe:0, group:'September', start: '
 {name:'Derek Strenning', patientId:"p00026" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
 {name:'Mike Sartori', patientId:"p00027" ,iframe:0, group:'September', start: '10/10/2017',attends:'yellow',participation:'green',expanded:false, emotion:'yellow',test:'green'}
 ]});
+
 page.controller('add_patient', function($scope) {
         var c = this;
         c.data=[];
@@ -663,14 +664,14 @@ $(window).resize(function() {
 
 function drawChartstate() {
       var data = google.visualization.arrayToDataTable([
-        ["Info Sesion", "Density", { role: "style" } ],
-        ["Info Sesion", 95, "#b87333"],
-        ["consultation", 85, "silver"],
-        ["pyscoligist", 65, "gold"],
-        ["nutrtion", 50, "color: #e5e4e2"],
-          ["education", 40, "color: #e5e4e2"],
-            ["something", 30, "color: #e5e4e2"],
-              ["surgery", 20, "color: #e5e4e2"]
+        ["Informational", "Population", { role: "style" } ],
+        ["Education", 16, "#576490"],
+        ["Consultation", 10, "#7796CB"],
+        ["Nutrition", 8, "#A3BCF9"],
+        ["Behaivior", 6, "color: #C9CAD9"],
+        ["Physical", 4, "color: #D1D2F9"],
+        ["Insurance", 8, "color: #e5e4e2"],
+        ["Pre-Op", 3, "color: #e5e4e2"]
       ]);
 
       var view = new google.visualization.DataView(data);
