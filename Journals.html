@@ -13,6 +13,9 @@
                 } else {
                     c.data.journals = [];
                 }
+				c.back = function() {
+					window.location = 'Home_Patient.html';
+				}
             });
     </script>
 
@@ -20,9 +23,29 @@
 	    body {
 			background-color: #F1F1F1;
 			font-size: 13px;
-      width: 400px;
-      margin: auto;
+			width: 400px;
+			margin: auto;
 		}
+		.title_div {
+            position: relative;
+            display: flex;
+			flex-direction: row-reverse;
+            align-items: center;
+            background-color: white;
+            padding-top: 10px;
+			padding-bottom: 10px;
+        }
+
+        .cancel_text {
+            position: absolute;
+            right: 10px;
+        }
+
+        .title_text {
+            display: flex;
+            margin: 0 auto;
+            align-self: center;
+        }
         .journal_add_new {
             position: fixed;
             bottom: 30px;
@@ -79,6 +102,12 @@
 
 <body>
     <div ng-controller="JournalsController as c">
+		<div class="title_div">
+            <div class="title_text"><b>JOURNAL</b>
+            </div>
+			<div class="cancel_text" ng-click="c.back()"><img src = "images/home_mobile.png"/>
+            </div>
+        </div>
         <div ng-repeat="journal in c.data.journals">
             <a>
                 <div class="journal_list_item">

@@ -1,0 +1,127 @@
+<!doctype html>
+<html ng-app="progressApp">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="assets/js/slick/slick.css" />
+    <link rel="stylesheet" type="text/css" href="assets/js/slick/slick-theme.css" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+    <script src="assets/js/slick/slick.min.js"></script>
+    <script>
+	    function chunk(arr, size) {
+  var newArr = [];
+  for (var i=0; i<arr.length; i+=size) {
+    newArr.push(arr.slice(i, i+size));
+  }
+  return newArr;
+}
+
+        angular.module('progressApp', [])
+            .controller('ProgressController', function() {
+                var c = this;
+                c.data = [];
+                c.data.images = ['data/1.jpg', 'data/2.jpg', 'data/3.jpg', 'data/4.jpg', 'data/5.jpg', 'data/6.jpg', 'data/7.jpg'];
+				c.data.gridimages = chunk(c.data.images, 4);
+				c.back = function() {
+					window.location = 'Home_Patient.html';
+				}
+            });
+    </script>
+    <style>
+		body {
+            background-color: #F1F1F1;
+            width: 400px;
+            margin: auto;
+        }
+		.title_div {
+            position: relative;
+            display: flex;
+			flex-direction: row-reverse;
+            align-items: center;
+            background-color: white;
+            padding-top: 10px;
+			padding-bottom: 10px;
+			margin-bottom: 10px;
+        }
+
+        .cancel_text {
+            position: absolute;
+            right: 20px;
+        }
+
+        .title_text {
+            display: flex;
+            margin: 0 auto;
+            align-self: center;
+        }
+        .image_div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+		
+		.large_img {
+			width: 130px;
+			height: 130px;
+		}
+
+        .slick-track {
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+		
+		.slick-active:nth-child(2) img{ 
+			width: 130px;
+			height: 130px;
+		}
+		.grid-images{
+			width: 100%;
+			height: auto;
+		}
+		.row {
+			border-bottom: 1px solid white;
+			padding: 10px;
+		}
+    </style>
+</head>
+
+<body>
+    <div ng-controller="ProgressController as c">
+		<div class="title_div">
+			<div class="title_text"><b>PROGRESS</b>
+			</div>
+			<div class="cancel_text" ng-click="c.back()"><img src = "images/home_mobile.png"/>
+			</div>
+		</div>
+        <div id="slider" class = "container">
+            <div ng-repeat="img in c.data.images">
+                <div class="image_div">
+                    <img ng-src="{{img}}" width="120px" height="120px"/>
+                </div>
+            </div>
+        </div>
+		<br/>
+		<div class = "row" ng-repeat="rows in c.data.gridimages">
+			<div ng-repeat="img in rows" class = "col-xs-3">
+				<img ng-src="{{img}}" width="70px" height="70px"/>
+			</div>
+		</div>
+    </div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#slider').slick({
+            infinite: true,
+			autoplay: true,
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			centerPadding: '60px'
+        });
+    });
+	//$(".slick-active")[1].addClass('large_img');
+</script>
+
+</html>

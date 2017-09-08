@@ -1,0 +1,160 @@
+<html ng-app="single_education"><head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js" ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular-route.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script scr='https://raw.githubusercontent.com/michaelbromley/angularUtils/master/src/directives/pagination/dirPagination.js'></script>
+<script>
+  var page = new angular.module('single_education',[]);
+  page.controller('content', function($scope) {
+      var c = this;
+       c.data=[]
+    c.data.educationContents = [{file_name:'Dr.' ,file_type:'Smith', date_changed: 20, educationID:'lalala',description:"you suck"},{file_name:'Dr.' ,file_type:'Smith', date_changed: 20, educationID:'lalala',description:"you suck"}];
+    });
+</script>
+  <style>
+
+  table {
+    width: 100%;
+    border-collapse:separate;
+    border-spacing: 0px 1px;
+  }
+
+  th {
+    padding: 10px 10px;
+    background:#E4E4E4; /* Grey */
+    text-align: center;
+    font-size: 12px;
+  }
+
+  tbody:before {
+      content: "-";
+      display: block;
+      line-height: 1em;
+      color: transparent;
+  }
+
+  tr:nth-child(even) {
+      background-color: #E4E4E4;
+  }
+
+  td {
+      border: solid 1px #E4E4E4;
+      border-style: solid none;
+      padding: 10px;
+      background-color: transparent;
+      text-align: center;
+  }
+
+  .default_blue {
+    color : #41B2AA;
+    font-weight :bold;
+  }
+
+  .discription_span {
+    display : flex;
+    align-self: center;
+  }
+
+  .update_label {
+    float : right;
+    color : white;
+    background-color: #41B2AA;
+    font-weight :bold;
+    display : inline-block;
+    border-radius: 5px;
+  }
+
+  .center_div {
+    display: flex;
+    justify-content: center;
+  }
+  body{
+    padding:10px;
+  }
+  .modal3 {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 5; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+  }
+</style></head><body ng-controller='content as c'>
+<div>
+  	<div>
+      <button>
+        <label ng-click="c.toggleAll()" class="default_blue"><span ng-if="c.all_selected && c.all_content_selected()"></span>ACCESS ALL</label>
+      </button>
+
+      <button>
+        <label  class="default_blue"> <span ng-click="c.update_changes()">Update Changes</span></label>
+      </button>
+  </div>
+    <table>
+        <thead>
+            <tr class="row">
+                <th class="col-xs-1">
+                <span>AVAILABLE</span>
+                </th>
+              	<th class="col-xs-1">
+                <span>REMOVE</span>
+                </th>
+                <th class="col-xs-2"><span>FILE NAME</span></th>
+                <th class="col-xs-1"><span>FILE TYPE</span></th>
+                <th class="col-xs-2"><span>DATE CHANGED</span></th>
+                <!--<th class="col-xs-1"><span>SIZE</span></th>-->
+                <th class="col-xs-1"><span>PREVIEW</span></th>
+                <th class="col-xs-5"><span>DESCRIPTION </span></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--<tr class="row" dir-paginate="educationContent in c.data.educationContents | itemsPerPage: 10">-->
+            <tr class="row" ng-repeat="educationContent in c.data.educationContents">
+                <td class="col-xs-1">
+                    <input type="checkbox" ng-model="educationContent.selected">
+                </td>
+
+                <td class="col-xs-1">
+                    <input type="checkbox" ng-model="educationContent.selectedD">
+                </td>
+            	  <td class="col-xs-2">{{educationContent.file_name}}</td>
+                <td class="col-xs-1">{{educationContent.file_type}}</td>
+                <td class="col-xs-2">{{educationContent.date_changed}}</td>
+                <!--<td class="col-xs-1">{{educationContent.size}}</td>-->
+                <td  class="col-xs-2"><button ng-click='c.show_conntent(educationContent.educationID)'>
+                  <label  class="default_blue"><span class="update_label"></span>Preview</label>
+                  </button></td>
+                <td class="col-xs-4">{{educationContent.description}}</td>
+             </tr>
+        </tbody>
+    </table>
+    <!--<div dir-paginate="educationContent in c.data.educationContents | filter: none | itemsPerPage: pageSize">
+     {{educationContent.file_name}}
+   </div>
+   <dir-pagination-controls></dir-pagination-controls>-->
+   <div class = "center_div">
+       <ul uib-pagination total-items="c.data.totalNum" items-per-page="c.data.page_size" max-size="5" ng-model="c.data.currentPage" ng-change="c.pageChanged()" force-ellipses="true" previous-text="&lsaquo;" next-text="&rsaquo;"></ul>
+   </div>
+  <!--below can be added if layout is not an issue-->
+    <!--<div>
+        <select ng-model="c.data.page_size" ng-change="c.pageChanged()">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="50">50</option>
+                  <option value="1000">All</option>
+               </select>
+        <label>Per Page</label>
+    </div>-->
+</div>
+ <div id="myDialogWindow3" class="modal3">
+     <div>
+         <sp-widget class = "embeded_widget" widget="c.change_group"></sp-widget>
+    </div>
+  </div></body></html>

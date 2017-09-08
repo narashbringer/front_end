@@ -62,6 +62,9 @@
 					$("#favorite_c").addClass("source_selected");
 					$("#all_c").removeClass("source_selected");
                 }
+				c.back = function() {
+					window.location = 'Home_Patient.html';
+				}
             });
     </script>
     <style>
@@ -69,6 +72,28 @@
             background-color: #F1F1F1;
             width: 400px;
             margin: auto;
+        }
+		
+		.title_div {
+            position: relative;
+            display: flex;
+			flex-direction: row-reverse;
+            align-items: center;
+            background-color: white;
+            padding-top: 10px;
+			padding-bottom: 10px;
+			margin-bottom: 1px;
+        }
+
+        .cancel_text {
+            position: absolute;
+            right: 20px;
+        }
+
+        .title_text {
+            display: flex;
+            margin: 0 auto;
+            align-self: center;
         }
 
         .m_header {
@@ -134,6 +159,12 @@
 </head>
 
 <body ng-controller="EducationContentController as c">
+	<div class="title_div">
+        <div class="title_text"><b>EDUCATION</b>
+        </div>
+		<div class="cancel_text" ng-click="c.back()"><img src = "images/home_mobile.png"/>
+        </div>
+    </div>
     <div>
         <div class="m_header">
             <div class="m_tag" ng-click="c.all()" id = "all_c">
