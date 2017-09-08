@@ -1,675 +1,722 @@
-<html  ng-app='single_patient_frameApp'>
-<head>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js" ></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-<style>
-  body{
-  background-color: #E4E4E4;
-  //padding:0;
-}
-/*.patient_calender_main_div {
- background-color: #E4E4E4;
- display: flex;
- flex-direction: column;
- align-items:center;
- justify-content: center;border:
- border: 0px;
- margin: 0px;
- width:100%;
- height: 100%;
-}*/
-
-.buttons{
- width:100%;
-}
-
-.custom_btn {
-color: white;
-background-color: #41B2AA;
-font-size: 15px;
-padding: 3px 0px;
-}
-
-.button_selected {
- color: #41B2AA !important;
- background-color: white !important;
-}
-
-
-
-.flex_display {
-display: flex;
-align-items:center;
-}
-
-.calendar_month_year {
-font-weight: bold;
-font-size: 150%;
-padding-left: 20px;
-}
-
-.calendar_navigator {
-text-align:right;
-}
-
-.navigation {
-//margin-left: 20px;
-margin-top: 0px;
-margin-bottom: 0px;
-padding: 0px;
-font-size:40px;
-}
-
-table {
-margin-bottom: 30px;
-}
-
-table th {
-text-align:center;
-font-weight: normal;
-}
-
-table tr {
-height: 60px;
-}
-
-table td {
-height: 60px;
-width: 60px;
-border: solid 1px #A9A9A9;
-background-color: #F2F2F2;
-font-size: 150%;
-}
-
-.uavailable-date {
- background-color: #E4E4E4;
-}
-
-.current-date {
-  margin: 0 auto;
-  display: block;
-  height: 30px;
-  width: 30px;
-  line-height: 30px;
-
-  -moz-border-radius: 30px; /* or 50% */
-  border-radius: 30px; /* or 50% */
-
-  background-color: #41B2AA;
-  color: white;
-  text-align: center;
-  font-size: 1em;
-}
-
-.cell_corner {
-font-size: 50%;
-}
-
-.current_date_info_div {
-border-left: 3px solid #41B2AA;
-border-top: 1px solid #A9A9A9;
-border-right: 1px solid #A9A9A9;
-border-bottom: 1px solid #A9A9A9;
-padding:10px;
-margin-left: 40px;
-width: 200px;
-}
-
-.today_header {
-border-bottom: 1px solid #A9A9A9;
-padding-bottom: 10px;
-margin-bottom: 10px;
-}
-
-.date_text_style {
-font-weight: bold;
-}
-
-.today_color_entry {
-padding: 5px 10px;
-}
-
-.date_dot_style {
-  margin: 0 auto;
-  display: inline-block;
-  height: 12px;
-  width: 12px;
-  line-height: 12px;
-  -moz-border-radius: 30px; /* or 50% */
-  border-radius: 30px; /* or 50% */
-}
-
-.date_space {
-margin-left: 10px;
-}
-
-
-  .modal {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-  }
-  .modal2 {
-      display: none; /* Hidden by default */
-      position: fixed; /* Stay in place */
-      z-index: 1; /* Sit on top */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-  }
-  /* Modal Content/Box */
-  .modal-content {
-      top: 10%;
-      background-color: #fefefe;
-      margin: 10px auto; /* 15% from the top and centered */
-      padding: 10px;
-      border: 1px solid #888;
-      width: 60%; /* Could be more or less, depending on screen size */
-  }
-
-  /* The Close Button */
-  .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-  }
-/*  .center_div {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  top:0;
-}*/
-  .bottom_div{
-    display: flex;
-    justify-content: center;
-    margin-top:175px;
-  }
-.outer{
-  display: grid;
-  grid-template-rows: 50% 50%;
-  grid-template-columns: auto;
-  grid-gap: 10px;
-
-}
-.mess{
-  display:inline-block;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 150%;
-}
-
-
-</style>
-<script>
-  var page = angular.module('single_patient_frameApp', []);
-  page.controller('single_patient_frameController',function($scope) {
-      var c = this;
-      c.data =[];
-       c.up =function() {
-    // year, month for current calendar shown
-    var current_year, current_month;
-	  var custom_black = "black";
-	  var custom_yellow = "#FFC710";
-	  var custom_green = "#92CB00";
-	  var custom_red = "#EF3024";
-
-
-	function return_weekday(given_day){
-		var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday" ,"Friday", "Saturday"];
-		return weekday[given_day];
-	}
-
-	function return_month(given_day){
-		var monthNames  = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-		return monthNames[given_day];
-	}
-
-    if (c.data.month) {
-        // AJAX from c.server.update()
-        current_month = c.data.month;
-        current_year = c.data.year;
-			  //c.data.patientID = input.patientID;
-			 c.data.month_string = return_month(current_month - 1);
-    } else {
-        // on page init load
-        var ini_date = new Date();
-        current_year = ini_date.getFullYear();
-        current_month = ini_date.getMonth() + 1;
-        c.data.year = current_year;
-        c.data.month = current_month;
-			  c.data.month_string = return_month(current_month - 1);
-    }
-
-    //Calendar data
-    c.data.calendar_source = []; // calendar contains 5 weeks
-
-    // Test Data to Show
-    c.data.test = [];
-	  //data.test.push("month,year:");
-    //data.test.push(current_year);
-    //data.test.push(current_month);
-
-    // Get patientID from URL
-	//if (c.data.patientID == null) {
-	//	c.data.patientID = $sp.getParameter('patientID');
-	//}
-
-	  //data.test.push("patientID:");
-    //data.test.push(data.patientID);
-
-    //Start and End date on the calendar
-    var current_month_start = new Date();
-    var current_month_end = new Date();
-	  var current_date = new Date();
-
-	  c.data.today_date = return_weekday(current_month_start.getDate()) + ", " + return_month(current_month_start.getMonth()) + " " + current_month_start.getDate();
-
-    //Function to generate Calendar Data framework
-    function feed_calendar_source(year, month) {
-        month -= 1;
-        var first_day_of_month = new Date(year, month, 1);
-        var diff = first_day_of_month.getDay();
-        var startdiff = -diff + 1;
-        current_month_start = new Date(year, month, startdiff);
-        //current_month_start.setHours(0,0,0,0);
-        //data.test.push(current_month_start);
-			  var end_of_this_month = new Date(year, month + 1, 0);
-        for (var i = 0; i < 6; i++) {
-            var week = [];
-            for (var j = 0; j < 7; j++) {
-                var p = {};
-                current_month_end = new Date(year, month, startdiff);
-                p.date_number = current_month_end.getDate();
-                p.attendance_value = 0;
-                p.participation_value = 0;
-                p.emotion_state_value = 0;
-                p.test_result_value = 0;
-                week.push(p);
-                startdiff += 1;
-							  if (current_month_end.setHours(0,0,0,0) == current_date.setHours(0,0,0,0)) {
-									p.thisdate =  true;
-								} else {
-									p.thisdate =  false;
-								}
-							  if (current_month_end >= first_day_of_month && current_month_end <= end_of_this_month) {
-									p.thismonth =  true;
-								} else {
-									p.thismonth =  false;
-								}
-            }
-            c.data.calendar_source.push(week);
-        }
-    }
-
-    feed_calendar_source(current_year, current_month);
-
-    // convert javascript date to glidedate format
-    //data.test.push(current_month_start);
-    //data.test.push(current_month_end);
-    var query_start_date = current_month_start.toISOString().substring(0, 10)+" 00:00:00";
-    var query_end_date = current_month_end.toISOString().substring(0, 10)+" 00:00:00";
-    //data.test.push(query_start_date);
-    //data.test.push(query_end_date);
-
-    // Define variables that will be used
-    var y, m, d, t_date, date_diff, row, col, old_value;
-
-	// match the value to corresponding colors
-	function match_journal_color(emotion_value) {
-		if (parseInt(emotion_value) == 1) {
-			return custom_green;
-		} else if (parseInt(emotion_value) == 2) {
-			return custom_yellow;
-		} else if (parseInt(emotion_value) == 3) {
-			return custom_red;
-		}
-		return custom_black;
-	}
-
-    c.data.test.push(c.data.source);
-  //  var Journal = new GlideRecordSecure('x_q2i_oars_suport_journal');
-  //  Journal.query();
-  //   data.test.push("Journal");
-  //   while (Journal.next()) {
-	// 		if(Journal.getValue('user').toString() == data.patientID){
-  //       y = Journal.getValue('date').substring(0, 4);
-  //       m = Journal.getValue('date').substring(5, 7);
-  //       d = Journal.getValue('date').substring(8, 10);
-  //       t_date = new Date(y, m - 1, d);
-	// 		if(t_date>= current_month_start && t_date<=current_month_end){
-  //       //data.test.push(t_date);
-  //       data.test.push(current_month_start);
-  //       date_diff = Math.round((t_date - current_month_start) / (1000 * 3600 * 24));
-  //      // data.test.push(date_diff);
-  //       row = Math.floor(date_diff / 7);
-  //       col = date_diff % 7;
-  //       //data.test.push(row);
-  //       //data.test.push(col);
-	// 		if (t_date.setHours(0,0,0,0) === current_date.setHours(0,0,0,0)) {
-	// 			data.today_emotion_state_value = match_journal_color(Journal.getValue('emotion_state'));
-	// 		}
-	//
-	// 		  data.calendar_source[row][col].emotion_state_value = match_journal_color(Journal.getValue('emotion_state'));
-	// 		}
-  //       //for test purpose :
-  //       // data.test.push(t_date.toDateString());
-  //       // data.test.push(Journal.getDisplayValue('user'));
-  //       //data.test.push(Journal.getDisplayValue('emotion_state'));
-  //       //data.test.push(Journal.getDisplayValue('date'));
-	// 		} }
-
-	function match_participation_color(participation_value) {
-		if (participation_value == '1') {
-			return custom_red;
-		} else if (participation_value == '2') {
-			return custom_yellow;
-		} else if (participation_value == '3') {
-			return custom_green;
-		}
-		return custom_black;
-	}
-
-	function match_attendance_color(attendance_value) {
-		if (attendance_value == '1') {
-			return custom_green;
-			} else if (attendance_value == '2') {
-			return custom_yellow;
-		} else if (attendance_value == '3') {
-			return custom_red;
-		}
-		return custom_black;
-	}
-
-//    var attendee = new GlideRecordSecure('x_q2i_oars_suport_attendee');
-  //  //attendee.addQuery('patient_name', data.patientID);
-   // attendee.addQuery('meeting_date', '>=', query_start_date); // date format "2017-04-05 00:00:00"
-   // attendee.addQuery('meeting_date', '<=', query_end_date);
-   //attendee.orderBy('meeting_date');
-//    attendee.query();
-
-    //data.test.push("attendee");
-    // while (attendee.next()) {
-		// 	// data.test.push(attendee.getValue('patient_name').toString());
-		// 	//data.test.push(data.patientID);
-		// 	if(attendee.getValue('patient_name').toString().trim()==data.patientID.trim()){
-    //   //  data.test.push(attendee.getValue('meeting_date'))
-		// 		y = attendee.getValue('meeting_date').substring(0, 4);
-    //     m = attendee.getValue('meeting_date').substring(5, 7);
-    //     d = attendee.getValue('meeting_date').substring(8, 10);
-    //     t_date = new Date(y, m-1, d);
-		// 		//data.test.push(t_date);
-		// 		if(t_date>= current_month_start && t_date<=current_month_end){
-    //     date_diff = Math.round((t_date - current_month_start) / (1000 * 3600 * 24));
-    //     row = Math.floor(date_diff / 7);
-    //     col = date_diff % 7;
-    //   data.test.push(date_diff);
-    //    // data.test.push(row);
-    //     //data.test.push(col);
-		//
-		// 	 if (t_date.setHours(0,0,0,0) === current_date.setHours(0,0,0,0)) {
-		// 		data.today_attendance_value = match_attendance_color(attendee.getValue('arrived_at_meeting'));
-		// 	  data.today_participation_value = match_participation_color(attendee.getValue('participation'));
-		// 	 }
-    //
-    //     data.calendar_source[row][col].attendance_value = match_attendance_color(attendee.getValue('arrived_at_meeting'));
-    //     data.calendar_source[row][col].participation_value = match_participation_color(attendee.getValue('participation'));
-		// 		}
-		//
-    //   //for test purpose :
-    //    //data.test.push(t_date.toDateString());
-    //     //data.test.push(attendee.getValue('arrived_at_meeting'));
-    //     //data.test.push(attendee.getDisplayValue('participation'));
-    // }}
-
-	function match_test_result_color(test_result_value) {
-		if (test_result_value == '3') {
-			return custom_red;
-		} else if (test_result_value == '2') {
-			return custom_yellow;
-		} else if (test_result_value == '1') {
-			return custom_green;
-		}
-		return custom_black;
-	}
-
-  //   var test_results = new GlideRecordSecure('x_q2i_oars_suport_test_result');
-  //  // test_results.addQuery('patient', data.patientID);
-  // //  test_results.addQuery('test_date', '>=', query_start_date); // date format "2017-04-05 00:00:00"
-  //  // test_results.addQuery('test_date', '<=', query_end_date);
-  //  // test_results.orderBy('test_date');
-  //   test_results.query();
-  //
-  //   while (test_results.next()) {
-	// 		data.test.push(test_results.getValue('subject'));
-	// 		if(test_results.getValue('subject').toString() == data.patientID){
-  //       y = test_results.getValue('test_date').substring(0, 4);
-  //       m = test_results.getValue('test_date').substring(5, 7);
-  //       d = test_results.getValue('test_date').substring(8, 10);
-	// 		t_date = new Date(y, m - 1, d);
-	// 		if(t_date>= current_month_start && t_date<=current_month_end){
-  //       date_diff = Math.round((t_date - current_month_start) / (1000 * 3600 * 24));
-  //       row = Math.floor(date_diff / 7);
-  //       col = date_diff % 7;
-  //       //data.test.push(date_diff);
-  //       //data.test.push(row);
-  //       //data.test.push(col);
-	//
-	// 		if (t_date.setHours(0,0,0,0) === current_date.setHours(0,0,0,0)) {
-	// 			data.today_test_result_value = match_test_result_color(test_results.getValue('color'));
-	// 		}
-  //
-  //       old_value = data.calendar_source[row][col].test_result_value;
-  //       data.calendar_source[row][col].test_result_value = match_test_result_color(test_results.getValue('color'));
-	// 		}
-  //       // for test purpose :
-  //       //data.test.push(t_date.toDateString());
-  //       //data.test.push(test_results.getDisplayValue('color'));
-  //   }}
-
-};
-       c.up();
-
-
-       c.pageChanged = function() {
-           var startrow = (c.data.currentPage - 1) * 8;
-           var endrow = c.data.currentPage * 8;
-           c.data.results = c.data.allresults.slice(startrow, endrow);
+<html ng-app='single_patient_frameApp'>
+   <head>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.5/angular.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <style>
+         body {
+         background-color: #E4E4E4; //padding:0;
          }
-         /* widget controller */
-       	c.prev = function(){
-       		if (c.data.month == 1) {
-       			c.data.month = 12;
-       			c.data.year = c.data.year - 1;
-       		} else {
-       			c.data.month = c.data.month - 1;
-       		}
-          c.up();
-          //c.pageChanged();
-       	};
-
-       	c.after = function(){
-       		if (c.data.month == 12) {
-       			c.data.month = 1;
-       			c.data.year = c.data.year + 1;
-       		} else {
-       			c.data.month = c.data.month + 1;
-
-       		}
-          c.up();
-        //  c.pageChanged();
-       	}
-        c.debug = function(){
-          console.log(c.data.calendar);
-        }
-
-       	function swipeleftHandler(event){
-           if (c.data.month == 12) {
-       			c.data.month = 1;
-       			c.data.year = c.data.year + 1;
-       		} else {
-       			c.data.month = c.data.month + 1;
-       		}
+         .buttons {
+         width: 100%;
          }
-
-       	function swiperightHandler(event){
-           if (c.data.month == 1) {
-       			c.data.month = 12;
-       			c.data.year = c.data.year - 1;
-       		} else {
-       			c.data.month = c.data.month - 1;
-       		}
+         .custom_btn {
+         color: white;
+         background-color: #41B2AA;
+         font-size: 15px;
+         padding: 3px 0px;
          }
-
-       	$(document).on( "swipeleft", swipeleftHandler );
-       	$(document).on( "swiperight", swiperightHandler );
-});
-
-  //  spUtil.get("doctor_journal_list ").then(function(response) {
-    //    c.journalListWidget = response;
-  //  });
-	//spUtil.get("change_group").then(function(response) {
-  //      c.change_group = response;
-  //  });
-
-    // Get the modal
-  //  var modal = document.getElementById('myDialogWindow');
-//var modal2 = document.getElementById('myDialogWindow2');
-    // Get the <span> element that closes the modal
-  //  var span = document.getElementsByClassName("close")[0];
-//var span2 = document.getElementsByClassName("close2")[0];
-    // When the user clicks on <span> (x), close the modal
-  //  span.onclick = function() {
-    //    modal.style.display = "none";
-    //};
-
-		//c.show_journals = function() {
-			//  $rootScope.$broadcast('b_patientID', c.data.patientID);
-      //  modal.style.display = "block";
-    //};
-  //  c.show_edit_patient =function() {
-      ///todo
-    //}
-    // When the user clicks anywhere outside of the modal, close it
-  /*  window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    };
-*/
-
-</script>
-</head>
-
-
-
-
-<body ng-controller = "single_patient_frameController as c">
-  <div class = "row">
-     <div class = "calendar_month_year col-xs-3">
-       <input type="hidden" name="month_string" ng-value="c.data.month"/>
-       <input type="hidden" name="patient_id_string" ng-value="c.data.patientID"/>
-       <span> {{c.data.month_string}} - {{c.data.year}} </span>
-    </div>
-     <div class = "calendar_navigator col-xs-3">
-        <label id = "prev" class = "navigation" ng-click='c.prev()'> &lt; &#32;</label>
-        <label id = "after" class = "navigation" ng-click='c.after()'> &#32; &gt; </label>
-     </div>
-     <div class ="col-xs-6"></div>
-  </div>
-<div class= 'outer'>  <div class = "patient_calender_main_div">
-   <div class='mess'>
-      <div>
-         <table>
-            <tr>
-               <th>SUN</th>
-               <th>MON</th>
-               <th>TUE</th>
-               <th>WED</th>
-               <th>THU</th>
-               <th>FRI</th>
-               <th>SAT</th>
-            </tr>
-            <tr ng-repeat="weeks in c.data.calendar_source">
-               <td ng-repeat = "date in weeks" align="center" ng-class = "{'uavailable-date': !date.thismonth}">
-                  <div ng-class = "{'current-date': date.thisdate}">
-                     {{date.date_number}}
-                  </div>
-                  <div class = "cell_corner">
-                     <span ng-style = " {color: date.attendance_value} ">A</span>
-                     <span ng-style = " {color: date.participation_value}">P</span>
-                     <span ng-style = " {color: date.emotion_state_value}">J</span>
-                     <span ng-style = " {color: date.test_result_value}">T</span>
-                  </div>
-               </td>
-            </tr>
-         </table>
-       <!-- {{data.test}}-->
+         .button_selected {
+         color: #41B2AA !important;
+         background-color: white !important;
+         }
+         .flex_display {
+         display: flex;
+         align-items: center;
+         }
+         .calendar_month_year {
+         font-weight: bold;
+         font-size: 150%;
+         padding-left: 20px;
+         }
+         .calendar_navigator {
+         text-align: right;
+         }
+         .navigation {
+         //margin-left: 20px;
+         margin-top: 0px;
+         margin-bottom: 0px;
+         padding: 0px;
+         font-size: 40px;
+         }
+         table {
+         margin-bottom: 30px;
+         }
+         table th {
+         text-align: center;
+         font-weight: normal;
+         }
+         table tr {
+         height: 60px;
+         }
+         table td {
+         height: 60px;
+         width: 60px;
+         border: solid 1px #A9A9A9;
+         background-color: #F2F2F2;
+         font-size: 150%;
+         }
+         .uavailable-date {
+         background-color: #E4E4E4;
+         }
+         .current-date {
+         margin: 0 auto;
+         display: block;
+         height: 30px;
+         width: 30px;
+         line-height: 30px;
+         -moz-border-radius: 30px;
+         border-radius: 30px;
+         background-color: #41B2AA;
+         color: white;
+         text-align: center;
+         font-size: 1em;
+         }
+         .cell_corner {
+         font-size: 50%;
+         }
+         .current_date_info_div {
+         border-left: 3px solid #41B2AA;
+         border-top: 1px solid #A9A9A9;
+         border-right: 1px solid #A9A9A9;
+         border-bottom: 1px solid #A9A9A9;
+         padding: 10px;
+         margin-left: 40px;
+         width: 200px;
+         }
+         .today_header {
+         border-bottom: 1px solid #A9A9A9;
+         padding-bottom: 10px;
+         margin-bottom: 10px;
+         }
+         .date_text_style {
+         font-weight: bold;
+         }
+         .today_color_entry {
+         padding: 5px 10px;
+         }
+         .date_dot_style {
+         margin: 0 auto;
+         display: inline-block;
+         height: 12px;
+         width: 12px;
+         line-height: 12px;
+         -moz-border-radius: 30px;
+         border-radius: 30px;
+         }
+         .date_space {
+         margin-left: 10px;
+         }
+         .modal {
+         display: none;
+         position: fixed;
+         z-index: 1;
+         left: 0;
+         top: 0;
+         width: 100%;
+         height: 100%;
+         overflow: auto;
+         }
+         .modal2 {
+         display: none;
+         position: fixed;
+         z-index: 1;
+         left: 0;
+         top: 0;
+         width: 100%;
+         height: 100%;
+         overflow: auto;
+         }
+         .modal-content {
+         top: 10%;
+         background-color: #fefefe;
+         margin: 10px auto;
+         padding: 10px;
+         border: 1px solid #888;
+         width: 60%;
+         }
+         .close {
+         color: #aaa;
+         float: right;
+         font-size: 28px;
+         font-weight: bold;
+         }
+         .bottom_div {
+         display: flex;
+         justify-content: center;
+         margin-top: 175px;
+         }
+         .outer {
+         display: grid;
+         grid-template-rows: 50% 50%;
+         grid-template-columns: auto;
+         grid-gap: 10px;
+         }
+         .mess {
+         display: inline-block;
+         border-radius: 5px;
+         padding: 10px;
+         font-size: 150%;
+         }
+         .journal_list_item {
+         background-color: white;
+         margin: 1px 0px;
+         color: grey;
+         display: flex;
+         }
+         .circle_div {
+         width: 40px;
+         height: 40px;
+         border-radius: 50%;
+         color: white;
+         background-color: #F1F1F1;
+         text-align: center;
+         line-height: 40px;
+         align-self: center;
+         margin-right: 10px;
+         }
+         .bari_red{
+         background-color: red !important;
+         }
+         .bari_yellow{
+         background-color: #F7D300 !important;
+         }
+         .bari_green{
+         background-color: #7CDE00 !important;
+         }
+         .journal_content {
+         height: 60px;
+         flex: 1;
+         }
+         .journal_item_date {
+         padding-right: 10px;
+         text-align: right;
+         }
+         .journal_item_entry {
+         padding: 5px 5px;
+         }
+      </style>
+      <script>
+         var page = angular.module('single_patient_frameApp', []);
+         page.controller('single_patient_frameController', function($scope) {
+             var c = this;
+             c.data = [];
+         c.data.journals = [{happiness: 4, hunger: 7, date: new Date(), note: 'good'}, {happiness: 6, hunger: 9, date: new Date(), note: 'nice'}];
+         c.data.meals = [{protein: 20, carbs: 20, calories: 30, date: new Date(), note : 'I am hungry'}, {protein: 60, carbs: 60, calories: 60, date: new Date(), note : 'I am full'}];
+         c.data.exercises = [{duration: 60, date: new Date(), note: 'I finished running'}];
+         var modal, span;
+             c.up = function() {
+                 // year, month for current calendar shown
+                 var current_year, current_month;
+                 var custom_black = "black";
+                 var custom_yellow = "#FFC710";
+                 var custom_green = "#92CB00";
+                 var custom_red = "#EF3024";
+				 
+				 function getRandomIntInclusive(min, max) {
+					 min = Math.ceil(min);
+					 max = Math.floor(max);
+					 return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+				}
+         
+         
+                 function return_weekday(given_day) {
+                     var weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+                     return weekday[given_day];
+                 }
+         
+                 function return_month(given_day) {
+                     var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+                     return monthNames[given_day];
+                 }
+         
+                 if (c.data.month) {
+                     // AJAX from c.server.update()
+                     current_month = c.data.month;
+                     current_year = c.data.year;
+                     //c.data.patientID = input.patientID;
+                     c.data.month_string = return_month(current_month - 1);
+                 } else {
+                     // on page init load
+                     var ini_date = new Date();
+                     current_year = ini_date.getFullYear();
+                     current_month = ini_date.getMonth() + 1;
+                     c.data.year = current_year;
+                     c.data.month = current_month;
+                     c.data.month_string = return_month(current_month - 1);
+                 }
+         
+                 //Calendar data
+                 c.data.calendar_source = []; // calendar contains 5 weeks
+         
+                 // Test Data to Show
+                 c.data.test = [];
+                 //data.test.push("month,year:");
+                 //data.test.push(current_year);
+                 //data.test.push(current_month);
+         
+                 // Get patientID from URL
+                 //if (c.data.patientID == null) {
+                 //	c.data.patientID = $sp.getParameter('patientID');
+                 //}
+         
+                 //data.test.push("patientID:");
+                 //data.test.push(data.patientID);
+         
+                 //Start and End date on the calendar
+                 var current_month_start = new Date();
+                 var current_month_end = new Date();
+                 var current_date = new Date();
+         
+                 c.data.today_date = return_weekday(current_month_start.getDate()) + ", " + return_month(current_month_start.getMonth()) + " " + current_month_start.getDate();
+         
+                 //Function to generate Calendar Data framework
+                 function feed_calendar_source(year, month) {
+                     month -= 1;
+                     var first_day_of_month = new Date(year, month, 1);
+                     var diff = first_day_of_month.getDay();
+                     var startdiff = -diff + 1;
+                     current_month_start = new Date(year, month, startdiff);
+                     //current_month_start.setHours(0,0,0,0);
+                     //data.test.push(current_month_start);
+                     var end_of_this_month = new Date(year, month + 1, 0);
+                     for (var i = 0; i < 6; i++) {
+                         var week = [];
+                         for (var j = 0; j < 7; j++) {
+                             var p = {};
+                             current_month_end = new Date(year, month, startdiff);
+                             p.date_number = current_month_end.getDate();
+                             p.attendance_value = match_attendance_color(getRandomIntInclusive(0,3));
+                             p.participation_value = match_participation_color(getRandomIntInclusive(0,3));
+                             p.emotion_state_value = match_journal_color(getRandomIntInclusive(0,3));
+                             p.test_result_value = match_test_result_color(getRandomIntInclusive(0,3));
+                             week.push(p);
+                             startdiff += 1;
+                             if (current_month_end.setHours(0, 0, 0, 0) == current_date.setHours(0, 0, 0, 0)) {
+                                 p.thisdate = true;
+                             } else {
+                                 p.thisdate = false;
+                             }
+                             if (current_month_end >= first_day_of_month && current_month_end <= end_of_this_month) {
+                                 p.thismonth = true;
+                             } else {
+                                 p.thismonth = false;
+                             }
+                         }
+                         c.data.calendar_source.push(week);
+                     }
+                 }
+         
+                 feed_calendar_source(current_year, current_month);
+         
+                 // convert javascript date to glidedate format
+                 //data.test.push(current_month_start);
+                 //data.test.push(current_month_end);
+                 var query_start_date = current_month_start.toISOString().substring(0, 10) + " 00:00:00";
+                 var query_end_date = current_month_end.toISOString().substring(0, 10) + " 00:00:00";
+                 //data.test.push(query_start_date);
+                 //data.test.push(query_end_date);
+         
+                 // Define variables that will be used
+                 var y, m, d, t_date, date_diff, row, col, old_value;
+         
+                 // match the value to corresponding colors
+                 function match_journal_color(emotion_value) {
+                     if (parseInt(emotion_value) == 1) {
+                         return custom_green;
+                     } else if (parseInt(emotion_value) == 2) {
+                         return custom_yellow;
+                     } else if (parseInt(emotion_value) == 3) {
+                         return custom_red;
+                     }
+                     return custom_black;
+                 }
+         
+                 c.data.test.push(c.data.source);
+                 //  var Journal = new GlideRecordSecure('x_q2i_oars_suport_journal');
+                 //  Journal.query();
+                 //   data.test.push("Journal");
+                 //   while (Journal.next()) {
+                 // 		if(Journal.getValue('user').toString() == data.patientID){
+                 //       y = Journal.getValue('date').substring(0, 4);
+                 //       m = Journal.getValue('date').substring(5, 7);
+                 //       d = Journal.getValue('date').substring(8, 10);
+                 //       t_date = new Date(y, m - 1, d);
+                 // 		if(t_date>= current_month_start && t_date<=current_month_end){
+                 //       //data.test.push(t_date);
+                 //       data.test.push(current_month_start);
+                 //       date_diff = Math.round((t_date - current_month_start) / (1000 * 3600 * 24));
+                 //      // data.test.push(date_diff);
+                 //       row = Math.floor(date_diff / 7);
+                 //       col = date_diff % 7;
+                 //       //data.test.push(row);
+                 //       //data.test.push(col);
+                 // 		if (t_date.setHours(0,0,0,0) === current_date.setHours(0,0,0,0)) {
+                 // 			data.today_emotion_state_value = match_journal_color(Journal.getValue('emotion_state'));
+                 // 		}
+                 //
+                 // 		  data.calendar_source[row][col].emotion_state_value = match_journal_color(Journal.getValue('emotion_state'));
+                 // 		}
+                 //       //for test purpose :
+                 //       // data.test.push(t_date.toDateString());
+                 //       // data.test.push(Journal.getDisplayValue('user'));
+                 //       //data.test.push(Journal.getDisplayValue('emotion_state'));
+                 //       //data.test.push(Journal.getDisplayValue('date'));
+                 // 		} }
+         
+                 function match_participation_color(participation_value) {
+                     if (participation_value == '1') {
+                         return custom_red;
+                     } else if (participation_value == '2') {
+                         return custom_yellow;
+                     } else if (participation_value == '3') {
+                         return custom_green;
+                     }
+                     return custom_black;
+                 }
+         
+                 function match_attendance_color(attendance_value) {
+                     if (attendance_value == '1') {
+                         return custom_green;
+                     } else if (attendance_value == '2') {
+                         return custom_yellow;
+                     } else if (attendance_value == '3') {
+                         return custom_red;
+                     }
+                     return custom_black;
+                 }
+         
+                 //    var attendee = new GlideRecordSecure('x_q2i_oars_suport_attendee');
+                 //  //attendee.addQuery('patient_name', data.patientID);
+                 // attendee.addQuery('meeting_date', '>=', query_start_date); // date format "2017-04-05 00:00:00"
+                 // attendee.addQuery('meeting_date', '<=', query_end_date);
+                 //attendee.orderBy('meeting_date');
+                 //    attendee.query();
+         
+                 //data.test.push("attendee");
+                 // while (attendee.next()) {
+                 // 	// data.test.push(attendee.getValue('patient_name').toString());
+                 // 	//data.test.push(data.patientID);
+                 // 	if(attendee.getValue('patient_name').toString().trim()==data.patientID.trim()){
+                 //   //  data.test.push(attendee.getValue('meeting_date'))
+                 // 		y = attendee.getValue('meeting_date').substring(0, 4);
+                 //     m = attendee.getValue('meeting_date').substring(5, 7);
+                 //     d = attendee.getValue('meeting_date').substring(8, 10);
+                 //     t_date = new Date(y, m-1, d);
+                 // 		//data.test.push(t_date);
+                 // 		if(t_date>= current_month_start && t_date<=current_month_end){
+                 //     date_diff = Math.round((t_date - current_month_start) / (1000 * 3600 * 24));
+                 //     row = Math.floor(date_diff / 7);
+                 //     col = date_diff % 7;
+                 //   data.test.push(date_diff);
+                 //    // data.test.push(row);
+                 //     //data.test.push(col);
+                 //
+                 // 	 if (t_date.setHours(0,0,0,0) === current_date.setHours(0,0,0,0)) {
+                 // 		data.today_attendance_value = match_attendance_color(attendee.getValue('arrived_at_meeting'));
+                 // 	  data.today_participation_value = match_participation_color(attendee.getValue('participation'));
+                 // 	 }
+                 //
+                 //     data.calendar_source[row][col].attendance_value = match_attendance_color(attendee.getValue('arrived_at_meeting'));
+                 //     data.calendar_source[row][col].participation_value = match_participation_color(attendee.getValue('participation'));
+                 // 		}
+                 //
+                 //   //for test purpose :
+                 //    //data.test.push(t_date.toDateString());
+                 //     //data.test.push(attendee.getValue('arrived_at_meeting'));
+                 //     //data.test.push(attendee.getDisplayValue('participation'));
+                 // }}
+         
+                 function match_test_result_color(test_result_value) {
+                     if (test_result_value == '3') {
+                         return custom_red;
+                     } else if (test_result_value == '2') {
+                         return custom_yellow;
+                     } else if (test_result_value == '1') {
+                         return custom_green;
+                     }
+                     return custom_black;
+                 }
+         
+                 //   var test_results = new GlideRecordSecure('x_q2i_oars_suport_test_result');
+                 //  // test_results.addQuery('patient', data.patientID);
+                 // //  test_results.addQuery('test_date', '>=', query_start_date); // date format "2017-04-05 00:00:00"
+                 //  // test_results.addQuery('test_date', '<=', query_end_date);
+                 //  // test_results.orderBy('test_date');
+                 //   test_results.query();
+                 //
+                 //   while (test_results.next()) {
+                 // 		data.test.push(test_results.getValue('subject'));
+                 // 		if(test_results.getValue('subject').toString() == data.patientID){
+                 //       y = test_results.getValue('test_date').substring(0, 4);
+                 //       m = test_results.getValue('test_date').substring(5, 7);
+                 //       d = test_results.getValue('test_date').substring(8, 10);
+                 // 		t_date = new Date(y, m - 1, d);
+                 // 		if(t_date>= current_month_start && t_date<=current_month_end){
+                 //       date_diff = Math.round((t_date - current_month_start) / (1000 * 3600 * 24));
+                 //       row = Math.floor(date_diff / 7);
+                 //       col = date_diff % 7;
+                 //       //data.test.push(date_diff);
+                 //       //data.test.push(row);
+                 //       //data.test.push(col);
+                 //
+                 // 		if (t_date.setHours(0,0,0,0) === current_date.setHours(0,0,0,0)) {
+                 // 			data.today_test_result_value = match_test_result_color(test_results.getValue('color'));
+                 // 		}
+                 //
+                 //       old_value = data.calendar_source[row][col].test_result_value;
+                 //       data.calendar_source[row][col].test_result_value = match_test_result_color(test_results.getValue('color'));
+                 // 		}
+                 //       // for test purpose :
+                 //       //data.test.push(t_date.toDateString());
+                 //       //data.test.push(test_results.getDisplayValue('color'));
+                 //   }}
+         
+             };
+             c.up();
+         
+         
+             c.pageChanged = function() {
+                 var startrow = (c.data.currentPage - 1) * 8;
+                 var endrow = c.data.currentPage * 8;
+                 c.data.results = c.data.allresults.slice(startrow, endrow);
+             }
+             /* widget controller */
+             c.prev = function() {
+                 if (c.data.month == 1) {
+                     c.data.month = 12;
+                     c.data.year = c.data.year - 1;
+                 } else {
+                     c.data.month = c.data.month - 1;
+                 }
+                 c.up();
+                 //c.pageChanged();
+             };
+         
+             c.after = function() {
+                 if (c.data.month == 12) {
+                     c.data.month = 1;
+                     c.data.year = c.data.year + 1;
+                 } else {
+                     c.data.month = c.data.month + 1;
+         
+                 }
+                 c.up();
+                 //  c.pageChanged();
+             }
+             c.debug = function() {
+                 console.log(c.data.calendar);
+             }
+             c.show_journals = function() {
+                 //  $rootScope.$broadcast('b_patientID', c.data.patientID);
+                 c.data.iframe = 1;
+                 modal.style.display = "block";
+             };
+         c.show_food = function() {
+         c.data.iframe = 3;
+                 modal.style.display = "block";
+         }
+         c.show_exercise = function() {
+         c.data.iframe = 4;
+                 modal.style.display = "block";
+         }
+         
+             function swipeleftHandler(event) {
+                 if (c.data.month == 12) {
+                     c.data.month = 1;
+                     c.data.year = c.data.year + 1;
+                 } else {
+                     c.data.month = c.data.month + 1;
+                 }
+             }
+         
+             function swiperightHandler(event) {
+                 if (c.data.month == 1) {
+                     c.data.month = 12;
+                     c.data.year = c.data.year - 1;
+                 } else {
+                     c.data.month = c.data.month - 1;
+                 }
+             }
+         
+             $(document).on("swipeleft", swipeleftHandler);
+             $(document).on("swiperight", swiperightHandler);
+         $(document).ready(function(){
+         modal = document.getElementById('myDialogWindow');
+         span = document.getElementsByClassName("close")[0];
+         window.onclick = function(event) {
+         if (event.target == modal) {
+         modal.style.display = "none";
+         }
+         };
+         span.onclick = function() {
+         modal.style.display = "none";
+         };
+         });
+         });
+         
+         //  spUtil.get("doctor_journal_list ").then(function(response) {
+         //    c.journalListWidget = response;
+         //  });
+         //spUtil.get("change_group").then(function(response) {
+         //      c.change_group = response;
+         //  });
+         
+         // Get the modal
+         //var modal = document.getElementById('myDialogWindow');
+         //var modal2 = document.getElementById('myDialogWindow2');
+         //Get the <span> element that closes the modal
+         //var span = document.getElementsByClassName("close")[0];
+         //var span2 = document.getElementsByClassName("close2")[0];
+         //When the user clicks on <span> (x), close the modal
+         //span.onclick = function() {
+         //    modal.style.display = "none";
+         //};
+         //  c.show_edit_patient =function() {
+         ///todo
+         //}
+         // When the user clicks anywhere outside of the modal, close it
+          //window.onclick = function(event) {
+               //if (event.target == modal) {
+                   //modal.style.display = "none";
+               //}
+           //};
+         
+      </script>
+   </head>
+   <body ng-controller="single_patient_frameController as c">
+      <div class="row">
+         <div class="calendar_month_year col-xs-3">
+            <input type="hidden" name="month_string" ng-value="c.data.month" />
+            <input type="hidden" name="patient_id_string" ng-value="c.data.patientID" />
+            <span> {{c.data.month_string}} - {{c.data.year}} </span>
+         </div>
+         <div class="calendar_navigator col-xs-3">
+            <label id="prev" class="navigation" ng-click='c.prev()'> &lt; &#32;</label>
+            <label id="after" class="navigation" ng-click='c.after()'> &#32; &gt; </label>
+         </div>
+         <div class="col-xs-6"></div>
       </div>
-   </div>
-  <div class='mess'>
-     <div class = "center_div">
-       <button class = "btn custom_button" ng-click = "c.show_journals()">Show Journals</button>
-       <button class = "btn custom_button" ng-click = "c.show_edit_patient()">Edit Information</button>
-       <br><br>
-       <button class = "btn custom_button" ng-click = "c.show_journals()">Show Food LOGS</button>
-       <button class = "btn custom_button" ng-click = "c.show_edit_patient()">Exersize LOGS</button>
-     </div>
-  <!--    <div class = "current_date_info_div">
-      <div class = "today_header"><span class = "date_text_style">{{c.data.today_date}}</span> (Today)</div>
-      <div class = "today_color_entry">
-        <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_attendance_value}"></span>
-        <span class = "date_space">Attendance</span>
-     </div>
-     <div class = "today_color_entry">
-        <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_participation_value}"></span>
-        <span class = "date_space">Participation</span>
-     </div>
-     <div class = "today_color_entry">
-        <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_emotion_state_value}"></span>
-        <span class = "date_space">Journal</span>
-     </div>
-     <div class = "today_color_entry">
-       <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_test_result_value}"></span>
-       <span class = "date_space">Testing</span>
-     </div>
-   </div-->
-      <div class = "bottom_div">
-
-     </div>
-  </div>
-
-   <div id="myDialogWindow" class="modal">
-     <div class="modal-content">
-       <span class="close">&times;</span>
-       <br/>
-       <br/>
-       <div>
-         <sp-widget class = "embeded_widget" widget="c.journalListWidget"></sp-widget>
-       </div>
-     </div>
-  </div>
- <div id="myDialogWindow2" class="modal2">
-     <div>
-         <sp-widget class = "embeded_widget" widget="c.change_group"></sp-widget>
-
-     </div>
-  </div>
-</div></div>
- </body>
-
-
-
-
-
+      <div class='outer'>
+         <div class="patient_calender_main_div">
+            <div class='mess'>
+               <div>
+                  <table>
+                     <tr>
+                        <th>SUN</th>
+                        <th>MON</th>
+                        <th>TUE</th>
+                        <th>WED</th>
+                        <th>THU</th>
+                        <th>FRI</th>
+                        <th>SAT</th>
+                     </tr>
+                     <tr ng-repeat="weeks in c.data.calendar_source">
+                        <td ng-repeat="date in weeks" align="center" ng-class="{'uavailable-date': !date.thismonth}">
+                           <div ng-class="{'current-date': date.thisdate}">
+                              {{date.date_number}}
+                           </div>
+                           <div class="cell_corner">
+                              <span ng-style=" {color: date.attendance_value} ">E</span>
+                              <span ng-style=" {color: date.participation_value}">N</span>
+                              <span ng-style=" {color: date.emotion_state_value}">J</span>
+                              <span ng-style=" {color: date.test_result_value}">V</span>
+                           </div>
+                        </td>
+                     </tr>
+                  </table>
+                  <!-- {{data.test}}-->
+               </div>
+            </div>
+            <div class='mess'>
+               <div class="center_div">
+                  <button class="btn custom_button" ng-click="c.show_journals()">Show Journals</button>
+                  <!--<button class="btn custom_button" ng-click="c.show_edit_patient()">Edit Information</button>-->
+                  <br>
+				  <br>
+                  <button class="btn custom_button" ng-click="c.show_food()">Show Food LOGS</button>
+				  <br>
+				  <br>
+                  <button class="btn custom_button" ng-click="c.show_exercise()">Exersize LOGS</button>
+               </div>
+               <!--    <div class = "current_date_info_div">
+                  <div class = "today_header"><span class = "date_text_style">{{c.data.today_date}}</span> (Today)</div>
+                  <div class = "today_color_entry">
+                    <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_attendance_value}"></span>
+                    <span class = "date_space">Attendance</span>
+                  </div>
+                  <div class = "today_color_entry">
+                    <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_participation_value}"></span>
+                    <span class = "date_space">Participation</span>
+                  </div>
+                  <div class = "today_color_entry">
+                    <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_emotion_state_value}"></span>
+                    <span class = "date_space">Journal</span>
+                  </div>
+                  <div class = "today_color_entry">
+                   <span class = "date_dot_style" ng-style = " {'background-color': c.data.today_test_result_value}"></span>
+                   <span class = "date_space">Testing</span>
+                  </div>
+                  </div-->
+               <div class="bottom_div">
+               </div>
+            </div>
+            <div id="myDialogWindow" class="modal">
+               <div class="modal-content">
+                  <span class="close">&times;</span>
+                  <br/>
+                  <br/>
+                  <div ng-if = "c.data.iframe == 1" ng-repeat="journal in c.data.journals">
+                     <a>
+                        <div class="journal_list_item">
+                           <div class = "circle_div" ng-class=" journal.happiness ? ( journal.happiness > 4 ? ( journal.happiness > 7 ? 'bari_green' : 'bari_yellow') : 'bari_red') : ''">{{journal.happiness || 0}}
+                           </div>
+                           <div class = "circle_div" ng-class=" journal.hunger ? ( journal.hunger > 4 ? ( journal.hunger > 7 ? 'bari_green' : 'bari_yellow') : 'bari_red') : ''">{{journal.hunger || 0}}
+                           </div>
+                           <div class="journal_content">
+                              <div class="journal_item_date">{{journal.date}}</div>
+                              <div class="journal_item_entry">{{journal.note.substring(0,40)}}&nbsp;..</div>
+                           </div>
+                        </div>
+                     </a>
+                  </div>
+                  <div ng-if = "c.data.iframe == 3" ng-repeat="journal in c.data.meals">
+                     <a>
+                        <div class="journal_list_item">
+                           <div class = "circle_div" ng-class=" journal.protein ? ( journal.protein > 4 ? ( journal.protein > 7 ? 'bari_green' : 'bari_yellow') : 'bari_red') : ''">{{journal.protein || 0}}
+                           </div>
+                           <div class = "circle_div" ng-class=" journal.carbs ? ( journal.carbs > 4 ? ( journal.carbs > 7 ? 'bari_green' : 'bari_yellow') : 'bari_red') : ''">{{journal.carbs || 0}}
+                           </div>
+                           <div class = "circle_div" ng-class=" journal.calories ? ( journal.calories > 4 ? ( journal.calories > 7 ? 'bari_green' : 'bari_yellow') : 'bari_red') : ''">{{journal.calories || 0}}
+                           </div>
+                           <div class="journal_content">
+                              <div class="journal_item_date">{{journal.date}}</div>
+                              <div class="journal_item_entry">{{journal.note.substring(0,40)}}&nbsp;..</div>
+                           </div>
+                        </div>
+                     </a>
+                  </div>
+                  <div ng-if = "c.data.iframe == 4" ng-repeat="journal in c.data.exercises">
+                     <a>
+                        <div class="journal_list_item">
+                           <div class = "circle_div" ng-class=" journal.duration ? ( journal.duration > 4 ? ( journal.duration > 7 ? 'bari_green' : 'bari_yellow') : 'bari_red') : ''">{{journal.duration || 0}}
+                           </div>
+                           <div class="journal_content">
+                              <div class="journal_item_date">{{journal.date}}</div>
+                              <div class="journal_item_entry">{{journal.note.substring(0,40)}}&nbsp;..</div>
+                           </div>
+                        </div>
+                     </a>
+                  </div>
+               </div>
+            </div>
+            <div id="myDialogWindow2" class="modal2">
+               <div>
+                  <sp-widget class="embeded_widget" widget="c.change_group"></sp-widget>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
 </html>
