@@ -597,16 +597,11 @@ display: none;
 var page = angular.module('bari', []);
 page.controller('providers', function($scope) {
     var doc = this;
-<<<<<<< HEAD
     doc.provider ={title:'Dr. Smith',patient_count: 35};
-=======
-    doc.provider ={title:'Dr.' ,name:'Smith', patient_count: 20};
->>>>>>> 5d17f3a4756dc1ae282ff114486a0c22d0118287
   });
 
 page.controller('menu_area', function($scope,$http) {
         $scope.patients =[{
-<<<<<<< HEAD
 name:'Emily Williams', patientId:"p00001" ,iframe:0, group:'September', start: '10/20/2017',attends:'green',participation:'green',expanded:false, emotion:'red' ,test:'green'},
 {name:'Jack Rodman', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
 {name:'George Smith', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
@@ -636,10 +631,7 @@ name:'Emily Williams', patientId:"p00001" ,iframe:0, group:'September', start: '
 {name:'Mike Sartori', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'}
 
     ]});
-=======
-          name:'Emily Williams', patientId:"p00001" ,iframe:0, group:'Monday', start: '10/20/2017',attends:'green',participation:'green',expanded:false, emotion:'red' ,test:'green'},
-      {name:'Jack Rodman', patientId:"p00002" ,iframe:0, group:'Monday', start: '10/10/2017',attends:'yellow',participation:'green',expanded:false, emotion:'yellow' ,test:'green'}]
-});
+
 page.controller('add_patient', function($scope) {
         var c = this;
         c.data=[];
