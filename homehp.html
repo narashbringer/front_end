@@ -535,14 +535,40 @@ var page = angular.module('bari', []);
 
 page.controller('providers', function($scope) {
     var doc = this;
-    doc.provider ={title:'Dr. Smith',patient_count: 20};
+    doc.provider ={title:'Dr. Smith',patient_count: 35};
   });
 
 page.controller('menu_area', function($scope,$http) {
         $scope.patients =[{
-          name:'Emily Williams', patientId:"p00001" ,iframe:0, group:'Monday', start: '10/20/2017',attends:'green',participation:'green',expanded:false, emotion:'red' ,test:'green'},
-      {name:'Jack Rodman', patientId:"p00002" ,iframe:0, group:'monday', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'}]
-});
+name:'Emily Williams', patientId:"p00001" ,iframe:0, group:'September', start: '10/20/2017',attends:'green',participation:'green',expanded:false, emotion:'red' ,test:'green'},
+{name:'Jack Rodman', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'George Smith', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Betty Fordham', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Bill Melvin', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Jim Fredrick', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Emily Merriman', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Jen Bland', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Stacy Stiltman', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Jack Rodman', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Jim Rose', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Wes Heis', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Mary Detmers', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Jerome Kelly', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Wendy Williams', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Sierra Jenson', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Georgia Brown', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Adam First', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Melanie Horseman', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Demi Frost', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Joe Brodeux', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Rose McClosky', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Klem Moore', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Sally Staples', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Jessie Palinski', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Derek Strenning', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'},
+{name:'Mike Sartori', patientId:"p00002" ,iframe:0, group:'September', start: '10/10/2017',attends:'green',participation:'green',expanded:false, emotion:'yellow',test:'green'}
+
+    ]});
 
   /* $('#nav_home').click(function() {
           $(men).addClass('selected').siblings().removeClass('selected');
